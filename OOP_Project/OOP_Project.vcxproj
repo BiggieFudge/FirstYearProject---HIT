@@ -183,6 +183,7 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CONTROLS.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="OOP_Project.h" />
     <ClInclude Include="OOP_ProjectDlg.h" />
@@ -191,6 +192,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CONTROLS.cpp" />
     <ClCompile Include="OOP_Project.cpp" />
     <ClCompile Include="OOP_ProjectDlg.cpp" />
     <ClCompile Include="pch.cpp">

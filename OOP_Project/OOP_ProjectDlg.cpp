@@ -2,11 +2,13 @@
 // OOP_ProjectDlg.cpp : implementation file
 //
 
+
 #include "pch.h"
 #include "framework.h"
 #include "OOP_Project.h"
 #include "OOP_ProjectDlg.h"
 #include "afxdialogex.h"
+#include "CONTROLS.h"
 
 
 #ifdef _DEBUG
@@ -66,6 +68,7 @@ BEGIN_MESSAGE_MAP(COOPProjectDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+	ON_BN_CLICKED(IDC_BUTTON1, &COOPProjectDlg::OnBnClickedButton1)
 END_MESSAGE_MAP()
 
 
@@ -101,7 +104,7 @@ BOOL COOPProjectDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 
 	// TODO: Add extra initialization here
-
+	m_controls.Create(IDD_CONTROLS, this);
 	
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
@@ -200,7 +203,6 @@ void COOPProjectDlg::OnPaint()
 		
 
 		//print x and y labels
-		CStatic* paint_xy[2];
 		paint_xy[0] = new CStatic;
 		paint_xy[1]= new CStatic;
 
@@ -230,3 +232,15 @@ HCURSOR COOPProjectDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
+
+
+void COOPProjectDlg::OnBnClickedButton1()//creating CONTROL dialog
+{
+
+	m_controls.ShowWindow(SW_SHOW);
+
+
+
+
+	
+}

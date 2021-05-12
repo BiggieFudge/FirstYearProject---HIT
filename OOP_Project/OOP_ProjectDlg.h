@@ -3,7 +3,7 @@
 //
 
 #pragma once
-
+#include "CONTROLS.h"
 
 // COOPProjectDlg dialog
 class COOPProjectDlg : public CDialogEx
@@ -21,6 +21,11 @@ public:
 			delete(Xshnatot[i]);
 			delete(Yshnatot[i]);
 		}
+		for (i = 0; i < 2; i++)
+		{
+			delete(paint_xy[i]);
+		}
+		
 	}
 	
 	
@@ -38,6 +43,10 @@ protected:
 	HICON m_hIcon;
 	CStatic* Xshnatot[20];
 	CStatic* Yshnatot[20];
+	CStatic* paint_xy[2];
+	
+	
+
 
 	// Generated message map functions
 	virtual BOOL OnInitDialog();
@@ -46,4 +55,8 @@ protected:
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
 	
+public:
+	CONTROLS m_controls;
+
+	afx_msg void OnBnClickedButton1();
 };
