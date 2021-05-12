@@ -56,7 +56,7 @@ END_MESSAGE_MAP()
 COOPProjectDlg::COOPProjectDlg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_OOP_PROJECT_DIALOG, pParent)
 {
-	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+	m_hIcon = AfxGetApp()->LoadIcon(IDI_ICON1); // Change the app icon.ETN
 }
 
 void COOPProjectDlg::DoDataExchange(CDataExchange* pDX)
@@ -126,15 +126,13 @@ void COOPProjectDlg::OnSysCommand(UINT nID, LPARAM lParam)
 // If you add a minimize button to your dialog, you will need the code below
 //  to draw the icon.  For MFC applications using the document/view model,
 //  this is automatically done for you by the framework.
-
+bool change = false; //Auto update screen size;
 void COOPProjectDlg::OnPaint()
 {
 
 	//create window size
-	MoveWindow(0, 0, 1600, 1000);
+	if (change == false) { MoveWindow(0, 0, 1600, 1000); change = true; }
 
-	
-	
     
 	if (IsIconic())
 	{
