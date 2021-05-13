@@ -30,14 +30,18 @@ public:
 	afx_msg void OnBnClickedPolygon();
 	afx_msg void OnBnClickedCircle();
 
+	
+
 	CComboBox m_comboBoxCtrl; // ComboBox 8 number
 
 	CString m_strTextCtrl;//text in combo box
 	
+	//if chosen polygon shape:
+
 	CWnd* Poly[4];//display input button
 
-	CStatic IDC_XX2;
-	CStatic IDC_YY2;
+	CStatic IDC_XX2;//display x label
+	CStatic IDC_YY2;//display y label
 	CStatic IDC_XX;//display x label
 	CStatic IDC_YY;//display y label
 	
@@ -45,16 +49,61 @@ public:
 	CEdit* Ytextbox[8];//TextBoxes for point input
 	CStatic* labels[8];//display point number labels
 
-	bool isHidden = 0;
+	//if chosen circle shape
+	CStatic IDC_Circle_GroupV;
 
-	int save_amount_points=-1;//amount of points selected in combo box
+
+	//if chose circle
+	bool CreateCircleC = 0;
+	CStatic* CircleTextBoxLabels[3]; //Circle labels
+	CEdit* CircleTextBox[3]; //Input Circle shape
+
+
+	//if chose Ellipse
+	bool CreateCircleE = 0;
+	CStatic* EllipseTextBoxLabels[4];
+	CEdit* EllipseTextBox[4];
+
+	//if chose pie
+	bool CreateCircleP = 0;
+	CStatic* PieTextBoxLabels[8];
+	CEdit* PieTextBox[8];
+
+	bool isHidden = 0; //Used for knowing if Xtextbox and Ytextbox are shown or hidden
+
+	int save_amount_points=-1;//amount of points selected in combo box (polygon)
 
 	afx_msg void OnCbnSelchangePoints();
+	
+	//creating circle shape
+	afx_msg void Create_Circle_C();
+	afx_msg void show_Circle_C();
+	afx_msg void hide_Circle_C();
 
+	//creating ellipse shape
+	afx_msg void Create_Circle_E();
+	afx_msg void show_Circle_E();
+	afx_msg void hide_Circle_E();
+
+	//creating pie shape
+	afx_msg void Create_Circle_P();
+	afx_msg void show_Circle_P();
+	afx_msg void hide_Circle_P();
+
+	//functions regarding circle categorie
+	afx_msg void delete_circle_textbox();
+	afx_msg void hide_Circle();
+	afx_msg void show_Circle();
+
+	//functions regarding polygon
 	afx_msg void show_Poly();
 	afx_msg void hide_Poly();
 	afx_msg void delete_buttons();
 	afx_msg void HideTextBoxes();
 	afx_msg void ShowTextBoxes();
 	
+	
+	afx_msg void OnBnClickedCircleC();
+	afx_msg void OnBnClickedCircleE();
+	afx_msg void OnBnClickedCircleP();
 };

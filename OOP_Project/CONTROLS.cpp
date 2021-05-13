@@ -15,6 +15,7 @@ IMPLEMENT_DYNAMIC(CONTROLS, CDialogEx)
 BOOL CONTROLS::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
+	MoveWindow(1500, 400, 270, 430);
 	//TAB CONTROL
 	CTabCtrl* pTabCtrl = (CTabCtrl*)GetDlgItem(IDC_TAB);
 	m_TAB1.Create(IDD_TAB1, pTabCtrl);  // TAB1 Connection
