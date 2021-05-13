@@ -196,10 +196,7 @@ void CTAB1::OnCbnSelchangePoints()
    // Add number to the combo box
    m_comboBoxCtrl.GetLBText(m_comboBoxCtrl.GetCurSel(), m_strTextCtrl); 
    UpdateData(FALSE);
-   //if(save_amount_points!=-1)//if already entered number before
-   //{
-	  // delete_buttons();
-   //}
+   
    if(save_amount_points > m_comboBoxCtrl.GetCurSel() + 1)//if already entered number before
    { 
 	   //for loop is for removing textboxes that are not needed
