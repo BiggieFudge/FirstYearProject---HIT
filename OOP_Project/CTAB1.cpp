@@ -72,6 +72,7 @@ void CTAB1::OnBnClickedPolygon()
 	if ( IsDlgButtonChecked(IDC_Polygon) == BST_CHECKED )//if chosen poligon
 	{
 		show_Poly();
+		ShowTextBoxes();
 
 	}
   
@@ -90,9 +91,7 @@ void CTAB1::show_Poly() {
 
 	Poly[3] = (CWnd*)GetDlgItem(IDC_Send);
 	Poly[3]->ShowWindow(SW_SHOW);
-	//display x and y labels
-	GetDlgItem(IDC_X)->ShowWindow(SW_SHOW);
-	GetDlgItem(IDC_Y)->ShowWindow(SW_SHOW);
+
 
 	
 	
@@ -134,23 +133,59 @@ void CTAB1::OnBnClickedCircle()
 	if ( IsDlgButtonChecked(IDC_Circle) == BST_CHECKED )//if chosen circle
 	{
 		hide_Poly();
+		HideTextBoxes();
+
 	}
 	
 }
-
+//Function for displaying textboxes when moving from circle to poly
+void CTAB1::ShowTextBoxes() {
+	if (isHidden == 1) {
+		for (int i = 0; i < save_amount_points; i++) {
+			labels[i]->ShowWindow(SW_SHOW);
+			Xtextbox[i]->ShowWindow(SW_SHOW);
+			Ytextbox[i]->ShowWindow(SW_SHOW);
+		}
+	}
+}
+//Function for moving from poly to circle so we need to hide the textboxes createdl
+void CTAB1::HideTextBoxes() {
+	for (int i = 0; i < save_amount_points; i++) {
+		labels[i]->ShowWindow(SW_HIDE);
+		Xtextbox[i]->ShowWindow(SW_HIDE);
+		Ytextbox[i]->ShowWindow(SW_HIDE);
+	}
+	//HIDE ALL X,Y LABEL (and yo kids)
+	GetDlgItem(IDC_X)->ShowWindow(SW_HIDE); GetDlgItem(IDC_Y)->ShowWindow(SW_HIDE); GetDlgItem(IDC_X2)->ShowWindow(SW_HIDE);	GetDlgItem(IDC_Y2)->ShowWindow(SW_HIDE);
+	isHidden = 1;
+}
 
 
 //choosing the number of points desired
 void CTAB1::OnCbnSelchangePoints()
 {
-	
+	//display x and y labels
+	GetDlgItem(IDC_X)->ShowWindow(SW_SHOW);
+	GetDlgItem(IDC_Y)->ShowWindow(SW_SHOW);
 
    // Add number to the combo box
    m_comboBoxCtrl.GetLBText(m_comboBoxCtrl.GetCurSel(), m_strTextCtrl); 
    UpdateData(FALSE);
-   if(save_amount_points!=-1)//if already entered number before
-   {
-	   delete_buttons();
+   //if(save_amount_points!=-1)//if already entered number before
+   //{
+	  // delete_buttons();
+   //}
+   if(save_amount_points > m_comboBoxCtrl.GetCurSel() + 1)//if already entered number before
+   { 
+	   //for loop is for removing textboxes that are not needed
+	   for (int i = m_comboBoxCtrl.GetCurSel() + 1; i < save_amount_points; i++) {
+		   delete labels[i];
+		   delete Xtextbox[i];
+		   delete Ytextbox[i];
+		   labels[i]=NULL;
+		   Xtextbox[i]=NULL;
+		   Ytextbox[i]=NULL;
+	  }
    }
    save_amount_points = m_comboBoxCtrl.GetCurSel() + 1;//get value according to place in combo box(starting from 0)
 
@@ -173,19 +208,23 @@ void CTAB1::OnCbnSelchangePoints()
    for (int i = 1; i <= save_amount_points; i++)
    {
 	   if (i == 5) { x = 120; y = 180; }
-	   
+
 	   CString NumToDisplay;  NumToDisplay.Format(_T("%d"), i); //Enter i to string;
 
-	   labels[i - 1] = new CStatic;         //Print nums;
-	   labels[i - 1]->Create(NumToDisplay, WS_CHILD | WS_VISIBLE,
-		   CRect(x-10 , y , x , y+20), this);
-
-
-	   Xtextbox[i - 1] = new CEdit;        // Print Text Boxes
-	   Xtextbox[i - 1]->Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER, CRect(x,y,x+20,y+20), this, 8888);
-	   Ytextbox[i - 1] = new CEdit;
-	   Ytextbox[i - 1]->Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER, CRect(x + 45 , y, x + 65, y + 20), this, 8888);
-	   y += 35;
+	   if (labels[i - 1] == NULL) {
+		   labels[i - 1] = new CStatic;         //Print nums;
+		   labels[i - 1]->Create(NumToDisplay, WS_CHILD | WS_VISIBLE,
+			   CRect(x - 10, y, x, y + 20), this);
+	   }
+	   if (Xtextbox[i - 1] == NULL) {
+		   Xtextbox[i - 1] = new CEdit;        // Print Text Boxes
+		   Xtextbox[i - 1]->Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER, CRect(x, y, x + 20, y + 20), this, 8888);
+	   }
+	   if (Ytextbox[i - 1] == NULL){
+		   Ytextbox[i - 1] = new CEdit;
+	   Ytextbox[i - 1]->Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER, CRect(x + 45, y, x + 65, y + 20), this, 8888);
+   }
+   y += 35;
    }
 
 

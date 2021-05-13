@@ -45,7 +45,7 @@ public:
 	CEdit* Ytextbox[8];//TextBoxes for point input
 	CStatic* labels[8];//display point number labels
 
-	
+	bool isHidden = 0;
 
 	int save_amount_points=-1;//amount of points selected in combo box
 
@@ -54,7 +54,7 @@ public:
 	afx_msg void show_Poly();
 	afx_msg void hide_Poly();
 	afx_msg void delete_buttons();
-
-	
+	afx_msg void HideTextBoxes();
+	afx_msg void ShowTextBoxes();
 	
 };
