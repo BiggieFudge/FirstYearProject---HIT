@@ -17,20 +17,21 @@ BOOL CONTROLS::OnInitDialog()
 	CDialogEx::OnInitDialog();
 	//TAB CONTROL
 	CTabCtrl* pTabCtrl = (CTabCtrl*)GetDlgItem(IDC_TAB);
-	m_TAB1.Create(IDD_TAB1, pTabCtrl);  // TAB1 Creation
+	m_TAB1.Create(IDD_TAB1, pTabCtrl);  // TAB1 Connection
 
 	CTabCtrl* pTabCtrl2 = (CTabCtrl*)GetDlgItem(IDC_TAB);
-	m_TAB2.Create(IDD_TAB2, pTabCtrl2);// TAB2 Creation
+	m_TAB2.Create(IDD_TAB2, pTabCtrl2);// TAB2 Connection
 
 	CTabCtrl* pTabCtrl3 = (CTabCtrl*)GetDlgItem(IDC_TAB);
-	m_TAB3.Create(IDD_TAB3, pTabCtrl3);// TAB3 Creation
+	m_TAB3.Create(IDD_TAB3, pTabCtrl3);// TAB3 Connection
 
 	TCITEM item1, item2, item3;
 
-	item1.mask = TCIF_TEXT | TCIF_PARAM;
+	//choosing name for tab
+	item1.mask = TCIF_TEXT | TCIF_PARAM;  
 	item1.lParam = (LPARAM)&m_TAB1;
 	item1.pszText = _T("Add new Shape");
-	pTabCtrl->InsertItem(0, &item1);
+	pTabCtrl->InsertItem(0, &item1);      
 
 	item2.mask = TCIF_TEXT | TCIF_PARAM;
 	item2.lParam = (LPARAM)&m_TAB2;
@@ -44,6 +45,7 @@ BOOL CONTROLS::OnInitDialog()
 
 	CRect rcItem1, rcItem2,rcItem3;
 
+	//choosing position/visibilty for tab
 	pTabCtrl->GetItemRect(0, &rcItem1);
 	m_TAB1.SetWindowPos(NULL, rcItem1.left, rcItem1.bottom + 1, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 	m_TAB1.ShowWindow(SW_SHOW);
@@ -58,7 +60,7 @@ BOOL CONTROLS::OnInitDialog()
 	//END TAB CONTROL
 
 
-	return TRUE;
+	return TRUE;//must return true!!!!
 }
 
 
@@ -68,7 +70,8 @@ CONTROLS::CONTROLS(CWnd* pParent /*=nullptr*/): CDialogEx(IDD_CONTROLS, pParent)
 
 CONTROLS::~CONTROLS()
 {
-	
+    //calling for the function deleting text boxes for input points in polygon 
+	m_TAB1.delete_buttons();
 }
 
 void CONTROLS::DoDataExchange(CDataExchange* pDX)
@@ -110,7 +113,7 @@ void CONTROLS::OnSelchangeTabcontrol(NMHDR* pNMHDR, LRESULT* pResult)
 		m_TAB1.ShowWindow(SW_HIDE);
 		m_TAB3.ShowWindow(SW_HIDE);
 	}
-	else {
+	else {  //Third Tab
 		m_TAB3.ShowWindow(SW_SHOW);
 		m_TAB2.ShowWindow(SW_HIDE);
 		m_TAB1.ShowWindow(SW_HIDE);

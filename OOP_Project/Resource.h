@@ -11,11 +11,20 @@
 #define IDD_DIALOG1                     130
 #define IDD_CONTROLS                    130
 #define IDD_TAB2                        131
-#define IDD_OLE_PROPPAGE_SMALL          132
 #define IDD_TAB3                        132
 #define IDI_ICON1                       141
 #define IDC_BUTTON1                     1000
 #define IDC_TAB                         1002
+#define IDC_Polygon                     1004
+#define IDC_Circle                      1005
+#define IDC_Poly                        1006
+#define IDC_Points                      1007
+#define IDC_label                       1009
+#define IDC_Send                        1012
+#define IDC_X                           1013
+#define IDC_Y                           1014
+#define IDC_X2                          1015
+#define IDC_Y2                          1016
 
 // Next default values for new objects
 // 
@@ -23,7 +32,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        150
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1004
+#define _APS_NEXT_CONTROL_VALUE         1017
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

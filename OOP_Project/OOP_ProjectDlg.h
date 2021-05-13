@@ -17,11 +17,14 @@ public:
 
 		//deleting dynammiclly created labels for shnatot
 		int i;
-		for (i = 0; i < 20; i++)
+		for (i = 0; i <= 20; i++)
 		{
-			delete(Xshnatot[i]);
-			delete(Yshnatot[i]);
+			if (i != 10) {
+				delete(Xshnatot[i]);
+				delete(Yshnatot[i]);
+			}
 		}
+		
 		for (i = 0; i < 2; i++)
 		{
 			delete(paint_xy[i]);
@@ -42,8 +45,8 @@ public:
 // Implementation
 protected:
 	HICON m_hIcon;
-	CStatic* Xshnatot[20];
-	CStatic* Yshnatot[20];
+	CStatic* Xshnatot[21];
+	CStatic* Yshnatot[21];
 	CStatic* paint_xy[2];
 	
 	

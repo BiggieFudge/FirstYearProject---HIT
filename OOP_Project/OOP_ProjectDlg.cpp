@@ -36,6 +36,8 @@ public:
 // Implementation
 protected:
 	DECLARE_MESSAGE_MAP()
+public:
+	
 };
 
 CAboutDlg::CAboutDlg() : CDialogEx(IDD_ABOUTBOX)
@@ -48,6 +50,7 @@ void CAboutDlg::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
+	
 END_MESSAGE_MAP()
 
 
@@ -106,7 +109,7 @@ BOOL COOPProjectDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 
 	// TODO: Add extra initialization here
-	m_controls.Create(IDD_CONTROLS, this);
+	m_controls.Create(IDD_CONTROLS, this);  //Create CONTROL DIALOG
 	
 	
 
@@ -161,6 +164,7 @@ void COOPProjectDlg::OnPaint()
 	{
 
 		//CDialogEx::OnPaint();
+
 		CPaintDC dc(this); // device context for painting
 		CRect rect;
 		CString a;//string in labels
@@ -170,9 +174,10 @@ void COOPProjectDlg::OnPaint()
 		//drawing y axis
 		dc.MoveTo(0, rect.Height()/2);
 		dc.LineTo(rect.Width(), rect.Height() / 2);
+
 		int Hei = rect.Width() / 20;
 
-		//Test
+		//Test GRID
 		CPen penBlack;
 		penBlack.CreatePen(PS_SOLID, 2, RGB(0, 0, 0));
 		dc.DrawEdge(CRect(0, 0,Hei,Hei), BDR_RAISEDOUTER | BDR_SUNKENINNER, BF_RECT);
@@ -196,6 +201,7 @@ void COOPProjectDlg::OnPaint()
 		//drawing x axis
 		dc.MoveTo(rect.Width()/2, 0);
 		dc.LineTo(rect.Width()/2, rect.Height());
+
 		int Wid = rect.Width() / 20;
 		for (int i = 0; i <= 20; i++) {
 			if (i != 10) {
@@ -217,12 +223,12 @@ void COOPProjectDlg::OnPaint()
 		paint_xy[0] = new CStatic;
 		paint_xy[1]= new CStatic;
 
-
+		//create x label
 		a.Format(_T("X"));
 		(*paint_xy[0]).Create(a, WS_CHILD | WS_VISIBLE,
 			CRect(rect.Width() - 20, rect.Height() / 2 + 5, rect.Width(), rect.Height() + 20), this);
 
-
+		//create y label
 		a.Format(_T("Y"));
 		(*paint_xy[1]).Create(a, WS_CHILD | WS_VISIBLE,
 			CRect(rect.Width() / 2 +5, 0, rect.Width()/2 +25, 20), this);
@@ -245,10 +251,13 @@ HCURSOR COOPProjectDlg::OnQueryDragIcon()
 
 
 
-void COOPProjectDlg::OnBnClickedButton1()//creating CONTROL dialog
+void COOPProjectDlg::OnBnClickedButton1()//Open CONTROL dialog
 {
 
 	m_controls.ShowWindow(SW_SHOW);
 }
+
+
+
 
 
