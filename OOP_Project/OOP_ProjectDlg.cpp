@@ -23,6 +23,8 @@ class CAboutDlg : public CDialogEx
 public:
 	CAboutDlg();
 
+	
+	
 // Dialog Data
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_ABOUTBOX };
@@ -106,6 +108,8 @@ BOOL COOPProjectDlg::OnInitDialog()
 	// TODO: Add extra initialization here
 	m_controls.Create(IDD_CONTROLS, this);
 	
+	
+
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -131,7 +135,7 @@ void COOPProjectDlg::OnPaint()
 {
 
 	//create window size
-	if (change == false) { MoveWindow(0, 0, 1600, 1000); change = true; }
+	if (change == false) { MoveWindow(0, 0, 960 , 980 ); CenterWindow(); change = true; }
 
     
 	if (IsIconic())
@@ -162,10 +166,19 @@ void COOPProjectDlg::OnPaint()
 		CString a;//string in labels
 		GetClientRect(&rect);
 
+		
 		//drawing y axis
 		dc.MoveTo(0, rect.Height()/2);
 		dc.LineTo(rect.Width(), rect.Height() / 2);
-		int Hei = rect.Height() / 20;
+		int Hei = rect.Width() / 20;
+
+		//Test
+		CPen penBlack;
+		penBlack.CreatePen(PS_SOLID, 2, RGB(0, 0, 0));
+		dc.DrawEdge(CRect(0, 0,Hei,Hei), BDR_RAISEDOUTER | BDR_SUNKENINNER, BF_RECT);
+		//END test
+
+
 		for (int i = 0; i <= 20; i++) {
 			if (i != 10) {
 
@@ -191,10 +204,10 @@ void COOPProjectDlg::OnPaint()
 
 				Xshnatot[i] = new CStatic;
 				(*Xshnatot[i]).Create(a, WS_CHILD | WS_VISIBLE, //Create Shnatot label
-					CRect(i*Wid + 3, rect.Height() / 2 - 30, i*Wid + 30, rect.Height() / 2 - 7), this);
+					CRect(i*Hei + 3, rect.Height() / 2 - 30, i*Hei + 30, rect.Height() / 2 - 7), this);
 
-				dc.MoveTo(i*Wid, rect.Height() / 2 - 5);  //Create Shnatot kav
-				dc.LineTo(i*Wid, rect.Height() / 2 + 5);
+				dc.MoveTo(i*Hei, rect.Height() / 2 - 5);  //Create Shnatot kav
+				dc.LineTo(i*Hei, rect.Height() / 2 + 5);
 			}
 		}
 		
@@ -236,9 +249,6 @@ void COOPProjectDlg::OnBnClickedButton1()//creating CONTROL dialog
 {
 
 	m_controls.ShowWindow(SW_SHOW);
-
-
-
-
-	
 }
+
+

@@ -1,5 +1,7 @@
 #pragma once
-
+#include "CTAB1.h"
+#include "CTAB2.h"
+#include "CTAB3.h"
 
 // CONTROLS dialog
 
@@ -19,7 +21,23 @@ public:
 #endif
 
 protected:
+	virtual BOOL OnInitDialog();
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 	
 	DECLARE_MESSAGE_MAP()
+public:
+
+
+
+	//TAB CONTROL
+	CTabCtrl m_tabc;
+	CTAB1 m_TAB1;
+	CTAB2 m_TAB2;
+	CTAB3 m_TAB3;
+	//END TAB CONTROL
+
+
+
+	afx_msg void OnTcnSelchangeIdPreviewPrev(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void OnSelchangeTabcontrol(NMHDR* pNMHDR, LRESULT* pResult);
 };

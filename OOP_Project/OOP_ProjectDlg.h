@@ -5,6 +5,7 @@
 #pragma once
 #include "CONTROLS.h"
 
+
 // COOPProjectDlg dialog
 class COOPProjectDlg : public CDialogEx
 {
@@ -28,7 +29,7 @@ public:
 		
 	}
 	
-	
+
 // Dialog Data
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_OOP_PROJECT_DIALOG };
@@ -56,7 +57,6 @@ protected:
 	DECLARE_MESSAGE_MAP()
 	
 public:
-	CONTROLS m_controls;
-
+	CONTROLS m_controls; //Show/Hide CONTROLS DIALOG
 	afx_msg void OnBnClickedButton1();
 };
