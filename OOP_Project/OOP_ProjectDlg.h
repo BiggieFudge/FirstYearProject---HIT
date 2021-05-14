@@ -4,7 +4,7 @@
 
 #pragma once
 #include "CONTROLS.h"
-
+#include "Show_All.h"
 
 // COOPProjectDlg dialog
 class COOPProjectDlg : public CDialogEx
@@ -14,22 +14,9 @@ public:
 	COOPProjectDlg(CWnd* pParent = nullptr);	// standard constructor
 	~COOPProjectDlg()
 	{
+		delete(show_axis);
+		delete(Page);
 
-		//deleting dynammiclly created labels for shnatot
-		int i;
-		for (i = 0; i <= 20; i++)
-		{
-			if (i != 10) {
-				delete(Xshnatot[i]);
-				delete(Yshnatot[i]);
-			}
-		}
-		
-		for (i = 0; i < 2; i++)
-		{
-			delete(paint_xy[i]);
-		}
-		
 	}
 	
 
@@ -45,21 +32,27 @@ public:
 // Implementation
 protected:
 	HICON m_hIcon;
-	CStatic* Xshnatot[21];
-	CStatic* Yshnatot[21];
-	CStatic* paint_xy[2];
+	AXIS* show_axis = new AXIS;
+	Show_All* Page = new Show_All;
+	
 	
 	
 
 
 	// Generated message map functions
 	virtual BOOL OnInitDialog();
+	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
 	
 public:
+
+
+
+
 	CONTROLS m_controls; //Show/Hide CONTROLS DIALOG
 	afx_msg void OnBnClickedButton1();
+	
 };

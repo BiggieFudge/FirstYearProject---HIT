@@ -1,6 +1,6 @@
 // CTAB1.cpp : implementation file
 //
-
+#include <iostream>
 #include "pch.h"
 #include "OOP_Project.h"
 #include "CTAB1.h"
@@ -99,7 +99,6 @@ void CTAB1::show_Poly() {
 	
 	
 }
-
 //hide everything that is connected to poly
 void CTAB1::hide_Poly()
 {
@@ -113,6 +112,9 @@ void CTAB1::hide_Poly()
 	Poly[2]->ShowWindow(SW_HIDE);   
 
 }
+
+
+
 
 
 //deleting text boxes for input points in polygon
@@ -129,15 +131,22 @@ void CTAB1::delete_buttons()
 		}
 	}
 }
-
+//deleting text boxes for input points in circle
 void CTAB1::delete_circle_textbox()
 {
-	int i;
-	for(i=0;i<3;i++)
-	{
-		delete(CircleTextBox[i]);
-	}
+	if(CreateCircleC==1)
+		for(int i=0;i<3;i++)
+			delete(CircleTextBox[i]);
+	if (CreateCircleE == 1)
+		for (int i = 0; i < 4; i++)
+			delete(EllipseTextBox[i]);
+	if (CreateCircleP == 1)
+		for (int i = 0; i < 8; i++)
+			delete(PieTextBox[i]);
+	
 }
+
+
 
 //check if clicked on circle categorie option
 void CTAB1::OnBnClickedCircle()
@@ -150,7 +159,6 @@ void CTAB1::OnBnClickedCircle()
 	}
 	
 }
-
 void CTAB1::show_Circle() {
 	GetDlgItem(IDC_Circle_Group)->ShowWindow(SW_SHOW); GetDlgItem(IDC_Circle_C)->ShowWindow(SW_SHOW); GetDlgItem(IDC_Circle_E)->ShowWindow(SW_SHOW); GetDlgItem(IDC_Circle_P)->ShowWindow(SW_SHOW);
 
@@ -256,136 +264,127 @@ void CTAB1::OnCbnSelchangePoints()
  
 }
 
+
+
+
 //display everything that is connected to Circle C
 void CTAB1::Create_Circle_C()
 {
 		//input x textbox
-		CircleTextBox[0] = new CEdit;
-		CircleTextBox[0]->Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER, 
+		CircleTextBox = new CEdit[3]();
+		CircleTextBox[0].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER, 
 			CRect(25,180,45,200),this, 8888);
 		//input y textbox
-		CircleTextBox[1] = new CEdit;
-		CircleTextBox[1]->Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
+	
+		CircleTextBox[1].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
 			CRect(70, 180, 90,200), this, 8888);
 		//input radious textbox
-		CircleTextBox[2] = new CEdit;
-		CircleTextBox[2]->Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
+	
+		CircleTextBox[2].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
 			CRect(115, 180, 135, 200), this, 8888);
 }
+
 void CTAB1::show_Circle_C()
 {
-	CircleTextBox[0]->ShowWindow(SW_SHOW);
-	CircleTextBox[1]->ShowWindow(SW_SHOW);
-	CircleTextBox[2]->ShowWindow(SW_SHOW);
+	if (CreateCircleC == 0) { Create_Circle_C(); CreateCircleC = 1; }
+	else
+		for (int i = 0; i < 3; i++)
+			CircleTextBox[i].ShowWindow(SW_SHOW);
 }
 
 void CTAB1::hide_Circle_C()
 {
 	if (CreateCircleC == 1) {
-		CircleTextBox[0]->ShowWindow(SW_HIDE);
-		CircleTextBox[1]->ShowWindow(SW_HIDE);
-		CircleTextBox[2]->ShowWindow(SW_HIDE);
+		for(int i=0; i<3; i++)
+			CircleTextBox[i].ShowWindow(SW_HIDE);
 	}
 }
+
+
 
 void CTAB1::Create_Circle_E()
 {
 	//input x textbox
-	EllipseTextBox[0] = new CEdit;
-	EllipseTextBox[0]->Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
+	EllipseTextBox = new CEdit[4];
+	EllipseTextBox[0].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
 		CRect(25, 180, 45, 200), this, 8888);
 	//input y textbox
-	EllipseTextBox[1] = new CEdit;
-	EllipseTextBox[1]->Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
+
+	EllipseTextBox[1].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
 		CRect(70, 180, 90, 200), this, 8888);
 	//input radious textbox
-	EllipseTextBox[2] = new CEdit;
-	EllipseTextBox[2]->Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
+
+	EllipseTextBox[2].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
 		CRect(135, 180, 155, 200), this, 8888);
-	EllipseTextBox[3] = new CEdit;
-	EllipseTextBox[3]->Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
+
+	EllipseTextBox[3].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
 		CRect(180, 180, 200, 200), this, 8888);
 }
+
 void CTAB1::show_Circle_E()
 {
-	EllipseTextBox[0]->ShowWindow(SW_SHOW);
-	EllipseTextBox[1]->ShowWindow(SW_SHOW);
-	EllipseTextBox[2]->ShowWindow(SW_SHOW);
-	EllipseTextBox[3]->ShowWindow(SW_SHOW);
+	if (CreateCircleE == 0) { Create_Circle_E(); CreateCircleE = 1; }
+	else
+		for(int i=0; i<4; i++)
+			EllipseTextBox[i].ShowWindow(SW_SHOW);
 }
 
 void CTAB1::hide_Circle_E()
 {
 	if (CreateCircleE == 1) {
-		EllipseTextBox[0]->ShowWindow(SW_HIDE);
-		EllipseTextBox[1]->ShowWindow(SW_HIDE);
-		EllipseTextBox[2]->ShowWindow(SW_HIDE);
-		EllipseTextBox[3]->ShowWindow(SW_HIDE);
+		for(int i=0; i<4; i++)
+			EllipseTextBox[i].ShowWindow(SW_HIDE);
 	}
 }
-
 
 
 
 void CTAB1::Create_Circle_P()
 {
+
 	//input x textbox
-	PieTextBox[0] = new CEdit;
-	PieTextBox[0]->Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
+	PieTextBox = new CEdit[8];
+	PieTextBox[0].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
 		CRect(25, 180, 45, 200), this, 8888);
 	//input y textbox
-	PieTextBox[1] = new CEdit;
-	PieTextBox[1]->Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
+	
+	PieTextBox[1].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
 		CRect(70, 180, 90, 200), this, 8888);
 	//input radious textbox
-	PieTextBox[2] = new CEdit;
-	PieTextBox[2]->Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
+
+	PieTextBox[2].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
 		CRect(135, 180, 155, 200), this, 8888);
-	PieTextBox[3] = new CEdit;
-	PieTextBox[3]->Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
+	
+	PieTextBox[3].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
 		CRect(180, 180, 200, 200), this, 8888);
 
 
 
-	PieTextBox[4] = new CEdit;
-	PieTextBox[4]->Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
+
+	PieTextBox[4].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
 		CRect(25, 220, 45, 240), this, 8888);
 	
-	PieTextBox[5] = new CEdit;
-	PieTextBox[5]->Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
+	PieTextBox[5].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
 		CRect(70, 220, 90, 240), this, 8888);
-	
-	PieTextBox[6] = new CEdit;
-	PieTextBox[6]->Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
+
+	PieTextBox[6].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
 		CRect(135, 220, 155, 240), this, 8888);
 
-	PieTextBox[7] = new CEdit;
-	PieTextBox[7]->Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
+	PieTextBox[7].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
 		CRect(180, 220, 200, 240), this, 8888);
 }
+
 void CTAB1::show_Circle_P()
 {
-	PieTextBox[0]->ShowWindow(SW_SHOW);
-	PieTextBox[1]->ShowWindow(SW_SHOW);
-	PieTextBox[2]->ShowWindow(SW_SHOW);
-	PieTextBox[3]->ShowWindow(SW_SHOW);
-	PieTextBox[4]->ShowWindow(SW_SHOW);
-	PieTextBox[5]->ShowWindow(SW_SHOW);
-	PieTextBox[6]->ShowWindow(SW_SHOW);
-	PieTextBox[7]->ShowWindow(SW_SHOW);
+	if (CreateCircleP == 0) { Create_Circle_P(); CreateCircleP = 1; }
+	else
+		for (int i = 0; i < 8; i++) { PieTextBox[i].ShowWindow(SW_SHOW); }
 }
 
 void CTAB1::hide_Circle_P()
 {
 	if (CreateCircleP == 1) {
-		PieTextBox[0]->ShowWindow(SW_HIDE);
-		PieTextBox[1]->ShowWindow(SW_HIDE);
-		PieTextBox[2]->ShowWindow(SW_HIDE);
-		PieTextBox[3]->ShowWindow(SW_HIDE);
-		PieTextBox[4]->ShowWindow(SW_HIDE);
-		PieTextBox[5]->ShowWindow(SW_HIDE);
-		PieTextBox[6]->ShowWindow(SW_HIDE);
-		PieTextBox[7]->ShowWindow(SW_HIDE);
+		for(int i=0; i <8; i++){ PieTextBox[i].ShowWindow(SW_HIDE); }
 	}
 }
 
@@ -394,7 +393,7 @@ void CTAB1::hide_Circle_P()
 
 
 
-
+//On Circle Radio button click
 
 void CTAB1::OnBnClickedCircleC()
 {
@@ -402,16 +401,11 @@ void CTAB1::OnBnClickedCircleC()
 	{
 		hide_Circle_E();
 		hide_Circle_P();
-		if (CreateCircleC == 0) { Create_Circle_C(); CreateCircleC = 1; }
-		else {
-			show_Circle_C();
+		show_Circle_C();
 			
-		}
+		
 	}
 }
-
-
-
 
 
 void CTAB1::OnBnClickedCircleE()
@@ -420,11 +414,9 @@ void CTAB1::OnBnClickedCircleE()
 	{
 		hide_Circle_P();
 		hide_Circle_C();
-		if (CreateCircleE == 0) { Create_Circle_E(); CreateCircleE = 1; }
-		else {
-			show_Circle_E();
+		show_Circle_E();
 			
-		}
+		
 	}
 }
 
@@ -435,11 +427,8 @@ void CTAB1::OnBnClickedCircleP()
 	{
 		hide_Circle_E();
 		hide_Circle_C();
-		if (CreateCircleP == 0) { Create_Circle_P(); CreateCircleP = 1; }
-		else {
-			show_Circle_P();
-			
-		}
+		show_Circle_P();
+		
 		
 
 	}

@@ -55,19 +55,19 @@ public:
 
 	//if chose circle
 	bool CreateCircleC = 0;
-	CStatic* CircleTextBoxLabels[3]; //Circle labels
-	CEdit* CircleTextBox[3]; //Input Circle shape
+	CStatic* CircleTextBoxLabels; //Circle labels
+	CEdit* CircleTextBox; //Input Circle shape
 
 
 	//if chose Ellipse
 	bool CreateCircleE = 0;
-	CStatic* EllipseTextBoxLabels[4];
-	CEdit* EllipseTextBox[4];
+	CStatic* EllipseTextBoxLabels;
+	CEdit* EllipseTextBox;
 
 	//if chose pie
 	bool CreateCircleP = 0;
-	CStatic* PieTextBoxLabels[8];
-	CEdit* PieTextBox[8];
+	CStatic* PieTextBoxLabels;
+	CEdit* PieTextBox;
 
 	bool isHidden = 0; //Used for knowing if Xtextbox and Ytextbox are shown or hidden
 

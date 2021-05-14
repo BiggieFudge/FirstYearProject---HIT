@@ -15,7 +15,7 @@ IMPLEMENT_DYNAMIC(CONTROLS, CDialogEx)
 BOOL CONTROLS::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
-	MoveWindow(1500, 400, 270, 430);
+	MoveWindow(1600, 350, 270, 430);
 	//TAB CONTROL
 	CTabCtrl* pTabCtrl = (CTabCtrl*)GetDlgItem(IDC_TAB);
 	m_TAB1.Create(IDD_TAB1, pTabCtrl);  // TAB1 Connection
@@ -73,6 +73,9 @@ CONTROLS::~CONTROLS()
 {
     //calling for the function deleting text boxes for input points in polygon 
 	m_TAB1.delete_buttons();
+	//calling for the function deleting text boxes for input points in circle
+	m_TAB1.delete_circle_textbox();
+
 }
 
 void CONTROLS::DoDataExchange(CDataExchange* pDX)

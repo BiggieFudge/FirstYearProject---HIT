@@ -9,7 +9,7 @@
 #include "OOP_ProjectDlg.h"
 #include "afxdialogex.h"
 #include "CONTROLS.h"
-
+#include "AXIS.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -67,10 +67,12 @@ COOPProjectDlg::COOPProjectDlg(CWnd* pParent /*=nullptr*/)
 void COOPProjectDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+
 }
 
 BEGIN_MESSAGE_MAP(COOPProjectDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
+	ON_WM_CTLCOLOR()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_BUTTON1, &COOPProjectDlg::OnBnClickedButton1)
@@ -109,9 +111,20 @@ BOOL COOPProjectDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 
 	// TODO: Add extra initialization here
+	CRect rect;
+	GetClientRect(&rect);
+
+
 	m_controls.Create(IDD_CONTROLS, this);  //Create CONTROL DIALOG
-	
-	
+
+	show_axis->Create(MAKEINTRESOURCE(IDD_AXIS), this);  //Create X,Y axis on main screen
+	show_axis->MoveWindow(30, 30, rect.Height()-73, rect.Height()-73);
+	show_axis->ShowWindow(SW_SHOW);
+
+
+	Page->Create(MAKEINTRESOURCE(IDD_Show_All), this); //Create View tab
+	Page->MoveWindow(900,30,280,450);
+	Page->ShowWindow(SW_SHOW);
 
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
@@ -138,7 +151,7 @@ void COOPProjectDlg::OnPaint()
 {
 
 	//create window size
-	if (change == false) { MoveWindow(0, 0, 960 , 980 ); CenterWindow(); change = true; }
+	if (change == false) {  CenterWindow(); change = true; }
 
     
 	if (IsIconic())
@@ -162,79 +175,15 @@ void COOPProjectDlg::OnPaint()
 	}
 	else
 	{
-
-		//CDialogEx::OnPaint();
-
-		CPaintDC dc(this); // device context for painting
+		CPaintDC dc(this);
 		CRect rect;
-		CString a;//string in labels
 		GetClientRect(&rect);
 
-		
-		//drawing y axis
-		dc.MoveTo(0, rect.Height()/2);
-		dc.LineTo(rect.Width(), rect.Height() / 2);
-
-		int Hei = rect.Width() / 20;
-
-		//Test GRID
-		CPen penBlack;
-		penBlack.CreatePen(PS_SOLID, 2, RGB(0, 0, 0));
-		dc.DrawEdge(CRect(0, 0,Hei,Hei), BDR_RAISEDOUTER | BDR_SUNKENINNER, BF_RECT);
-		//END test
-
-
-		for (int i = 0; i <= 20; i++) {
-			if (i != 10) {
-
-				Yshnatot[i] = new CStatic;
-
-				a.Format(_T("%d"), 10 - i);  //Create Shnatot label
-				(*Yshnatot[i]).Create(a, WS_CHILD | WS_VISIBLE,
-					CRect(rect.Width() / 2 + 7, i*Hei - 20, rect.Width() / 2 + 34, i*Hei + 10), this);
-
-				dc.MoveTo(rect.Width() / 2 - 5, i*Hei);  //Create Shnatot kav
-				dc.LineTo(rect.Width() / 2 + 5, i*Hei);
-			}
-		}
-		
-		//drawing x axis
-		dc.MoveTo(rect.Width()/2, 0);
-		dc.LineTo(rect.Width()/2, rect.Height());
-
-		int Wid = rect.Width() / 20;
-		for (int i = 0; i <= 20; i++) {
-			if (i != 10) {
-
-				a.Format(_T("%d"), i - 10);
-
-				Xshnatot[i] = new CStatic;
-				(*Xshnatot[i]).Create(a, WS_CHILD | WS_VISIBLE, //Create Shnatot label
-					CRect(i*Hei + 3, rect.Height() / 2 - 30, i*Hei + 30, rect.Height() / 2 - 7), this);
-
-				dc.MoveTo(i*Hei, rect.Height() / 2 - 5);  //Create Shnatot kav
-				dc.LineTo(i*Hei, rect.Height() / 2 + 5);
-			}
-		}
-		
-		
-
-		//print x and y labels
-		paint_xy[0] = new CStatic;
-		paint_xy[1]= new CStatic;
-
-		//create x label
-		a.Format(_T("X"));
-		(*paint_xy[0]).Create(a, WS_CHILD | WS_VISIBLE,
-			CRect(rect.Width() - 20, rect.Height() / 2 + 5, rect.Width(), rect.Height() + 20), this);
-
-		//create y label
-		a.Format(_T("Y"));
-		(*paint_xy[1]).Create(a, WS_CHILD | WS_VISIBLE,
-			CRect(rect.Width() / 2 +5, 0, rect.Width()/2 +25, 20), this);
-
-
-	
+		dc.MoveTo(899,29);
+		dc.LineTo(1181,29);
+		dc.LineTo(1181, 481);
+		dc.LineTo(899, 481);
+		dc.LineTo(899, 29);
 
 	}
 	
@@ -258,6 +207,7 @@ void COOPProjectDlg::OnBnClickedButton1()//Open CONTROL dialog
 }
 
 
-
-
-
+HBRUSH COOPProjectDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)  //Set Background
+{
+	return (HBRUSH)GetStockObject(DC_BRUSH);
+}

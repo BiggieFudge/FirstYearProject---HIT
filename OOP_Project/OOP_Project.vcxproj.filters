@@ -45,6 +45,12 @@
     <ClInclude Include="CTAB3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AXIS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Show_All.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OOP_Project.cpp">
@@ -66,6 +72,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CTAB3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AXIS.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Show_All.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
