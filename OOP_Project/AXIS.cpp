@@ -1,12 +1,14 @@
 // AXIS.cpp : implementation file
 //
 
+
 #include "pch.h"
 #include "OOP_Project.h"
+#include "OOP_ProjectDlg.h"
 #include "AXIS.h"
 #include "afxdialogex.h"
-
-
+#include <string.h>
+#include "CONTROLS.h"
 // AXIS dialog
 
 IMPLEMENT_DYNAMIC(AXIS, CDialogEx)
@@ -69,7 +71,7 @@ void AXIS::OnPaint(){
 	}
 	else
 	{
-		
+
 		//Draw NEW AXIS AND GRID 1.1
 		CPaintDC dc(this);
 		CRect rect;
@@ -77,7 +79,7 @@ void AXIS::OnPaint(){
 		int SquareSide = rect.Width() / 20;
 
 		CPen penForSquare;
-		penForSquare.CreatePen(PS_DOT, 1, RGB(128, 128,128));
+		penForSquare.CreatePen(PS_DOT, 1, RGB(128, 128, 128));
 		CPen penForAxis;
 		penForAxis.CreatePen(PS_SOLID, 3, RGB(0, 0, 0));
 
@@ -86,13 +88,13 @@ void AXIS::OnPaint(){
 				dc.SelectObject(&penForSquare);
 				dc.Rectangle(CRect(i * SquareSide, j * SquareSide, i * SquareSide + SquareSide, j * SquareSide + SquareSide)); //Draw Square
 				dc.SelectObject(&penForAxis);
-				if (i == 10 && j!=0) {
+				if (i == 10 && j != 0) {
 					dc.MoveTo(i * SquareSide - 7, j * SquareSide);//shnatot on y axis
 					dc.LineTo(i * SquareSide + 7, j * SquareSide);
 				}
-				if (j == 10 && i!=0) {
-					dc.MoveTo(i * SquareSide , j * SquareSide - 7); //shnatot on x axis
-					dc.LineTo(i * SquareSide , j * SquareSide + 7);
+				if (j == 10 && i != 0) {
+					dc.MoveTo(i * SquareSide, j * SquareSide - 7); //shnatot on x axis
+					dc.LineTo(i * SquareSide, j * SquareSide + 7);
 				}
 			}
 		}
@@ -103,77 +105,27 @@ void AXIS::OnPaint(){
 		dc.LineTo(rect.Width() / 2, rect.Height()); //draw X axis
 
 
+		
+		
+
+		//total_arr_poli
+
+		//changing points to be relative to the grid screen
+
+		
+
+		
+		//for (int i = 0; i < CTAB1::CurrentPose; i++)
+		//{
+		//	if (m_tab->ShapeArr[i]->type()=="polygon")//if painting poli
+		//	{
+		//		m_tab->ShapeArr[i];
+		//	}
+		//	//dc.Polygon();
+		//}
+		//
 
 
-	//	//
-
-	//	 // device context for painting
-	//	CRect rect;
-	//	CString a;//string in labels
-	//	GetClientRect(&rect);
-
-
-	//	//drawing y axis
-	//	dc.MoveTo(0, rect.Height() / 2);
-	//	dc.LineTo(rect.Width(), rect.Height() / 2);
-
-	//	int Hei = rect.Width() / 20;
-
-	//	//Test GRID
-	//	CPen penBlack;
-	//	penBlack.CreatePen(PS_SOLID, 2, RGB(0, 0, 0));
-	//	dc.DrawEdge(CRect(0, 0, Hei, Hei), BDR_RAISEDOUTER | BDR_SUNKENINNER, BF_RECT);
-	//	//END test
-
-
-	//	for (int i = 0; i <= 20; i++) {
-	//		if (i != 10) {
-
-	//			Yshnatot[i] = new CStatic;
-
-	//			a.Format(_T("%d"), 10 - i);  //Create Shnatot label
-	//			(*Yshnatot[i]).Create(a, WS_CHILD | WS_VISIBLE,
-	//				CRect(rect.Width() / 2 + 7, i * Hei - 20, rect.Width() / 2 + 34, i * Hei + 10), this);
-
-	//			dc.MoveTo(rect.Width() / 2 - 5, i * Hei);  //Create Shnatot kav
-	//			dc.LineTo(rect.Width() / 2 + 5, i * Hei);
-	//		}
-	//	}
-
-	//	//drawing x axis
-	//	dc.MoveTo(rect.Width() / 2, 0);
-	//	dc.LineTo(rect.Width() / 2, rect.Height());
-
-	//	int Wid = rect.Width() / 20;
-	//	for (int i = 0; i <= 20; i++) {
-	//		if (i != 10) {
-
-	//			a.Format(_T("%d"), i - 10);
-
-	//			Xshnatot[i] = new CStatic;
-	//			(*Xshnatot[i]).Create(a, WS_CHILD | WS_VISIBLE, //Create Shnatot label
-	//				CRect(i * Hei + 3, rect.Height() / 2 - 30, i * Hei + 30, rect.Height() / 2 - 7), this);
-
-	//			dc.MoveTo(i * Hei, rect.Height() / 2 - 5);  //Create Shnatot kav
-	//			dc.LineTo(i * Hei, rect.Height() / 2 + 5);
-	//		}
-	//	}
-
-
-
-	//	//print x and y labels
-	//	paint_xy[0] = new CStatic;
-	//	paint_xy[1] = new CStatic;
-
-	//	//create x label
-	//	a.Format(_T("X"));
-	//	(*paint_xy[0]).Create(a, WS_CHILD | WS_VISIBLE,
-	//		CRect(rect.Width() - 20, rect.Height() / 2 + 5, rect.Width(), rect.Height() + 20), this);
-
-	//	//create y label
-	//	a.Format(_T("Y"));
-	//	(*paint_xy[1]).Create(a, WS_CHILD | WS_VISIBLE,
-	//		CRect(rect.Width() / 2 + 5, 0, rect.Width() / 2 + 25, 20), this);
 
 
 	}

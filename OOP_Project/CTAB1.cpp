@@ -5,7 +5,7 @@
 #include "OOP_Project.h"
 #include "CTAB1.h"
 #include "afxdialogex.h"
-
+#include "AXIS.h"
 
 // CTAB1 dialog
 
@@ -60,6 +60,7 @@ BEGIN_MESSAGE_MAP(CTAB1, CDialogEx)
 	ON_BN_CLICKED(IDC_Circle_C, &CTAB1::OnBnClickedCircleC)
 	ON_BN_CLICKED(IDC_Circle_E, &CTAB1::OnBnClickedCircleE)
 	ON_BN_CLICKED(IDC_Circle_P, &CTAB1::OnBnClickedCircleP)
+	ON_BN_CLICKED(IDC_Send, &CTAB1::OnBnClickedSend)
 END_MESSAGE_MAP()
 
 
@@ -201,66 +202,63 @@ void CTAB1::OnCbnSelchangePoints()
 	GetDlgItem(IDC_X)->ShowWindow(SW_SHOW);
 	GetDlgItem(IDC_Y)->ShowWindow(SW_SHOW);
 
-   // Add number to the combo box
-   m_comboBoxCtrl.GetLBText(m_comboBoxCtrl.GetCurSel(), m_strTextCtrl); 
-   UpdateData(FALSE);
+	   // Add number to the combo box
+	   m_comboBoxCtrl.GetLBText(m_comboBoxCtrl.GetCurSel(), m_strTextCtrl); 
+	   UpdateData(FALSE);
    
-   if(save_amount_points > m_comboBoxCtrl.GetCurSel() + 1)//if already entered number before
-   { 
-	   //for loop is for removing textboxes that are not needed
-	   for (int i = m_comboBoxCtrl.GetCurSel() + 1; i < save_amount_points; i++) {
-		   delete labels[i];
-		   delete Xtextbox[i];
-		   delete Ytextbox[i];
-		   labels[i]=NULL;
-		   Xtextbox[i]=NULL;
-		   Ytextbox[i]=NULL;
-	  }
-   }
-   save_amount_points = m_comboBoxCtrl.GetCurSel() + 1;//get value according to place in combo box(starting from 0)
+	   if(save_amount_points > m_comboBoxCtrl.GetCurSel() + 1)//if already entered number before
+	   { 
+		   //for loop is for removing textboxes that are not needed
+		   for (int i = m_comboBoxCtrl.GetCurSel() + 1; i < save_amount_points; i++) {
+			   delete labels[i];
+			   delete Xtextbox[i];
+			   delete Ytextbox[i];
+			   labels[i]=NULL;
+			   Xtextbox[i]=NULL;
+			   Ytextbox[i]=NULL;
+		  }
+	   }
+	   save_amount_points = m_comboBoxCtrl.GetCurSel() + 1;//get value according to place in combo box(starting from 0)
 
 
-   if (save_amount_points > 4)//if amount is bigger than 4,display x y labels in the right side as well 
-   {
-	   GetDlgItem(IDC_X2)->ShowWindow(SW_SHOW);   GetDlgItem(IDC_Y2)->ShowWindow(SW_SHOW);
+	   if (save_amount_points > 4)//if amount is bigger than 4,display x y labels in the right side as well 
+	   {
+		   GetDlgItem(IDC_X2)->ShowWindow(SW_SHOW);   GetDlgItem(IDC_Y2)->ShowWindow(SW_SHOW);
 
 	 
-   }
-   else
-   {
-	   GetDlgItem(IDC_X2)->ShowWindow(SW_HIDE);  GetDlgItem(IDC_Y2)->ShowWindow(SW_HIDE);
-   }
-
-	//Add text box
-
-   int y=180;
-   int x = 25;
-   for (int i = 1; i <= save_amount_points; i++)
-   {
-	   if (i == 5) { x = 120; y = 180; }
-
-	   CString NumToDisplay;  NumToDisplay.Format(_T("%d"), i); //Enter i to string;
-
-	   if (labels[i - 1] == NULL) {
-		   labels[i - 1] = new CStatic;         //Print nums;
-		   labels[i - 1]->Create(NumToDisplay, WS_CHILD | WS_VISIBLE,
-			   CRect(x - 10, y, x, y + 20), this);
 	   }
-	   if (Xtextbox[i - 1] == NULL) {
-		   Xtextbox[i - 1] = new CEdit;        // Print Text Boxes
-		   Xtextbox[i - 1]->Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
-			   CRect(x, y, x + 20, y + 20), this, 8888);
+	   else
+	   {
+		   GetDlgItem(IDC_X2)->ShowWindow(SW_HIDE);  GetDlgItem(IDC_Y2)->ShowWindow(SW_HIDE);
 	   }
-	   if (Ytextbox[i - 1] == NULL){
-		   Ytextbox[i - 1] = new CEdit;
-	   Ytextbox[i - 1]->Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER, 
-		   CRect(x + 45, y, x + 65, y + 20), this, 8888);
-   }
-   y += 35;
-   }
 
+		//Add text box
 
+	   int y=180;
+	   int x = 25;
+	   for (int i = 1; i <= save_amount_points; i++)
+	   {
+		   if (i == 5) { x = 120; y = 180; }
 
+		   CString NumToDisplay;  NumToDisplay.Format(_T("%d"), i); //Enter i to string;
+
+		   if (labels[i - 1] == NULL) {
+			   labels[i - 1] = new CStatic;         //Print nums;
+			   labels[i - 1]->Create(NumToDisplay, WS_CHILD | WS_VISIBLE,
+				   CRect(x - 10, y, x, y + 20), this);
+		   }
+		   if (Xtextbox[i - 1] == NULL) {
+			   Xtextbox[i - 1] = new CEdit;        // Print Text Boxes
+			   Xtextbox[i - 1]->Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
+				   CRect(x, y, x + 20, y + 20), this, 8888);
+		   }
+		   if (Ytextbox[i - 1] == NULL){
+			   Ytextbox[i - 1] = new CEdit;
+		   Ytextbox[i - 1]->Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER, 
+			   CRect(x + 45, y, x + 65, y + 20), this, 8888);
+	   }
+	   y += 35;
+	   }
  
 }
 
@@ -271,7 +269,7 @@ void CTAB1::OnCbnSelchangePoints()
 void CTAB1::Create_Circle_C()
 {
 		//input x textbox
-		CircleTextBox = new CEdit[3]();
+		CircleTextBox = new CEdit[3];
 		CircleTextBox[0].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER, 
 			CRect(25,180,45,200),this, 8888);
 		//input y textbox
@@ -431,5 +429,37 @@ void CTAB1::OnBnClickedCircleP()
 		
 		
 
+	}
+}
+
+
+void CTAB1::OnBnClickedSend()
+{
+	if (IsDlgButtonChecked(IDC_Polygon) == BST_CHECKED){//if chosen poly 
+		UpdateData(TRUE);
+		CString str;
+		//gets input from textbox
+		double x, y;
+		POINT* PointArray = new POINT[save_amount_points];
+		
+		for (int i = 0; i < this->save_amount_points; i++) {
+			Xtextbox[i]->GetWindowTextW(str);
+			 x = _ttoi(str);
+			Ytextbox[i]->GetWindowTextW(str);
+			 y = _ttoi(str);
+			 PointArray[i].x = (double)x;
+			 PointArray[i].y = (double)y;
+		}
+		Poligon p1(PointArray, save_amount_points);
+		ShapeArr[CurrentPose] = &p1;
+		CurrentPose++;
+		
+
+		delete[] PointArray;
+
+		//MORE TO FOLLOW
+		//TBD
+
+		UpdateData(FALSE);
 	}
 }

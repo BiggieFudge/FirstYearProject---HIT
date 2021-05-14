@@ -179,6 +179,7 @@ void COOPProjectDlg::OnPaint()
 		CRect rect;
 		GetClientRect(&rect);
 
+		//create frame around show_All;
 		dc.MoveTo(899,29);
 		dc.LineTo(1181,29);
 		dc.LineTo(1181, 481);

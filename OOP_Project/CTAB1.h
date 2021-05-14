@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Shape.h"
+#include "Poligon.h"
 
 // CTAB1 dialog
 
@@ -25,10 +27,11 @@ protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 
 	DECLARE_MESSAGE_MAP()
+
+
 public:
-	
-	afx_msg void OnBnClickedPolygon();
-	afx_msg void OnBnClickedCircle();
+	Shape* ShapeArr[5];
+	int CurrentPose = 0;
 
 	
 
@@ -73,6 +76,9 @@ public:
 
 	int save_amount_points=-1;//amount of points selected in combo box (polygon)
 
+	afx_msg void OnBnClickedPolygon();
+	afx_msg void OnBnClickedCircle();
+
 	afx_msg void OnCbnSelchangePoints();
 	
 	//creating circle shape
@@ -106,4 +112,5 @@ public:
 	afx_msg void OnBnClickedCircleC();
 	afx_msg void OnBnClickedCircleE();
 	afx_msg void OnBnClickedCircleP();
+	afx_msg void OnBnClickedSend();
 };

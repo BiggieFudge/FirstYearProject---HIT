@@ -13,7 +13,6 @@
 #define IDD_CONTROLS                    130
 #define IDD_TAB2                        131
 #define IDD_TAB3                        132
-#define IDD_OLE_PROPPAGE_SMALL          133
 #define IDD_Show_All                    133
 #define IDI_ICON1                       141
 #define IDC_BUTTON1                     1000

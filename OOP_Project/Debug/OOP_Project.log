@@ -1,2 +1,12 @@
-﻿  OOP_ProjectDlg.cpp
+﻿  AXIS.cpp
+  CONTROLS.cpp
+  CTAB1.cpp
+D:\OOP_Project\OOP_Project\CTAB1.cpp(450,31): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\CTAB1.cpp(451,31): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+  CTAB2.cpp
+  CTAB3.cpp
+  OOP_Project.cpp
+  OOP_ProjectDlg.cpp
+  Show_All.cpp
+  Generating Code...
   OOP_Project.vcxproj -> D:\OOP_Project\Debug\OOP_Project.exe
