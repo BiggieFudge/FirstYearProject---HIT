@@ -1,12 +1,14 @@
 ﻿  AXIS.cpp
-  CONTROLS.cpp
   CTAB1.cpp
-D:\OOP_Project\OOP_Project\CTAB1.cpp(450,31): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(451,31): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-  CTAB2.cpp
-  CTAB3.cpp
+D:\OOP_Project\OOP_Project\CTAB1.cpp(454,31): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\CTAB1.cpp(455,31): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\CTAB1.cpp(456,52): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\CTAB1.cpp(457,52): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\CTAB1.cpp(489,54): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\CTAB1.cpp(490,54): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\CTAB1.cpp(494,54): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\CTAB1.cpp(495,54): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
   OOP_Project.cpp
   OOP_ProjectDlg.cpp
-  Show_All.cpp
   Generating Code...
   OOP_Project.vcxproj -> D:\OOP_Project\Debug\OOP_Project.exe

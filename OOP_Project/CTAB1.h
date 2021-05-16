@@ -2,6 +2,7 @@
 
 #include "Shape.h"
 #include "Poligon.h"
+#include "Circle.h"
 
 // CTAB1 dialog
 
@@ -30,10 +31,17 @@ protected:
 
 
 public:
-	Shape* ShapeArr[5];
-	int CurrentPose = 0;
+	Shape* ShapeArr[5];//contains all the shapes object(polys,circles)   //Add delete
+	Poligon* PolyArr[5];//contains all the polys  //ADD delete
+	Circle* CircleArr[5];//contains all the circles objects
+	Circle* CircleArr_C[5];//contains all the circles circles
 
-	
+	int CurrentPose_shape = 0;//amount of shapes right now
+	int CurrentPose_poly = 0;//amount of polygons right now
+	int CurrentPose_circle = 0;//amount of circles right now
+	int CurrentPose_circle_c = 0;//amount of circles right now
+	int CurrentPose_circle_e = 0;//amount of circles right now
+	int CurrentPose_circle_p = 0;//amount of circles right now
 
 	CComboBox m_comboBoxCtrl; // ComboBox 8 number
 

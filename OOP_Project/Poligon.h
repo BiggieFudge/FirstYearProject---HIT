@@ -4,7 +4,7 @@
 class Poligon :public Shape
 {
 public:
-    Poligon(POINT* PointArray,int x = 1);
+    Poligon(POINT* ,POINT* ,int);
     ~Poligon();
     //virtual functions:
     double area();
@@ -13,13 +13,18 @@ public:
     string type();
     //extra functions:
     double check_slope(POINT, POINT);
-    int check_tzela();
+    //int check_tzela();
     //getters setters
-    int get_tzela();
+    //int get_tzela();
+    const int get_amount_edge();
+    POINT* GetArr();
+
+
 
 private:
     const int amount_edge;
-    POINT* arr_edge;
+    POINT* Real_Coor;
+    POINT* On_Screen_Coor;//for painting the poly
     int amount_tzela;
 };
 

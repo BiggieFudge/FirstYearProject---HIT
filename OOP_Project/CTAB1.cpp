@@ -1,8 +1,9 @@
 // CTAB1.cpp : implementation file
 //
-#include <iostream>
+
 #include "pch.h"
 #include "OOP_Project.h"
+#include "OOP_ProjectDlg.h"
 #include "CTAB1.h"
 #include "afxdialogex.h"
 #include "AXIS.h"
@@ -158,7 +159,7 @@ void CTAB1::OnBnClickedCircle()
 		HideTextBoxes();
 		show_Circle();
 	}
-	
+	(CWnd*)GetDlgItem(IDC_Send)->ShowWindow(SW_SHOW);
 }
 void CTAB1::show_Circle() {
 	GetDlgItem(IDC_Circle_Group)->ShowWindow(SW_SHOW); GetDlgItem(IDC_Circle_C)->ShowWindow(SW_SHOW); GetDlgItem(IDC_Circle_E)->ShowWindow(SW_SHOW); GetDlgItem(IDC_Circle_P)->ShowWindow(SW_SHOW);
@@ -433,33 +434,94 @@ void CTAB1::OnBnClickedCircleP()
 }
 
 
-void CTAB1::OnBnClickedSend()
-{
-	if (IsDlgButtonChecked(IDC_Polygon) == BST_CHECKED){//if chosen poly 
-		UpdateData(TRUE);
-		CString str;
-		//gets input from textbox
-		double x, y;
-		POINT* PointArray = new POINT[save_amount_points];
-		
-		for (int i = 0; i < this->save_amount_points; i++) {
-			Xtextbox[i]->GetWindowTextW(str);
-			 x = _ttoi(str);
-			Ytextbox[i]->GetWindowTextW(str);
-			 y = _ttoi(str);
-			 PointArray[i].x = (double)x;
-			 PointArray[i].y = (double)y;
+void CTAB1::OnBnClickedSend() {
+	if (CurrentPose_shape < 5) 
+	{
+		if (IsDlgButtonChecked(IDC_Polygon) == BST_CHECKED) {//if chosen poly 
+			UpdateData(TRUE);
+			CString str;
+			//gets input from textbox
+			double x, y;
+			POINT* PointArray = new POINT[save_amount_points];
+			POINT* On_Screen = new POINT[save_amount_points];
+			for (int i = 0; i < this->save_amount_points; i++) {
+				Xtextbox[i]->GetWindowTextW(str);     //Take Data from textbox
+				Xtextbox[i]->SetWindowTextW(_T("")); // Reset TextBox
+				x = _ttoi(str);  //Convert from Cstring to double
+				Ytextbox[i]->GetWindowTextW(str);   //Take Data from textbox
+				Ytextbox[i]->SetWindowTextW(_T("")); // Reset TextBox
+				y = _ttoi(str);  //Convert from Cstring to double
+				PointArray[i].x = (double)x;
+				PointArray[i].y = (double)y;
+				On_Screen[i].x = ((double)x + 10) * SquareSide + SquareSide;  //ETN maths
+				On_Screen[i].y = (10 - (double)y) * SquareSide + SquareSide;     //ETN maths
+			}
+			Poligon* p1 = new Poligon(On_Screen, PointArray, save_amount_points);
+			PolyArr[CurrentPose_poly] = p1;
+			ShapeArr[CurrentPose_shape] = p1;
+			CurrentPose_poly++;
+			CurrentPose_shape++;
+
+
+			CWnd* Main = GetParent()->GetParent()->GetParent();  //Get main window functions
+
+			Main->RedrawWindow();      //Go to main window and redraw with new shape;
+
+			delete[] PointArray;
+			delete[] On_Screen;
+
+			UpdateData(FALSE);
+
+
 		}
-		Poligon p1(PointArray, save_amount_points);
-		ShapeArr[CurrentPose] = &p1;
-		CurrentPose++;
-		
+		else {   //Chosen circle
+			if ((IsDlgButtonChecked(IDC_Circle_C) == BST_CHECKED)) { //Chosen circle circle
+				UpdateData(TRUE);
+				CString str;
+				CircleTextBox[2].GetWindowTextW(str);
+				CircleTextBox[2].SetWindowTextW(_T("")); // Reset TextBox
+				double rad = _ttoi(str);
+				POINT p1;
+				POINT* p2 = new POINT[2];
+				CircleTextBox[0].GetWindowTextW(str);
+				CircleTextBox[0].SetWindowTextW(_T(""));// Reset TextBox
+				p1.x = _ttoi(str);
+				p2[0].x = ((_ttoi(str) - rad) + 10) * SquareSide + SquareSide;
+				p2[1].x = ((_ttoi(str) + rad) + 10) * SquareSide + SquareSide;
+				CircleTextBox[1].GetWindowTextW(str);
+				CircleTextBox[1].SetWindowTextW(_T(""));// Reset TextBox
+				p1.y = _ttoi(str);
+				p2[0].y = (10 - (_ttoi(str) - rad)) * SquareSide + SquareSide;
+				p2[1].y = (10 - (_ttoi(str) + rad)) * SquareSide + SquareSide;
+				Circle* c1 = new Circle(p1, p2, rad);
+				ShapeArr[CurrentPose_shape] = c1;
+				CircleArr[CurrentPose_circle] = c1;
+				CircleArr_C[CurrentPose_circle_c] = c1;
+				CurrentPose_circle++;
+				CurrentPose_shape++;
+				CurrentPose_circle_c++;
 
-		delete[] PointArray;
+				CWnd* Main = GetParent()->GetParent()->GetParent();  //Get main window functions
 
-		//MORE TO FOLLOW
-		//TBD
+				Main->RedrawWindow();      //Go to main window and redraw with new shape;
 
-		UpdateData(FALSE);
+				delete[] p2;
+
+				UpdateData(FALSE);
+
+
+			}
+			else if ((IsDlgButtonChecked(IDC_Circle_E) == BST_CHECKED)) {
+
+
+			}
+			else {
+
+			}
+		}
+	}
+	else
+	{
+		MessageBox(_T("You enter too much shape \n FUCK YOU"), _T("ERROR"), MB_OK);
 	}
 }

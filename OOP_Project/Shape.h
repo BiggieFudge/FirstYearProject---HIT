@@ -16,7 +16,14 @@ public:
     virtual double perimeter() = 0;
     //virtual void print() = 0;
     virtual string type() = 0;
-    
+    void set_color(int x)
+    {
+        color_index = x;
+    }
+    int get_color()
+    {
+        return(color_index);
+    }
 
     //old
 
@@ -34,6 +41,7 @@ public:
     /*const int amount_edge;
     Point* arr_edge;*/
 
+     int color_index=-1;
 private:
 
 };
