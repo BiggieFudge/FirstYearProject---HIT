@@ -262,7 +262,9 @@ void COOPProjectDlg::OnPaint()
 			}
 			else if (type == "CircleP") {
 
-
+				dc.Pie(m_controls.m_TAB1.CircleArr_P[indexCircleP]->get_rekt(),
+					(m_controls.m_TAB1.CircleArr_P[indexCircleP]->get_angle_point())[0],
+					(m_controls.m_TAB1.CircleArr_P[indexCircleP]->get_angle_point())[1]);
 				indexCircleP++;
 			}
 			else {

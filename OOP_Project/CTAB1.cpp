@@ -559,7 +559,81 @@ void CTAB1::OnBnClickedSend() {
 
 			}
 			else {
+				UpdateData(TRUE);
+				CString str;
 
+				POINT p1;
+
+				POINT* p2 = new POINT[2];
+
+				POINT p3;
+
+				POINT* p4 = new POINT[2];
+
+				POINT p5;
+
+				POINT p6;
+				PieTextBox[0].GetWindowTextW(str);
+				PieTextBox[0].SetWindowTextW(_T(""));// Reset TextBox
+				p1.x = _ttoi(str);
+				p2[0].x = ((_ttoi(str)) + 10) * SquareSide + SquareSide;
+
+				PieTextBox[1].GetWindowTextW(str);
+				PieTextBox[1].SetWindowTextW(_T(""));// Reset TextBox
+				p1.y = _ttoi(str);
+				p2[0].y = (10 - (_ttoi(str))) * SquareSide + SquareSide;
+
+
+
+				PieTextBox[2].GetWindowTextW(str);
+				PieTextBox[2].SetWindowTextW(_T(""));// Reset TextBox
+				p3.x = _ttoi(str);
+				p2[1].x = ((_ttoi(str)) + 10) * SquareSide + SquareSide;
+
+				PieTextBox[3].GetWindowTextW(str);
+				PieTextBox[3].SetWindowTextW(_T(""));// Reset TextBox
+				p3.y = _ttoi(str);
+				p2[1].y = (10 - (_ttoi(str))) * SquareSide + SquareSide;
+
+
+
+				PieTextBox[4].GetWindowTextW(str);
+				PieTextBox[4].SetWindowTextW(_T(""));// Reset TextBox
+				p5.x = _ttoi(str);
+				p4[0].x = ((_ttoi(str)) + 10) * SquareSide + SquareSide;
+
+				PieTextBox[5].GetWindowTextW(str);
+				PieTextBox[5].SetWindowTextW(_T(""));// Reset TextBox
+				p5.y = _ttoi(str);
+				p4[0].y = (10 - (_ttoi(str))) * SquareSide + SquareSide;
+
+
+				PieTextBox[6].GetWindowTextW(str);
+				PieTextBox[6].SetWindowTextW(_T(""));// Reset TextBox
+				p6.x = _ttoi(str);
+				p4[1].x = ((_ttoi(str)) + 10) * SquareSide + SquareSide;
+
+				PieTextBox[7].GetWindowTextW(str);
+				PieTextBox[7].SetWindowTextW(_T(""));// Reset TextBox
+				p6.y = _ttoi(str);
+				p4[1].y = (10 - (_ttoi(str))) * SquareSide + SquareSide;
+
+
+				pie* e1 = new pie(p1, p3, p2,p5 , p6,p4);
+				ShapeArr[CurrentPose_shape] = e1;
+				CircleArr[CurrentPose_circle] = e1;
+				CircleArr_P[CurrentPose_circle_p] = e1;
+				CurrentPose_circle++;
+				CurrentPose_shape++;
+				CurrentPose_circle_p++;
+
+				CWnd* Main = GetParent()->GetParent()->GetParent();  //Get main window functions
+
+				Main->RedrawWindow();      //Go to main window and redraw with new shape;
+
+				delete[] p2;
+
+				UpdateData(FALSE);
 			}
 		}
 	}

@@ -3,6 +3,7 @@
 #include "Shape.h"
 #include "Poligon.h"
 #include "Ellipse.h"
+#include "Pie.h"
 
 // CTAB1 dialog
 
@@ -36,7 +37,7 @@ public:
 	Circle* CircleArr[5];//contains all the circles objects
 	Circle* CircleArr_C[5];//contains all the circles circles
 	ellipse* CircleArr_E[5];
-
+	pie* CircleArr_P[5];
 	int CurrentPose_shape = 0;//amount of shapes right now
 	int CurrentPose_poly = 0;//amount of polygons right now
 	int CurrentPose_circle = 0;//amount of circles right now
@@ -50,7 +51,7 @@ public:
 	
 	//if chosen polygon shape:
 
-	//CWnd* Poly[4];//display input button
+	
 
 	CStatic IDC_XX2;//display x label
 	CStatic IDC_YY2;//display y label

@@ -1,9 +1,10 @@
 #pragma once
 #include "Ellipse.h"
-class Pie : public ellipse
+class pie : public ellipse
 {
-    Pie(POINT p1,POINT p2,POINT p3,POINT p4,POINT* arr_p,POINT* arr_a);
-    ~Pie();
+public:
+    pie(POINT p1,POINT p2,POINT* arr_p,POINT p3,POINT p4,POINT* arr_a);
+    ~pie();
     double area();
     double perimeter();
     string type();

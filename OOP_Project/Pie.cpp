@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Pie.h"
 
-Pie::Pie(POINT p1,POINT p2,POINT p3,POINT p4,POINT* arr_p,POINT* arr_a):ellipse(p1,p2,arr_p)
+pie::pie(POINT p1,POINT p2,POINT* arr_p,POINT p3,POINT p4,POINT* arr_a):ellipse(p1,p2,arr_p)
 {
     start_angle=p3;
     end_angle = p4;
@@ -12,27 +12,27 @@ Pie::Pie(POINT p1,POINT p2,POINT p3,POINT p4,POINT* arr_p,POINT* arr_a):ellipse(
     Angle_point[1].y = arr_a[1].y;
 }
 
-Pie::~Pie()
+pie::~pie()
 {
     delete[] Angle_point;
 }
 
-double Pie::area()
+double pie::area()
 {
     return(3);
 }
 
-double Pie::perimeter()
+double pie::perimeter()
 {
     return(3);
 }
     
-string Pie::type()
+string pie::type()
 {
      return("CircleP");
 }
     
-POINT* Pie::get_angle_point()
+POINT* pie::get_angle_point()
 {
     return(Angle_point);
 }
