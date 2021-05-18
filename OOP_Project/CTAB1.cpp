@@ -17,7 +17,7 @@ CTAB1::CTAB1(CWnd* pParent /*=nullptr*/)
 	, m_strTextCtrl(_T(""))
 {
 
-}
+}  
 
 CTAB1::~CTAB1()
 {
@@ -27,6 +27,7 @@ CTAB1::~CTAB1()
 void CTAB1::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+
 	DDX_Control(pDX, IDC_Points, m_comboBoxCtrl);
 	DDX_CBString(pDX, IDC_Points, m_strTextCtrl);
 	DDX_Control(pDX, IDC_X, IDC_XX);
@@ -34,6 +35,7 @@ void CTAB1::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_X2, IDC_XX2);
 	DDX_Control(pDX, IDC_Y2, IDC_YY2);
 	DDX_Control(pDX, IDC_Circle_Group, IDC_Circle_GroupV);
+
 }
 
 BOOL CTAB1::OnInitDialog()
@@ -85,18 +87,13 @@ void CTAB1::OnBnClickedPolygon()
 //display everything that is connected to poly
 void CTAB1::show_Poly() {
    
-	Poly[0]= (CWnd*)GetDlgItem(IDC_Poly);
-	Poly[0]->ShowWindow(SW_SHOW);
+	GetDlgItem(IDC_Poly)->ShowWindow(SW_SHOW);
 
-	Poly[1] =(CWnd*)GetDlgItem(IDC_label);
-	Poly[1]->ShowWindow(SW_SHOW);
+	GetDlgItem(IDC_label)->ShowWindow(SW_SHOW);
 
-	Poly[2]= (CWnd*)GetDlgItem(IDC_Points);
-	Poly[2]->ShowWindow(SW_SHOW);
+	GetDlgItem(IDC_Points)->ShowWindow(SW_SHOW);
 
-	Poly[3] = (CWnd*)GetDlgItem(IDC_Send);
-	Poly[3]->ShowWindow(SW_SHOW);
-
+	GetDlgItem(IDC_Send)->ShowWindow(SW_SHOW);
 
 	
 	
@@ -104,14 +101,11 @@ void CTAB1::show_Poly() {
 //hide everything that is connected to poly
 void CTAB1::hide_Poly()
 {
-	Poly[0]= (CWnd*)GetDlgItem(IDC_Poly);
-	Poly[0]->ShowWindow(SW_HIDE);
+	GetDlgItem(IDC_Poly)->ShowWindow(SW_HIDE);
 
-	Poly[1] =(CWnd*)GetDlgItem(IDC_label);
-	Poly[1]->ShowWindow(SW_HIDE);
+	GetDlgItem(IDC_label)->ShowWindow(SW_HIDE);
 
-	Poly[2]= (CWnd*)GetDlgItem(IDC_Points);
-	Poly[2]->ShowWindow(SW_HIDE);   
+	GetDlgItem(IDC_Points)->ShowWindow(SW_HIDE);   
 
 }
 
@@ -155,6 +149,7 @@ void CTAB1::OnBnClickedCircle()
 {
 	if ( IsDlgButtonChecked(IDC_Circle) == BST_CHECKED )//if chosen circle
 	{
+		
 		hide_Poly();
 		HideTextBoxes();
 		show_Circle();
@@ -478,7 +473,7 @@ void CTAB1::OnBnClickedSend() {
 			if ((IsDlgButtonChecked(IDC_Circle_C) == BST_CHECKED)) { //Chosen circle circle
 				UpdateData(TRUE);
 				CString str;
-				CircleTextBox[2].GetWindowTextW(str);
+				CircleTextBox[2].GetWindowTextW(str);   //Get radius user entered
 				CircleTextBox[2].SetWindowTextW(_T("")); // Reset TextBox
 				double rad = _ttoi(str);
 				POINT p1;
@@ -493,6 +488,8 @@ void CTAB1::OnBnClickedSend() {
 				p1.y = _ttoi(str);
 				p2[0].y = (10 - (_ttoi(str) - rad)) * SquareSide + SquareSide;
 				p2[1].y = (10 - (_ttoi(str) + rad)) * SquareSide + SquareSide;
+				
+				
 				Circle* c1 = new Circle(p1, p2, rad);
 				ShapeArr[CurrentPose_shape] = c1;
 				CircleArr[CurrentPose_circle] = c1;
@@ -512,7 +509,53 @@ void CTAB1::OnBnClickedSend() {
 
 			}
 			else if ((IsDlgButtonChecked(IDC_Circle_E) == BST_CHECKED)) {
+				UpdateData(TRUE);
+				CString str;
+				
+				POINT p1;
+				
+				POINT* p2 = new POINT[2];
 
+				POINT p3;
+				EllipseTextBox[0].GetWindowTextW(str);
+				EllipseTextBox[0].SetWindowTextW(_T(""));// Reset TextBox
+				p1.x = _ttoi(str);
+				p2[0].x = ((_ttoi(str)) + 10) * SquareSide + SquareSide;
+				
+				EllipseTextBox[1].GetWindowTextW(str);
+				EllipseTextBox[1].SetWindowTextW(_T(""));// Reset TextBox
+				p1.y = _ttoi(str);
+				p2[0].y = (10 - (_ttoi(str))) * SquareSide + SquareSide;
+				
+
+
+				EllipseTextBox[2].GetWindowTextW(str);
+				EllipseTextBox[2].SetWindowTextW(_T(""));// Reset TextBox
+				p3.x = _ttoi(str);
+				p2[1].x = ((_ttoi(str)) + 10) * SquareSide + SquareSide;
+				
+				EllipseTextBox[3].GetWindowTextW(str);
+				EllipseTextBox[3].SetWindowTextW(_T(""));// Reset TextBox
+				p3.y = _ttoi(str);
+				p2[1].y = (10 - (_ttoi(str))) * SquareSide + SquareSide;
+		
+
+
+				ellipse* e1 = new ellipse(p1, p3 , p2);
+				ShapeArr[CurrentPose_shape] = e1;
+				CircleArr[CurrentPose_circle] = e1;
+				CircleArr_E[CurrentPose_circle_e] = e1;
+				CurrentPose_circle++;
+				CurrentPose_shape++;
+				CurrentPose_circle_e++;
+
+				CWnd* Main = GetParent()->GetParent()->GetParent();  //Get main window functions
+
+				Main->RedrawWindow();      //Go to main window and redraw with new shape;
+
+				delete[] p2;
+
+				UpdateData(FALSE);
 
 			}
 			else {

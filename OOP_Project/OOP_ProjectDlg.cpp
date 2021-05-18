@@ -231,64 +231,103 @@ void COOPProjectDlg::OnPaint()
 		
 		
 		CPen penForShapes;
-		penForShapes.CreatePen(PS_SOLID, 4, arr_color[index_shape]);
-		dc.SelectObject(&penForShapes);
-
-
-
 		
-		if (m_controls.m_TAB1.CurrentPose_shape > 0) //checking amount of shapes
-		{
-			int i;
-			for(i=0;i<m_controls.m_TAB1.CurrentPose_shape ;i++)
-			{
-				if((m_controls.m_TAB1.ShapeArr[i])->get_color()==-1)
-				{
-					(m_controls.m_TAB1.ShapeArr[i])->set_color(i);
-				}
-			}
-		    
-			if (m_controls.m_TAB1.CurrentPose_poly > 0)//checking amount of polys
-			{
-			    int i;
-				for (i = 0; i < m_controls.m_TAB1.CurrentPose_poly; i++)
-				{
-				    
-					CPen penForShapes;
-					penForShapes.CreatePen(PS_SOLID, 4, arr_color[(m_controls.m_TAB1.PolyArr[i])->get_color()]);
-					dc.SelectObject(&penForShapes);
-					
-			
-					dc.Polygon(m_controls.m_TAB1.PolyArr[i]->GetArr(),             //Draw poly
-								m_controls.m_TAB1.PolyArr[i]->get_amount_edge());
-					//index_shape++;
-					
-				}
-			}
-			if(m_controls.m_TAB1.CurrentPose_circle > 0)//checking amount of circles
-			{
-				if (m_controls.m_TAB1.CurrentPose_circle_c > 0)//checking amount of polys
-				{
-					int i;
-					for (i = 0; i < m_controls.m_TAB1.CurrentPose_circle_c; i++){
-					     
-						CPen penForShapes;
-						penForShapes.CreatePen(PS_SOLID, 4, arr_color[(m_controls.m_TAB1.CircleArr_C[i])->get_color()]);
-						dc.SelectObject(&penForShapes);
-					     
-						dc.Ellipse(m_controls.m_TAB1.CircleArr_C[i]->get_rekt());
-						
-						//index_shape++;
-					
+		
 
-									
-					}
-				}
+		int indexPoly = 0, indexCircleC = 0, indexCircleP = 0, indexCircleE = 0;     // Create and reset index's
+		for (int i = 0; i < m_controls.m_TAB1.CurrentPose_shape; i++) {   //Test To print shapes
+			
+			string type = (m_controls.m_TAB1.ShapeArr[i])->type();
+
+
+			if ((m_controls.m_TAB1.ShapeArr[i])->get_color() == -1){
+					(m_controls.m_TAB1.ShapeArr[i])->set_color(i);
 			}
+			penForShapes.DeleteObject();
+			penForShapes.CreatePen(PS_SOLID, 4, arr_color[(m_controls.m_TAB1.ShapeArr[i])->get_color()]); //Change Color according to shape.color
+			dc.SelectObject(&penForShapes);
+
+			
+
+			if (type == "Poly") {
+				
+				dc.Polygon(m_controls.m_TAB1.PolyArr[indexPoly]->GetArr(),             //Draw poly
+					m_controls.m_TAB1.PolyArr[indexPoly]->get_amount_edge());
+				indexPoly++;
+			}
+			else if (type == "CircleC") {
+				
+				dc.Ellipse(m_controls.m_TAB1.CircleArr_C[indexCircleC]->get_rekt());    //Draw CircleC
+				indexCircleC++;
+			}
+			else if (type == "CircleP") {
+
+
+				indexCircleP++;
+			}
+			else {
+
+				dc.Ellipse(m_controls.m_TAB1.CircleArr_E[indexCircleE]->get_rekt());
+				indexCircleE++;
+			}
+
+
 
 		}
-		//index_shape = 0;//restart the index
-		
+
+//		
+//		if (m_controls.m_TAB1.CurrentPose_shape > 0) //checking amount of shapes
+//		{
+//			int i;
+//			for(i=0;i<m_controls.m_TAB1.CurrentPose_shape ;i++)
+//			{
+//				if((m_controls.m_TAB1.ShapeArr[i])->get_color()==-1)
+//				{
+//					(m_controls.m_TAB1.ShapeArr[i])->set_color(i);
+//				}
+//			}
+//		    
+//			if (m_controls.m_TAB1.CurrentPose_poly > 0)//checking amount of polys
+//			{
+//			    int i;
+//				for (i = 0; i < m_controls.m_TAB1.CurrentPose_poly; i++)
+//				{
+//				    
+//					CPen penForShapes;
+//					penForShapes.CreatePen(PS_SOLID, 4, arr_color[(m_controls.m_TAB1.PolyArr[i])->get_color()]);
+//					dc.SelectObject(&penForShapes);
+//					
+//			
+//					dc.Polygon(m_controls.m_TAB1.PolyArr[i]->GetArr(),             //Draw poly
+//								m_controls.m_TAB1.PolyArr[i]->get_amount_edge());
+//					//index_shape++;
+//					
+//				}
+//			}
+//			if(m_controls.m_TAB1.CurrentPose_circle > 0)//checking amount of circles
+//			{
+//				if (m_controls.m_TAB1.CurrentPose_circle_c > 0)//checking amount of circles circles
+//				{
+//					int i;
+//					for (i = 0; i < m_controls.m_TAB1.CurrentPose_circle_c; i++){
+//					     
+//						CPen penForShapes;
+//						penForShapes.CreatePen(PS_SOLID, 4, arr_color[(m_controls.m_TAB1.CircleArr_C[i])->get_color()]);
+//						dc.SelectObject(&penForShapes);
+//					     
+//						dc.Ellipse(m_controls.m_TAB1.CircleArr_C[i]->get_rekt());
+//						
+//						//index_shape++;
+//					
+//
+//									
+//					}
+//				}
+//			}
+//
+//		}
+//		//index_shape = 0;//restart the index
+//		
 	}
 	
 }

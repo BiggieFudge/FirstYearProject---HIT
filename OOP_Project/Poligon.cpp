@@ -144,7 +144,7 @@ string Poligon::type()
     //    return("rectangle");
     default:
         string rt;
-        rt = "polygon";
+        rt = "Poly";
         //rt += tmp + '0';
         //rt += " number of edges";
         return(rt);

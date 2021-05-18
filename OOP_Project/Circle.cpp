@@ -1,6 +1,16 @@
 #include "pch.h"
 #include "Circle.h"
 
+
+Circle::Circle()
+{
+   radius=NULL;
+   radiusReal=NULL;
+   center.x=NULL;
+   center.y = NULL;
+   RectPoint=NULL;
+}
+
 Circle::Circle(POINT p,POINT* p_c,double r)
 {
     //cout << "enter radious of circle:" << endl;
@@ -26,7 +36,7 @@ Circle::Circle(POINT p,POINT* p_c,double r)
 
 Circle::~Circle()
 {
-
+    delete[] RectPoint;
 }
 
 double Circle::area()
@@ -49,7 +59,7 @@ double Circle::perimeter()
 
 string Circle::type()
 {
-    return("circle");
+    return("CircleC");
 }
 //getters and setters
 

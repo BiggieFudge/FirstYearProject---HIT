@@ -5,6 +5,7 @@
 class Circle :public Shape
 {
 public:
+    Circle();
     Circle(POINT,POINT* ,double radius);
     ~Circle();
 
@@ -24,7 +25,9 @@ private:
     double radius;//radius according to xy map
     double radiusReal;//radius according to grid map
     POINT center;//center of circle
-    POINT* RectPoint;//edge points of rectangle outside of circle object //add delete
+ 
+
+    POINT* RectPoint;//edge points of rectangle outside of circle object 
 };
 
 

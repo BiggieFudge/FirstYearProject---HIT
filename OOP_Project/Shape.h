@@ -41,7 +41,7 @@ public:
     /*const int amount_edge;
     Point* arr_edge;*/
 
-     int color_index=-1;
+     int color_index=-1;//color for shapes in ShapeArr
 private:
 
 };

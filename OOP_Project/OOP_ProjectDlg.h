@@ -48,7 +48,7 @@ protected:
 	//AXIS* show_axis = new AXIS;
 	Show_All* Page = new Show_All;
 	
-	COLORREF arr_color[5] = { RGB(255,0,0),RGB(0,255,0),RGB(0,0,255),RGB(255,128,0) };//array containing colors for shapes
+	COLORREF arr_color[5] = { RGB(255,0,0),RGB(0,255,0),RGB(0,0,255),RGB(255,128,0),RGB(255,255,255)};//array containing colors for shapes
 	int index_shape = 0;//indicating at what index you are in ShapeArr
 	
 

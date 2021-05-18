@@ -189,10 +189,12 @@
     <ClInclude Include="CTAB1.h" />
     <ClInclude Include="CTAB2.h" />
     <ClInclude Include="CTAB3.h" />
+    <ClInclude Include="Ellipse.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="OOP_Project.h" />
     <ClInclude Include="OOP_ProjectDlg.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Pie.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Poligon.h" />
     <ClInclude Include="Resource.h" />
@@ -207,6 +209,7 @@
     <ClCompile Include="CTAB1.cpp" />
     <ClCompile Include="CTAB2.cpp" />
     <ClCompile Include="CTAB3.cpp" />
+    <ClCompile Include="Ellipse.cpp" />
     <ClCompile Include="OOP_Project.cpp" />
     <ClCompile Include="OOP_ProjectDlg.cpp" />
     <ClCompile Include="pch.cpp">
@@ -215,6 +218,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Pie.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Poligon.cpp" />
     <ClCompile Include="Shape.cpp" />
