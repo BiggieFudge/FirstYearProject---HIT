@@ -7,13 +7,11 @@
 #define IDS_ABOUTBOX                    101
 #define IDD_OOP_PROJECT_DIALOG          102
 #define IDD_TAB1                        104
-#define IDD_AXIS                        105
 #define IDR_MAINFRAME                   128
 #define IDD_DIALOG1                     130
 #define IDD_CONTROLS                    130
 #define IDD_TAB2                        131
 #define IDD_TAB3                        132
-#define IDD_Show_All                    133
 #define IDI_ICON1                       141
 #define IDC_BUTTON1                     1000
 #define IDC_TAB                         1002
@@ -22,8 +20,8 @@
 #define IDC_Poly                        1006
 #define IDC_Points                      1007
 #define IDC_Poly2                       1008
+#define IDC_Bottom_Group                1008
 #define IDC_label                       1009
-#define IDC_AMOUNTLABEL                 1009
 #define IDC_Send                        1012
 #define IDC_X                           1013
 #define IDC_Y                           1014

@@ -9,7 +9,7 @@
 #endif
 
 #include "resource.h"		// main symbols
-#include "AXIS.h"
+
 
 // COOPProjectApp:
 // See OOP_Project.cpp for the implementation of this class

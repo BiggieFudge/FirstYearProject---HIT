@@ -39,12 +39,12 @@ double Poligon::area()
     {
         if (i == amount_edge - 1)
         {
-            sum += Real_Coor[i].x * Real_Coor[0].y - Real_Coor[i].y * Real_Coor[0].x;
+            sum += Real_Coor[i].x/10 * Real_Coor[0].y/10 - Real_Coor[i].y/10 * Real_Coor[0].x/10;
 
         }
         else
         {
-            sum += Real_Coor[i].x * Real_Coor[i + 1].y - Real_Coor[i].y * Real_Coor[i + 1].x;
+            sum += Real_Coor[i].x/10 * Real_Coor[i + 1].y/10 - Real_Coor[i].y/10 * Real_Coor[i + 1].x/10;
         }
 
     }

@@ -183,7 +183,6 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AXIS.h" />
     <ClInclude Include="Circle.h" />
     <ClInclude Include="CONTROLS.h" />
     <ClInclude Include="CTAB1.h" />
@@ -199,11 +198,9 @@
     <ClInclude Include="Poligon.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Shape.h" />
-    <ClInclude Include="Show_All.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AXIS.cpp" />
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="CONTROLS.cpp" />
     <ClCompile Include="CTAB1.cpp" />
@@ -222,7 +219,6 @@
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Poligon.cpp" />
     <ClCompile Include="Shape.cpp" />
-    <ClCompile Include="Show_All.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="OOPProject.rc" />

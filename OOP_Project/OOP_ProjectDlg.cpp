@@ -9,7 +9,7 @@
 #include "OOP_ProjectDlg.h"
 #include "afxdialogex.h"
 #include "CONTROLS.h"
-#include "AXIS.h"
+
 #include <iostream>
 #include <string.h>
 
@@ -293,6 +293,10 @@ void COOPProjectDlg::OnPaint()
 			}
 			i_color++;//index for color choosing
 
+			//Draw line at end of info section
+			dc.SelectObject(&penForAxis);
+			dc.MoveTo(870, 125 + (*shape_it)->get_color() * 100);
+			dc.LineTo(1200, 125 + (*shape_it)->get_color() * 100);
 
 		}
 
@@ -346,13 +350,13 @@ void COOPProjectDlg::INFOPoly(list <Shape*> ::iterator indexS,list <Poligon*> ::
 		for (int i = 3; i < (*indexP)->get_amount_edge()+3;i++){
 
 		
-			ctmp.Format(_T(" %d: (%d,%d)"),(i-2) ,
-				((*indexP)->get_fake_arr())[i - 3].x, 
-				((*indexP)->get_fake_arr())[i - 3].y);
+			ctmp.Format(_T("  %d: (%.1f,%.1f)"),(i-2) ,
+				(double)((*indexP)->get_fake_arr())[i - 3].x /10, // note:delete/10
+				(double)((*indexP)->get_fake_arr())[i - 3].y /10);// note:delete/10
 
 			
 			arr_labels[(*indexS)->get_color()][i]->Create(ctmp, WS_CHILD | WS_VISIBLE, 
-				CRect(875 +(i-3)* 35, 75 + (*indexS)->get_color() * 100, 910 + (i - 3) * 35, 105 + (*indexS)->get_color() * 100), this);
+				CRect(875 +(i-3)* 55, 75 + (*indexS)->get_color() * 100, 930 + (i - 3) * 55, 105 + (*indexS)->get_color() * 100), this);
 		}
 		
 
@@ -392,9 +396,9 @@ void COOPProjectDlg::INFOCircleC(list <Shape*> ::iterator indexS, list <Circle*>
 
 		
 
-		ctmp.Format(_T("Center Point: (%d,%d). Radius:%.1f"),
-				(*indexC)->get_center().x,
-				(*indexC)->get_center().y,
+		ctmp.Format(_T("Center Point: (%.1f,%.1f). Radius:%.1f"),
+			(double)(*indexC)->get_center().x/10,
+			(double)(*indexC)->get_center().y/10,
 				(*indexC)->get_radius());
 
 	
@@ -448,11 +452,11 @@ void COOPProjectDlg::INFOCircleE(list <Shape*> ::iterator indexS, list <ellipse*
 			
 
 		
-			ctmp.Format(_T("Top Left:(%d,%d) ,  Bottom Right:(%d,%d)"),
-				(*indexE)->get_lp().x,
-				(*indexE)->get_lp().y,
-				(*indexE)->get_rp().x,
-				(*indexE)->get_rp().y);
+			ctmp.Format(_T("Top Left:(%.1f,%.1f) ,  Bottom Right:(%.1f,%.1f)"),
+				(double)(*indexE)->get_lp().x/10,
+				(double)(*indexE)->get_lp().y/10,
+				(double)(*indexE)->get_rp().x/10,
+				(double)(*indexE)->get_rp().y/10);
 
 
 			
@@ -494,19 +498,19 @@ void COOPProjectDlg::INFOCircleP(list <Shape*> ::iterator indexS, list <pie*> ::
 
 
 
-	       ctmp.Format(_T("Top Left:(%d,%d) ,  Bottom Right:(%d,%d)"),
-				(*indexP)->get_lp().x,
-				(*indexP)->get_lp().y,
-				(*indexP)->get_rp().x,
-				(*indexP)->get_rp().y);
+	       ctmp.Format(_T("Top Left:(%.1f,%.1f) ,  Bottom Right:(%.1f,%.f)"),
+			   (double)(*indexP)->get_lp().x/10,
+			   (double)(*indexP)->get_lp().y/10,
+			   (double)(*indexP)->get_rp().x/10,
+			   (double)(*indexP)->get_rp().y/10);
 
 			arr_labels[(*indexS)->get_color()][3]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(875, 75 + (*indexS)->get_color() * 100, 1200, 95 + (*indexS)->get_color() * 100), this);
 			
-			ctmp.Format(_T("Start angle:(%d,%d) ,  End angle:(%d,%d)"),
-				(*indexP)->get_start_angle().x,
-				(*indexP)->get_start_angle().y,
-				(*indexP)->get_end_angle().x,
-				(*indexP)->get_end_angle().y);
+			ctmp.Format(_T("Top Left:(%.1f,%.1f) ,  Bottom Right:(%.1f,%.f)"),
+				(double)(*indexP)->get_start_angle().x/10,
+				(double)(*indexP)->get_start_angle().y/10,
+				(double)(*indexP)->get_end_angle().x/10,
+				(double)(*indexP)->get_end_angle().y/10);
 
 			arr_labels[(*indexS)->get_color()][4]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(875, 100 + (*indexS)->get_color() * 100, 1200, 120 + (*indexS)->get_color() * 100), this);
 

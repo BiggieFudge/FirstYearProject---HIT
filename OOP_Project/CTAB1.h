@@ -52,7 +52,6 @@ public:
 
 	CString m_strTextCtrl;//text in combo box
 	
-	//if chosen polygon shape:
 
 	
 
@@ -61,9 +60,7 @@ public:
 	CStatic IDC_XX;//display x label
 	CStatic IDC_YY;//display y label
 	
-	//CEdit* Xtextbox[8];//TextBoxes for point input
-	//CEdit* Ytextbox[8];//TextBoxes for point input
-	//CStatic* labels[8];//display point number labels
+	
 
 
 	bool CreatePoly = 0;//check if created textboxes and labels
@@ -136,4 +133,6 @@ public:
 	afx_msg void OnBnClickedCircleP();
 	afx_msg void OnBnClickedSend();
 
+	afx_msg bool InputItegrity();
+	afx_msg void CleanInput();
 };
