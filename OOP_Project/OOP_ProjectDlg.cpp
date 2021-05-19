@@ -226,52 +226,68 @@ void COOPProjectDlg::OnPaint()
 		CPen penForShapes;
 		
 		
-
+		int i_color = 0;//index for color choosing
 		int indexPoly = 0, indexCircleC = 0, indexCircleP = 0, indexCircleE = 0;     // Create and reset index's
-		for (int i = 0; i < m_controls.m_TAB1.CurrentPose_shape; i++) {   //Test To print shapes
+		
+		
+		list <Shape*> ::iterator shape_it;
+		list <Poligon*> ::iterator poly_it = m_controls.m_TAB1.PolyList.begin();;
+		list <Circle*> ::iterator circle_it = m_controls.m_TAB1.CircleCList.begin();
+		list <ellipse*> ::iterator ellipse_it = m_controls.m_TAB1.CircleEList.begin();
+		list <pie*> ::iterator pie_it= m_controls.m_TAB1.CirclePList.begin();
+
+		for (shape_it = m_controls.m_TAB1.ShapeList.begin(); shape_it != m_controls.m_TAB1.ShapeList.end(); shape_it++) {   //Test To print shapes
 			
-			string type = (m_controls.m_TAB1.ShapeArr[i])->type();
+		
+
+			string type = (*shape_it)->type();
 
 
-			if ((m_controls.m_TAB1.ShapeArr[i])->get_color() == -1){
-					(m_controls.m_TAB1.ShapeArr[i])->set_color(i);
+			if ((*shape_it)->get_color() == -1){
+				(*shape_it)->set_color(i_color);
 			}
 			penForShapes.DeleteObject();
-			penForShapes.CreatePen(PS_SOLID, 4, arr_color[(m_controls.m_TAB1.ShapeArr[i])->get_color()]); //Change Color according to shape.color
+			penForShapes.CreatePen(PS_SOLID, 4, arr_color[(*shape_it)->get_color()]); //Change Color according to shape.color
 			dc.SelectObject(&penForShapes);
 
 			
 
 			if (type == "Poly") {
 				
-				dc.Polygon(m_controls.m_TAB1.PolyArr[indexPoly]->GetArr(),             //Draw poly
-					m_controls.m_TAB1.PolyArr[indexPoly]->get_amount_edge());
-				INFOPoly(i, indexPoly);
+				
+				dc.Polygon((*poly_it)->GetArr(), (*poly_it)->get_amount_edge());  //Draw Polygon
+				INFOPoly(shape_it, poly_it);
 				indexPoly++;
+				poly_it++;
 			}
 			else if (type == "CircleC") {
 				
-				dc.Ellipse(m_controls.m_TAB1.CircleArr_C[indexCircleC]->get_rekt());    //Draw CircleC
-				INFOCircleC(i, indexCircleC);
+				
+				dc.Ellipse((*circle_it)->get_rekt());            //Draw CircleC
+				INFOCircleC(shape_it, circle_it);
 				indexCircleC++;
+				circle_it++;
 			}
 			else if (type == "CircleP") {
 
 				
-				dc.Pie(m_controls.m_TAB1.CircleArr_P[indexCircleP]->get_rekt(),
-					(m_controls.m_TAB1.CircleArr_P[indexCircleP]->get_angle_point())[0],
-					(m_controls.m_TAB1.CircleArr_P[indexCircleP]->get_angle_point())[1]);
-				INFOCircleP(i, indexCircleP);
+			
+				dc.Pie((*pie_it)->get_rekt(),
+					(*pie_it)->get_angle_point()[0],
+					(*pie_it)->get_angle_point()[1]);   //Draw CircleP
+				INFOCircleP(shape_it, pie_it);
 				indexCircleP++;
+				pie_it++;
 			}
 			else {
 			     
-			    
-				dc.Ellipse(m_controls.m_TAB1.CircleArr_E[indexCircleE]->get_rekt());
-				INFOCircleE(i, indexCircleE);
+				
+				dc.Ellipse((*ellipse_it)->get_rekt());  //Draw Ellipse
+				INFOCircleE(shape_it, ellipse_it);
+				ellipse_it++;
 				indexCircleE++;
 			}
-
+			i_color++;//index for color choosing
 
 
 		}
@@ -291,93 +307,101 @@ HCURSOR COOPProjectDlg::OnQueryDragIcon()
 }
 
 
-void COOPProjectDlg::INFOPoly(int indexS,int indexP){//delete here!!
-	if (!(m_controls.m_TAB1.ShapeArr[indexS])->get_is_shown()) {
+void COOPProjectDlg::INFOPoly(list <Shape*> ::iterator indexS,list <Poligon*> ::iterator indexP){//delete here!!
+	if (!(*indexS)->get_is_shown()) {
 		
-		arr_labels[indexS] = new CStatic*[(m_controls.m_TAB1.PolyArr[indexP])->get_amount_edge() + 3];
+		arr_labels[(*indexS)->get_color()] = new CStatic*[(*indexP)->get_amount_edge() + 3];
 
-		arr_sizes[indexS] = (m_controls.m_TAB1.PolyArr[indexP])->get_amount_edge() + 3;
+		arr_sizes[(*indexS)->get_color()] = (*indexP)->get_amount_edge() + 3;
 
-		for (int i = 0; i < (m_controls.m_TAB1.PolyArr[indexP])->get_amount_edge() + 3; i++) {
+		for (int i = 0; i < (*indexP)->get_amount_edge() + 3; i++) {
 			
-			arr_labels[indexS][i] = new CStatic;
+			arr_labels[(*indexS)->get_color()][i] = new CStatic;
 
 		}
 		
 
 
 		CString ctmp;
-	    ctmp.Format(_T("Type: %S"), (m_controls.m_TAB1.ShapeArr[indexS])->type().c_str());
+	    ctmp.Format(_T("Type: %S"), (*indexS)->type().c_str());
 		
-		arr_labels[indexS][0]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(875,35+ indexS*100,960,70 + indexS * 100),this);
+		arr_labels[(*indexS)->get_color()][0]->Create(ctmp, WS_CHILD | WS_VISIBLE, 
+			CRect(875,35+ (*indexS)->get_color() *100,960,70 + (*indexS)->get_color() * 100),this);
 
-	    ctmp.Format(_T("Area: %.2f"), (m_controls.m_TAB1.ShapeArr[indexS])->area());
-		arr_labels[indexS][1]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(990,35+ indexS*100,1080,70 + indexS * 100),this);
+	    ctmp.Format(_T("Area: %.2f"), (*indexS)->area());
+		arr_labels[(*indexS)->get_color()][1]->Create(ctmp, WS_CHILD | WS_VISIBLE, 
+			CRect(990,35+ (*indexS)->get_color() *100,1080,70 + (*indexS)->get_color() * 100),this);
 
-		ctmp.Format(_T("Parimeter: %.2f"), (m_controls.m_TAB1.ShapeArr[indexS])->perimeter());
-		arr_labels[indexS][2]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(1100,35+ indexS*100,1200,70 + indexS * 100),this);
+		ctmp.Format(_T("Parimeter: %.2f"), (*indexS)->perimeter());
+		arr_labels[(*indexS)->get_color()][2]->Create(ctmp, WS_CHILD | WS_VISIBLE, 
+			CRect(1100,35+ (*indexS)->get_color() *100,1200,70 + (*indexS)->get_color() * 100),this);
 
 
 
 	
-		for (int i = 3; i < (m_controls.m_TAB1.PolyArr[indexP])->get_amount_edge()+3;i++){
+		for (int i = 3; i < (*indexP)->get_amount_edge()+3;i++){
 
 		
 			ctmp.Format(_T(" %d: (%d,%d)"),(i-2) ,
-				(((m_controls.m_TAB1.PolyArr[indexP])->get_fake_arr())[i - 3].x), 
-				((m_controls.m_TAB1.PolyArr[indexP])->get_fake_arr())[i - 3].y);
+				((*indexP)->get_fake_arr())[i - 3].x, 
+				((*indexP)->get_fake_arr())[i - 3].y);
 
 			
-			arr_labels[indexS][i]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(875 +(i-3)* 35, 75 + indexS * 100, 910 + (i - 3) * 35, 105 + indexS * 100), this);
+			arr_labels[(*indexS)->get_color()][i]->Create(ctmp, WS_CHILD | WS_VISIBLE, 
+				CRect(875 +(i-3)* 35, 75 + (*indexS)->get_color() * 100, 910 + (i - 3) * 35, 105 + (*indexS)->get_color() * 100), this);
 		}
 		
 
 
 		
-		(m_controls.m_TAB1.ShapeArr[indexS])->set_is_shown(TRUE);
+		(*indexS)->set_is_shown(TRUE);
 	}
 }
 
-void COOPProjectDlg::INFOCircleC(int indexS, int indexC){
-	if (!(m_controls.m_TAB1.ShapeArr[indexS])->get_is_shown()) {
+void COOPProjectDlg::INFOCircleC(list <Shape*> ::iterator indexS, list <Circle*> ::iterator indexC){
+	if (!(*indexS)->get_is_shown()) {
 
 
-		arr_labels[indexS] = new CStatic * [4];
-		arr_sizes[indexS] = 4;
+		arr_labels[(*indexS)->get_color()] = new CStatic * [4];
+		arr_sizes[(*indexS)->get_color()] = 4;
 		for (int i = 0; i < 4; i++) {
 
-			arr_labels[indexS][i] = new CStatic;
+			arr_labels[(*indexS)->get_color()][i] = new CStatic;
 
 		}
 
 
 
 		CString ctmp;
-		ctmp.Format(_T("Type: %S"), (m_controls.m_TAB1.ShapeArr[indexS])->type().c_str());
+		ctmp.Format(_T("Type: %S"), (*indexS)->type().c_str());
 
-		arr_labels[indexS][0]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(875, 35 + indexS * 100, 960, 70 + indexS * 100), this);
+		arr_labels[(*indexS)->get_color()][0]->Create(ctmp, WS_CHILD | WS_VISIBLE, 
+			CRect(875, 35 + (*indexS)->get_color() * 100, 960, 70 + (*indexS)->get_color() * 100), this);
 
-		ctmp.Format(_T("Area: %.2f"), (m_controls.m_TAB1.ShapeArr[indexS])->area());
-		arr_labels[indexS][1]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(990, 35 + indexS * 100, 1080, 70 + indexS * 100), this);
+		ctmp.Format(_T("Area: %.2f"), (*indexS)->area());
+		arr_labels[(*indexS)->get_color()][1]->Create(ctmp, WS_CHILD | WS_VISIBLE, 
+			CRect(990, 35 + (*indexS)->get_color() * 100, 1080, 70 + (*indexS)->get_color() * 100), this);
 
-		ctmp.Format(_T("Parimeter: %.2f"), (m_controls.m_TAB1.ShapeArr[indexS])->perimeter());
-		arr_labels[indexS][2]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(1100, 35 + indexS * 100, 1200, 70 + indexS * 100), this);
+		ctmp.Format(_T("Parimeter: %.2f"), (*indexS)->perimeter());
+		arr_labels[(*indexS)->get_color()][2]->Create(ctmp, WS_CHILD | WS_VISIBLE, 
+			CRect(1100, 35 + (*indexS)->get_color() * 100, 1200, 70 + (*indexS)->get_color() * 100), this);
 
 		
 
 		ctmp.Format(_T("Center Point: (%d,%d). Radius:%.1f"),
-				((m_controls.m_TAB1.CircleArr_C[indexC])->get_center()).x,
-				(m_controls.m_TAB1.CircleArr_C[indexC])->get_center().y,
-				(m_controls.m_TAB1.CircleArr_C[indexC])->get_radius());
+				(*indexC)->get_center().x,
+				(*indexC)->get_center().y,
+				(*indexC)->get_radius());
 
 	
-			arr_labels[indexS][3]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(875 , 75 + indexS * 100, 1200, 105 + indexS * 100), this);
+			arr_labels[(*indexS)->get_color()][3]->Create(ctmp, WS_CHILD | WS_VISIBLE, 
+				CRect(875 , 75 + (*indexS)->get_color() * 100, 1200, 105 + (*indexS)->get_color() * 100), this);
 		
 
 
 
 
-		(m_controls.m_TAB1.ShapeArr[indexS])->set_is_shown(TRUE);
+		(*indexS)->set_is_shown(TRUE);
 	}
 
 
@@ -386,30 +410,33 @@ void COOPProjectDlg::INFOCircleC(int indexS, int indexC){
 
 }
 
-void COOPProjectDlg::INFOCircleE(int indexS, int indexE)
+void COOPProjectDlg::INFOCircleE(list <Shape*> ::iterator indexS, list <ellipse*> ::iterator indexE)
 {
-	if (!(m_controls.m_TAB1.ShapeArr[indexS])->get_is_shown()) {
+	if (!(*indexS)->get_is_shown()) {
 		
-			arr_labels[indexS] = new CStatic*[4];
-			arr_sizes[indexS] = 4;
+			arr_labels[(*indexS)->get_color()] = new CStatic*[4];
+			arr_sizes[(*indexS)->get_color()] = 4;
 			for (int i = 0; i < 4; i++) {
 			
-				arr_labels[indexS][i] = new CStatic;
+				arr_labels[(*indexS)->get_color()][i] = new CStatic;
 
 			}
 		
 
 
 			CString ctmp;
-			ctmp.Format(_T("Type: %S"), (m_controls.m_TAB1.ShapeArr[indexS])->type().c_str());
+			ctmp.Format(_T("Type: %S"), (*indexS)->type().c_str());
 		
-			arr_labels[indexS][0]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(875,35+ indexS*100,960,70 + indexS * 100),this);
+			arr_labels[(*indexS)->get_color()][0]->Create(ctmp, WS_CHILD | WS_VISIBLE,
+				CRect(875,35+ (*indexS)->get_color() *100,960,70 + (*indexS)->get_color() * 100),this);
 
-			ctmp.Format(_T("Area: %.2f"), (m_controls.m_TAB1.ShapeArr[indexS])->area());
-			arr_labels[indexS][1]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(990,35+ indexS*100,1080,70 + indexS * 100),this);
+			ctmp.Format(_T("Area: %.2f"), (*indexS)->area());
+			arr_labels[(*indexS)->get_color()][1]->Create(ctmp, WS_CHILD | WS_VISIBLE,
+				CRect(990,35+ (*indexS)->get_color() *100,1080,70 + (*indexS)->get_color() * 100),this);
 
-			ctmp.Format(_T("Parimeter: %.2f"), (m_controls.m_TAB1.ShapeArr[indexS])->perimeter());
-			arr_labels[indexS][2]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(1100,35+ indexS*100,1200,70 + indexS * 100),this);
+			ctmp.Format(_T("Parimeter: %.2f"), (*indexS)->perimeter());
+			arr_labels[(*indexS)->get_color()][2]->Create(ctmp, WS_CHILD | WS_VISIBLE,
+				CRect(1100,35+ (*indexS)->get_color() *100,1200,70 + (*indexS)->get_color() * 100),this);
 
 
 
@@ -418,70 +445,71 @@ void COOPProjectDlg::INFOCircleE(int indexS, int indexE)
 
 		
 			ctmp.Format(_T("Top Left:(%d,%d) ,  Bottom Right:(%d,%d)"),
-				(m_controls.m_TAB1.CircleArr_E[indexE])->get_lp().x,
-				((m_controls.m_TAB1.CircleArr_E[indexE])->get_lp()).y,
-				((m_controls.m_TAB1.CircleArr_E[indexE])->get_rp()).x,
-				((m_controls.m_TAB1.CircleArr_E[indexE])->get_rp()).y);
+				(*indexE)->get_lp().x,
+				(*indexE)->get_lp().y,
+				(*indexE)->get_rp().x,
+				(*indexE)->get_rp().y);
 
 
 			
-			arr_labels[indexS][3]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(875, 75 + indexS * 100, 1200, 105 + indexS * 100), this);
+			arr_labels[(*indexS)->get_color()][3]->Create(ctmp, WS_CHILD | WS_VISIBLE,
+				CRect(875, 75 + (*indexS)->get_color() * 100, 1200, 105 + (*indexS)->get_color() * 100), this);
 			
 		
 
 
 		
-			(m_controls.m_TAB1.ShapeArr[indexS])->set_is_shown(TRUE);
+			(*indexS)->set_is_shown(TRUE);
 		}
 }
 
-void COOPProjectDlg::INFOCircleP(int indexS , int indexP)
+void COOPProjectDlg::INFOCircleP(list <Shape*> ::iterator indexS, list <pie*> ::iterator indexP)
 {
-	if (!(m_controls.m_TAB1.ShapeArr[indexS])->get_is_shown()) {
+	if (!(*indexS)->get_is_shown()) {
 		
-			arr_labels[indexS] = new CStatic*[5];
-			arr_sizes[indexS] = 5;
+			arr_labels[(*indexS)->get_color()] = new CStatic*[5];
+			arr_sizes[(*indexS)->get_color()] = 5;
 			for (int i = 0; i < 5; i++) {
 			
-				arr_labels[indexS][i] = new CStatic;
+				arr_labels[(*indexS)->get_color()][i] = new CStatic;
 
 			}
 		
 
 
 			CString ctmp;
-			ctmp.Format(_T("Type: %S"), (m_controls.m_TAB1.ShapeArr[indexS])->type().c_str());
+			ctmp.Format(_T("Type: %S"), (*indexS)->type().c_str());
 		
-			arr_labels[indexS][0]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(875,35+ indexS*100,960,70 + indexS * 100),this);
+			arr_labels[(*indexS)->get_color()][0]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(875,35+ (*indexS)->get_color()*100,960,70 + (*indexS)->get_color() * 100),this);
 
-			ctmp.Format(_T("Area: %f"), (m_controls.m_TAB1.ShapeArr[indexS])->area());
-			arr_labels[indexS][1]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(990,35+ indexS*100,1080,70 + indexS * 100),this);
+			ctmp.Format(_T("Area: %f"), (*indexS)->area());
+			arr_labels[(*indexS)->get_color()][1]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(990,35+ (*indexS)->get_color()*100,1080,70 + (*indexS)->get_color() * 100),this);
 
-			ctmp.Format(_T("Parimeter: %f"), (m_controls.m_TAB1.ShapeArr[indexS])->perimeter());
-			arr_labels[indexS][2]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(1100,35+ indexS*100,1200,70 + indexS * 100),this);
+			ctmp.Format(_T("Parimeter: %f"), (*indexS)->perimeter());
+			arr_labels[(*indexS)->get_color()][2]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(1100,35+ (*indexS)->get_color()*100,1200,70 + (*indexS)->get_color() * 100),this);
 
 
 
 	       ctmp.Format(_T("Top Left:(%d,%d) ,  Bottom Right:(%d,%d)"),
-				(m_controls.m_TAB1.CircleArr_P[indexP])->get_lp().x,
-				((m_controls.m_TAB1.CircleArr_P[indexP])->get_lp()).y,
-				((m_controls.m_TAB1.CircleArr_P[indexP])->get_rp()).x,
-				((m_controls.m_TAB1.CircleArr_P[indexP])->get_rp()).y);
+				(*indexP)->get_lp().x,
+				(*indexP)->get_lp().y,
+				(*indexP)->get_rp().x,
+				(*indexP)->get_rp().y);
 
-			arr_labels[indexS][3]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(875, 75 + indexS * 100, 1200, 95 + indexS * 100), this);
+			arr_labels[(*indexS)->get_color()][3]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(875, 75 + (*indexS)->get_color() * 100, 1200, 95 + (*indexS)->get_color() * 100), this);
 			
 			ctmp.Format(_T("Start angle:(%d,%d) ,  End angle:(%d,%d)"),
-				(m_controls.m_TAB1.CircleArr_P[indexP])->get_start_angle().x,
-				((m_controls.m_TAB1.CircleArr_P[indexP])->get_start_angle()).y,
-				((m_controls.m_TAB1.CircleArr_P[indexP])->get_end_angle()).x,
-				((m_controls.m_TAB1.CircleArr_P[indexP])->get_end_angle()).y);
+				(*indexP)->get_start_angle().x,
+				(*indexP)->get_start_angle().y,
+				(*indexP)->get_end_angle().x,
+				(*indexP)->get_end_angle().y);
 
-			arr_labels[indexS][4]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(875, 100 + indexS * 100, 1200, 120 + indexS * 100), this);
+			arr_labels[(*indexS)->get_color()][4]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(875, 100 + (*indexS)->get_color() * 100, 1200, 120 + (*indexS)->get_color() * 100), this);
 
 
 
 		
-			(m_controls.m_TAB1.ShapeArr[indexS])->set_is_shown(TRUE);
+			(*indexS)->set_is_shown(TRUE);
 		}
 }
 

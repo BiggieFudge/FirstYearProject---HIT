@@ -4,6 +4,7 @@
 #include "Poligon.h"
 #include "Ellipse.h"
 #include "Pie.h"
+#include <list>
 
 // CTAB1 dialog
 
@@ -32,12 +33,25 @@ protected:
 
 
 public:
-	Shape* ShapeArr[5];//contains all the shapes object(polys,circles)   //Add delete
-	Poligon* PolyArr[5];//contains all the polys  //ADD delete
-	Circle* CircleArr[5];//contains all the circles objects
-	Circle* CircleArr_C[5];//contains all the circles circles
-	ellipse* CircleArr_E[5];
-	pie* CircleArr_P[5];
+
+	list<Shape*> ShapeList;
+	
+
+
+	list<Poligon*> PolyList;
+
+
+	list<Circle*> CircleList;
+	
+
+	list<Circle*> CircleCList;
+
+
+	list<ellipse*> CircleEList;
+
+	
+	list<pie*> CirclePList;
+
 	int CurrentPose_shape = 0;//amount of shapes right now
 	int CurrentPose_poly = 0;//amount of polygons right now
 	int CurrentPose_circle = 0;//amount of circles right now

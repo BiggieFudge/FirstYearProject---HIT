@@ -33,10 +33,10 @@ public:
 			delete[] arr_labels[i];
 		}
 
+		list <Shape*>::iterator it;
+		for(it=m_controls.m_TAB1.ShapeList.begin();it != m_controls.m_TAB1.ShapeList.end();it++){//deleting shape array
 
-		for(i=0;i<m_controls.m_TAB1.CurrentPose_shape;i++){//deleting shape array
-
-			delete(m_controls.m_TAB1.ShapeArr[i]);
+			delete(*it);
 		}
 
 		
@@ -59,7 +59,7 @@ protected:
 	
 	
 	COLORREF arr_color[5] = { RGB(255,0,0),RGB(0,255,0),RGB(0,0,255),RGB(255,128,0),RGB(255,255,0)};//array containing colors for shapes
-	//int index_shape = 0;//indicating at what index you are in ShapeArr
+	
 	CStatic** arr_labels[5];//array of labels for info//delete me!!!!
 	int arr_sizes[5];//saves sizes of inner arrays in arr_labels
 
@@ -74,12 +74,12 @@ protected:
 	
 public:
 
-	void INFOPoly(int indexS, int indexP);
-	void INFOCircleC(int indexS, int indexC);
-	void INFOCircleE(int indexS, int indexE);
-	void INFOCircleP(int indexS, int indexP);
+	void INFOPoly(list <Shape*> ::iterator indexS, list <Poligon*> ::iterator indexP);//shows info about polygon
+	void INFOCircleC(list <Shape*> ::iterator indexS, list <Circle*> ::iterator indexC);//shows info about circle
+	void INFOCircleE(list <Shape*> ::iterator indexS, list <ellipse*> ::iterator indexE);//shows info about ellipse
+	void INFOCircleP(list <Shape*> ::iterator indexS, list <pie*> ::iterator indexP);//shows info about pie
 
-
+	
 	CONTROLS m_controls; //Show/Hide CONTROLS DIALOG
 	afx_msg void OnBnClickedButton1();
 	

@@ -8,6 +8,7 @@
 #include "afxdialogex.h"
 #include "AXIS.h"
 
+
 // CTAB1 dialog
 
 IMPLEMENT_DYNAMIC(CTAB1, CDialogEx)
@@ -452,8 +453,10 @@ void CTAB1::OnBnClickedSend() {
 				On_Screen[i].y = (10 - (double)y) * SquareSide + SquareSide;     //ETN maths
 			}
 			Poligon* p1 = new Poligon(On_Screen, PointArray, save_amount_points);
-			PolyArr[CurrentPose_poly] = p1;
-			ShapeArr[CurrentPose_shape] = p1;
+			//PolyArr[CurrentPose_poly] = p1;
+			//ShapeArr[CurrentPose_shape] = p1;
+			PolyList.push_back(p1);
+			ShapeList.push_back(p1);
 			CurrentPose_poly++;
 			CurrentPose_shape++;
 
@@ -491,9 +494,11 @@ void CTAB1::OnBnClickedSend() {
 				
 				
 				Circle* c1 = new Circle(p1, p2, rad);
-				ShapeArr[CurrentPose_shape] = c1;
-				CircleArr[CurrentPose_circle] = c1;
-				CircleArr_C[CurrentPose_circle_c] = c1;
+
+				ShapeList.push_back(c1);
+				CircleList.push_back(c1);
+				CircleCList.push_back(c1);
+
 				CurrentPose_circle++;
 				CurrentPose_shape++;
 				CurrentPose_circle_c++;
@@ -542,9 +547,12 @@ void CTAB1::OnBnClickedSend() {
 
 
 				ellipse* e1 = new ellipse(p1, p3 , p2);
-				ShapeArr[CurrentPose_shape] = e1;
-				CircleArr[CurrentPose_circle] = e1;
-				CircleArr_E[CurrentPose_circle_e] = e1;
+
+
+				ShapeList.push_back(e1);
+				CircleList.push_back(e1);
+				CircleEList.push_back(e1);
+
 				CurrentPose_circle++;
 				CurrentPose_shape++;
 				CurrentPose_circle_e++;
@@ -620,9 +628,12 @@ void CTAB1::OnBnClickedSend() {
 
 
 				pie* e1 = new pie(p1, p3, p2,p5 , p6,p4);
-				ShapeArr[CurrentPose_shape] = e1;
-				CircleArr[CurrentPose_circle] = e1;
-				CircleArr_P[CurrentPose_circle_p] = e1;
+	
+
+				ShapeList.push_back(e1);
+				CircleList.push_back(e1);
+				CirclePList.push_back(e1);
+
 				CurrentPose_circle++;
 				CurrentPose_shape++;
 				CurrentPose_circle_p++;
