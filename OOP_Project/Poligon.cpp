@@ -1,32 +1,10 @@
 #include "pch.h"
 #include "Poligon.h"
-//
-//Poligon::Poligon(double* x_arr,double* y_arr, int x) :amount_edge(x)
-////{
-////    int i;
-////    arr_edge = new Point[amount_edge];
-////    for (i = 0; i < amount_edge; i++)
-////    {
-////        cout << "point number " << i + 1 << endl;
-////        arr_edge[i].input_point();
-////    }
-////    amount_tzela = check_tzela();
-//{
-//    int i;
-//    arr_edge = new Point[amount_edge];
-//    for (i = 0; i < amount_edge; i++)
-//    {
-//        arr_edge[i].set_x(x_arr[i]);
-//        arr_edge[i].set_y(y_arr[i]);
-//    }
-//    amount_tzela = check_tzela();//?
-//    
-//    
-//}
+#include <string.h>
 
 Poligon::Poligon(POINT* PointArray, POINT* RealPoint, int x = 1) :amount_edge(x) {
 
-    
+
     Real_Coor = new POINT[amount_edge];//for painting the poly
 
     int i;
@@ -39,7 +17,12 @@ Poligon::Poligon(POINT* PointArray, POINT* RealPoint, int x = 1) :amount_edge(x)
         Real_Coor[i].y = RealPoint[i].y;
     }
     //amount_tzela = check_tzela();//?
+
 }
+    
+  
+
+   
 
 
 Poligon::~Poligon()
@@ -174,6 +157,11 @@ POINT* Poligon::GetArr()
  const int Poligon::get_amount_edge()
  {
      return(amount_edge);
+ }
+
+ POINT* Poligon::get_fake_arr()
+ {
+     return(Real_Coor);
  }
 
 //int Poligon::check_tzela()//doesnt work well,check how to recognize the two slopes that result in zero,makbilim to the axis's.

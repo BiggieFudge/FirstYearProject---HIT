@@ -36,3 +36,13 @@ POINT* pie::get_angle_point()
 {
     return(Angle_point);
 }
+
+POINT pie::get_start_angle()
+{
+    return start_angle;
+}
+
+POINT pie::get_end_angle()
+{
+    return end_angle;
+}

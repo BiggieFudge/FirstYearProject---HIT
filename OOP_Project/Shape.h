@@ -18,12 +18,22 @@ public:
     virtual string type() = 0;
     void set_color(int x)
     {
+        
         color_index = x;
     }
     int get_color()
     {
         return(color_index);
     }
+    void set_is_shown(bool x)
+    {
+        is_shown = x;
+    }
+    bool get_is_shown()
+    {
+        return(is_shown);
+    }
+ 
 
     //old
 
@@ -42,7 +52,12 @@ public:
     Point* arr_edge;*/
 
      int color_index=-1;//color for shapes in ShapeArr
+     bool is_shown = false;
+    
 private:
+
+
+    
 
 };
 

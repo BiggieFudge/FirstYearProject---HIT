@@ -9,9 +9,11 @@ public:
     double perimeter();
     string type();
     POINT* get_angle_point();
+    POINT get_start_angle();
+    POINT get_end_angle();
 private:
     POINT start_angle;//start of angle
     POINT end_angle;//end of angle
-    POINT* Angle_point;//contains the real angle points;
+    POINT* Angle_point;//contains the grid angle points;
 };
 

@@ -31,7 +31,7 @@ Circle::Circle(POINT p,POINT* p_c,double r)
     RectPoint[1].x = p_c[1].x;
     RectPoint[1].y = p_c[1].y;
     radius = r;
-    radiusReal = r * 35;   //Change if change SquareSide
+    radiusReal = r * 40;   //Change if change SquareSide
 }
 
 Circle::~Circle()

@@ -17,8 +17,8 @@ public:
     //getters setters
     //int get_tzela();
     const int get_amount_edge();
-    POINT* GetArr();
-
+    POINT* GetArr();//returns the on screen points
+    POINT* get_fake_arr();//returns the x,y points
 
 
 private:
@@ -26,6 +26,7 @@ private:
     POINT* Real_Coor;
     POINT* On_Screen_Coor;//for painting the poly
     int amount_tzela;
+
 };
 
 

@@ -12,10 +12,13 @@ public:
     string type();
     //getters/setters:
     CRect get_rekt();
+    POINT get_lp();
+    POINT get_rp();
 private:
     POINT lp;//top left point of rectangle
     POINT rp;//bottom right point of rectangle
     POINT* Rect_point;//contains the real axis points;
+
 
 };
 
