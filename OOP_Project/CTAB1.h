@@ -35,21 +35,10 @@ protected:
 public:
 
 	list<Shape*> ShapeList;
-	
-
-
 	list<Poligon*> PolyList;
-
-
 	list<Circle*> CircleList;
-	
-
 	list<Circle*> CircleCList;
-
-
 	list<ellipse*> CircleEList;
-
-	
 	list<pie*> CirclePList;
 
 	int CurrentPose_shape = 0;//amount of shapes right now

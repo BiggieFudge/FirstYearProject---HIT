@@ -24,10 +24,10 @@ public:
 
 protected:
 	//Varaibles
-	CStatic* Xshnatot;
+	/*CStatic* Xshnatot;
 	CStatic* Yshnatot;
 	CStatic* paint_xy;
-	CTAB1* m_tab;
+	CTAB1* m_tab;*/
 
 	
 

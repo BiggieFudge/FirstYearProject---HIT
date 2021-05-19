@@ -1,2 +1,10 @@
-﻿  OOP_ProjectDlg.cpp
+﻿  CTAB1.cpp
+D:\OOP_Project\OOP_Project\CTAB1.cpp(454,31): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\CTAB1.cpp(455,31): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\CTAB1.cpp(456,52): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\CTAB1.cpp(457,52): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\CTAB1.cpp(492,54): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\CTAB1.cpp(493,54): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\CTAB1.cpp(497,54): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\CTAB1.cpp(498,54): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
   OOP_Project.vcxproj -> D:\OOP_Project\Debug\OOP_Project.exe

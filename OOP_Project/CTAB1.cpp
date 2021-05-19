@@ -120,12 +120,13 @@ void CTAB1::delete_buttons()
 	if (save_amount_points != -1)
 	{
 		int i;
-		for (i = 0; i < save_amount_points; i++)
+		for (i = 0; i < 8; i++)
 		{
 			delete(Xtextbox[i]);
 			delete(Ytextbox[i]);
 			delete(labels[i]);
 		}
+		
 	}
 }
 //deleting text boxes for input points in circle
@@ -433,9 +434,15 @@ void CTAB1::OnBnClickedCircleP()
 void CTAB1::OnBnClickedSend() {
 	if (CurrentPose_shape < 5) 
 	{
+		UpdateData(TRUE);
+
+		CWnd* Main = GetParent()->GetParent()->GetParent();  //Get main window functions
+
+		CString str;
+
 		if (IsDlgButtonChecked(IDC_Polygon) == BST_CHECKED) {//if chosen poly 
-			UpdateData(TRUE);
-			CString str;
+			
+			
 			//gets input from textbox
 			double x, y;
 			POINT* PointArray = new POINT[save_amount_points];
@@ -453,29 +460,30 @@ void CTAB1::OnBnClickedSend() {
 				On_Screen[i].y = (10 - (double)y) * SquareSide + SquareSide;     //ETN maths
 			}
 			Poligon* p1 = new Poligon(On_Screen, PointArray, save_amount_points);
-			//PolyArr[CurrentPose_poly] = p1;
-			//ShapeArr[CurrentPose_shape] = p1;
+			
 			PolyList.push_back(p1);
 			ShapeList.push_back(p1);
 			CurrentPose_poly++;
 			CurrentPose_shape++;
 
-
-			CWnd* Main = GetParent()->GetParent()->GetParent();  //Get main window functions
-
-			Main->RedrawWindow();      //Go to main window and redraw with new shape;
-
 			delete[] PointArray;
 			delete[] On_Screen;
 
-			UpdateData(FALSE);
+
+			Main->RedrawWindow();      //Go to main window and redraw with new shape;
+
+	
+				
+			
+
+		
 
 
 		}
 		else {   //Chosen circle
 			if ((IsDlgButtonChecked(IDC_Circle_C) == BST_CHECKED)) { //Chosen circle circle
-				UpdateData(TRUE);
-				CString str;
+		
+			
 				CircleTextBox[2].GetWindowTextW(str);   //Get radius user entered
 				CircleTextBox[2].SetWindowTextW(_T("")); // Reset TextBox
 				double rad = _ttoi(str);
@@ -503,19 +511,18 @@ void CTAB1::OnBnClickedSend() {
 				CurrentPose_shape++;
 				CurrentPose_circle_c++;
 
-				CWnd* Main = GetParent()->GetParent()->GetParent();  //Get main window functions
+				delete[] p2;
 
 				Main->RedrawWindow();      //Go to main window and redraw with new shape;
 
-				delete[] p2;
-
-				UpdateData(FALSE);
+			
+		
 
 
 			}
 			else if ((IsDlgButtonChecked(IDC_Circle_E) == BST_CHECKED)) {
-				UpdateData(TRUE);
-				CString str;
+		
+			
 				
 				POINT p1;
 				
@@ -548,6 +555,7 @@ void CTAB1::OnBnClickedSend() {
 
 				ellipse* e1 = new ellipse(p1, p3 , p2);
 
+				delete[] p2;
 
 				ShapeList.push_back(e1);
 				CircleList.push_back(e1);
@@ -557,18 +565,17 @@ void CTAB1::OnBnClickedSend() {
 				CurrentPose_shape++;
 				CurrentPose_circle_e++;
 
-				CWnd* Main = GetParent()->GetParent()->GetParent();  //Get main window functions
 
 				Main->RedrawWindow();      //Go to main window and redraw with new shape;
 
-				delete[] p2;
+				
 
-				UpdateData(FALSE);
+		
 
 			}
 			else {
-				UpdateData(TRUE);
-				CString str;
+				
+				
 
 				POINT p1;
 
@@ -638,14 +645,16 @@ void CTAB1::OnBnClickedSend() {
 				CurrentPose_shape++;
 				CurrentPose_circle_p++;
 
-				CWnd* Main = GetParent()->GetParent()->GetParent();  //Get main window functions
+				delete[] p2;
+				delete[] p4;
 
 				Main->RedrawWindow();      //Go to main window and redraw with new shape;
 
-				delete[] p2;
+				
 
-				UpdateData(FALSE);
+			
 			}
+			UpdateData(FALSE);
 		}
 	}
 	else

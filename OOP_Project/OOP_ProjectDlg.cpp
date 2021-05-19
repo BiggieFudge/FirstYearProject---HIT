@@ -249,8 +249,8 @@ void COOPProjectDlg::OnPaint()
 			penForShapes.DeleteObject();
 			penForShapes.CreatePen(PS_SOLID, 4, arr_color[(*shape_it)->get_color()]); //Change Color according to shape.color
 			dc.SelectObject(&penForShapes);
-
 			
+			dc.SelectStockObject(NULL_BRUSH);      //Set the background to be transparent.
 
 			if (type == "Poly") {
 				
@@ -362,7 +362,7 @@ void COOPProjectDlg::INFOCircleC(list <Shape*> ::iterator indexS, list <Circle*>
 	if (!(*indexS)->get_is_shown()) {
 
 
-		arr_labels[(*indexS)->get_color()] = new CStatic * [4];
+		arr_labels[(*indexS)->get_color()] = new CStatic*[4];
 		arr_sizes[(*indexS)->get_color()] = 4;
 		for (int i = 0; i < 4; i++) {
 
