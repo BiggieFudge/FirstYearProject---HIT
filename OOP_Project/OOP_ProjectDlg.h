@@ -32,11 +32,11 @@ public:
 			}
 			delete[] arr_labels[i];
 		}
-
+		
 		list <Shape*>::iterator it;
 		for(it=m_controls.m_TAB1.ShapeList.begin();it != m_controls.m_TAB1.ShapeList.end();it++){//deleting shape array
 
-			delete(*it);
+			delete[] *it;
 		}
 
 		

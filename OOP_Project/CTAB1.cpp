@@ -117,8 +117,7 @@ void CTAB1::hide_Poly()
 //deleting text boxes for input points in polygon
 void CTAB1::delete_buttons()
 {
-	if (save_amount_points != -1)
-	{
+	
 		int i;
 		for (i = 0; i < 8; i++)
 		{
@@ -127,7 +126,7 @@ void CTAB1::delete_buttons()
 			delete(labels[i]);
 		}
 		
-	}
+	
 }
 //deleting text boxes for input points in circle
 void CTAB1::delete_circle_textbox()
