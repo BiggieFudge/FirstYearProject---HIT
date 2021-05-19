@@ -61,9 +61,16 @@ public:
 	CStatic IDC_XX;//display x label
 	CStatic IDC_YY;//display y label
 	
-	CEdit* Xtextbox[8];//TextBoxes for point input
-	CEdit* Ytextbox[8];//TextBoxes for point input
-	CStatic* labels[8];//display point number labels
+	//CEdit* Xtextbox[8];//TextBoxes for point input
+	//CEdit* Ytextbox[8];//TextBoxes for point input
+	//CStatic* labels[8];//display point number labels
+
+
+	bool CreatePoly = 0;//check if created textboxes and labels
+	CEdit* PolyX;//TextBoxes for point input
+	CEdit* PolyY;//TextBoxes for point input
+	CStatic* Polylabel;//display point number labels
+
 
 	//if chosen circle shape
 	CStatic IDC_Circle_GroupV;
@@ -88,6 +95,8 @@ public:
 	bool isHidden = 0; //Used for knowing if Xtextbox and Ytextbox are shown or hidden
 
 	int save_amount_points=-1;//amount of points selected in combo box (polygon)
+
+	void Create_Poly();
 
 	afx_msg void OnBnClickedPolygon();
 	afx_msg void OnBnClickedCircle();

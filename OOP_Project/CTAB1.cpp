@@ -79,6 +79,7 @@ void CTAB1::OnBnClickedPolygon()
 	// TODO: Add your control notification handler code here
 	if ( IsDlgButtonChecked(IDC_Polygon) == BST_CHECKED )//if chosen poligon
 	{
+
 		show_Poly();
 		ShowTextBoxes();
 		hide_Circle();
@@ -87,7 +88,8 @@ void CTAB1::OnBnClickedPolygon()
 }
 //display everything that is connected to poly
 void CTAB1::show_Poly() {
-   
+	Create_Poly();
+	
 	GetDlgItem(IDC_Poly)->ShowWindow(SW_SHOW);
 
 	GetDlgItem(IDC_label)->ShowWindow(SW_SHOW);
@@ -102,6 +104,8 @@ void CTAB1::show_Poly() {
 //hide everything that is connected to poly
 void CTAB1::hide_Poly()
 {
+	GetDlgItem(IDC_X)->ShowWindow(SW_HIDE);
+	GetDlgItem(IDC_Y)->ShowWindow(SW_HIDE);
 	GetDlgItem(IDC_Poly)->ShowWindow(SW_HIDE);
 
 	GetDlgItem(IDC_label)->ShowWindow(SW_HIDE);
@@ -112,34 +116,58 @@ void CTAB1::hide_Poly()
 
 
 
+void CTAB1::Create_Poly() {//creating poly textboxes and labels
+	if (CreatePoly == 0) {   //Check if memory allocated
+		PolyX = new CEdit[8];
+		PolyY = new CEdit[8];
+		Polylabel = new CStatic[8];
+		
+		int y = 180;
+		int x = 25;
+		for (int i = 0; i < 8; i++) {
+			if (i == 4) { x = 120; y = 180; }
+
+			CString NumToDisplay;  NumToDisplay.Format(_T("%d"), i+1);
+			PolyX[i].Create(ES_MULTILINE | WS_CHILD  | WS_TABSTOP | WS_BORDER,
+				CRect(x, y, x + 20, y + 20), this, 8888);
+			PolyY[i].Create(ES_MULTILINE | WS_CHILD  | WS_TABSTOP | WS_BORDER,
+				CRect(x + 45, y, x + 65, y + 20), this, 8888);
+			Polylabel[i].Create(NumToDisplay, WS_CHILD ,
+				CRect(x - 10, y, x, y + 20), this);
+
+
+			y += 35;
+		}
+		CreatePoly = 1;    //Do not allocate more memory
+	}
+
+}
 
 
 //deleting text boxes for input points in polygon
 void CTAB1::delete_buttons()
 {
-	
-		int i;
-		for (i = 0; i < 8; i++)
-		{
-			delete(Xtextbox[i]);
-			delete(Ytextbox[i]);
-			delete(labels[i]);
-		}
+	if (CreatePoly) {
 		
+		delete[] PolyX;
+		delete[] PolyY;
+		delete[] Polylabel;
+	}
 	
 }
 //deleting text boxes for input points in circle
 void CTAB1::delete_circle_textbox()
 {
 	if(CreateCircleC==1)
-		for(int i=0;i<3;i++)
-			delete(CircleTextBox[i]);
+
+			delete[] CircleTextBox;
 	if (CreateCircleE == 1)
-		for (int i = 0; i < 4; i++)
-			delete(EllipseTextBox[i]);
+
+			delete[] EllipseTextBox;
+
 	if (CreateCircleP == 1)
-		for (int i = 0; i < 8; i++)
-			delete(PieTextBox[i]);
+
+			delete[] PieTextBox;
 	
 }
 
@@ -173,18 +201,25 @@ void CTAB1::hide_Circle()
 void CTAB1::ShowTextBoxes() {
 	if (isHidden == 1) {
 		for (int i = 0; i < save_amount_points; i++) {
-			labels[i]->ShowWindow(SW_SHOW);
-			Xtextbox[i]->ShowWindow(SW_SHOW);
-			Ytextbox[i]->ShowWindow(SW_SHOW);
+			Polylabel[i].ShowWindow(SW_SHOW);
+			PolyX[i].ShowWindow(SW_SHOW);
+			PolyY[i].ShowWindow(SW_SHOW);
 		}
+		GetDlgItem(IDC_X)->ShowWindow(SW_SHOW);
+		GetDlgItem(IDC_Y)->ShowWindow(SW_SHOW);
+		if (save_amount_points > 4)//if amount is bigger than 4,display x y labels in the right side as well 
+		{
+			GetDlgItem(IDC_X2)->ShowWindow(SW_SHOW);   GetDlgItem(IDC_Y2)->ShowWindow(SW_SHOW);
+		}
+	
 	}
 }
 //Function for moving from poly to circle so we need to hide the textboxes createdl
 void CTAB1::HideTextBoxes() {
 	for (int i = 0; i < save_amount_points; i++) {
-		labels[i]->ShowWindow(SW_HIDE);
-		Xtextbox[i]->ShowWindow(SW_HIDE);
-		Ytextbox[i]->ShowWindow(SW_HIDE);
+		Polylabel[i].ShowWindow(SW_HIDE);
+		PolyX[i].ShowWindow(SW_HIDE);
+		PolyY[i].ShowWindow(SW_HIDE);
 	}
 	//HIDE ALL X,Y LABEL (and yo kids)
 	GetDlgItem(IDC_X)->ShowWindow(SW_HIDE); GetDlgItem(IDC_Y)->ShowWindow(SW_HIDE); GetDlgItem(IDC_X2)->ShowWindow(SW_HIDE);	GetDlgItem(IDC_Y2)->ShowWindow(SW_HIDE);
@@ -196,66 +231,42 @@ void CTAB1::HideTextBoxes() {
 void CTAB1::OnCbnSelchangePoints()
 {
 	//display x and y labels
-	GetDlgItem(IDC_X)->ShowWindow(SW_SHOW);
-	GetDlgItem(IDC_Y)->ShowWindow(SW_SHOW);
+	GetDlgItem(IDC_X)->ShowWindow(SW_SHOW); GetDlgItem(IDC_Y)->ShowWindow(SW_SHOW);
+	if (save_amount_points > 3)//if amount is bigger than 4,display x y labels in the right side as well 
+	{
+		GetDlgItem(IDC_X2)->ShowWindow(SW_SHOW);   GetDlgItem(IDC_Y2)->ShowWindow(SW_SHOW);
+	}
+	else
+	{
+		GetDlgItem(IDC_X2)->ShowWindow(SW_HIDE);  GetDlgItem(IDC_Y2)->ShowWindow(SW_HIDE);
+	}
 
 	   // Add number to the combo box
 	   m_comboBoxCtrl.GetLBText(m_comboBoxCtrl.GetCurSel(), m_strTextCtrl); 
 	   UpdateData(FALSE);
    
-	   if(save_amount_points > m_comboBoxCtrl.GetCurSel() + 1)//if already entered number before
-	   { 
-		   //for loop is for removing textboxes that are not needed
-		   for (int i = m_comboBoxCtrl.GetCurSel() + 1; i < save_amount_points; i++) {
-			   delete labels[i];
-			   delete Xtextbox[i];
-			   delete Ytextbox[i];
-			   labels[i]=NULL;
-			   Xtextbox[i]=NULL;
-			   Ytextbox[i]=NULL;
-		  }
-	   }
+	   
 	   save_amount_points = m_comboBoxCtrl.GetCurSel() + 1;//get value according to place in combo box(starting from 0)
 
 
-	   if (save_amount_points > 4)//if amount is bigger than 4,display x y labels in the right side as well 
-	   {
-		   GetDlgItem(IDC_X2)->ShowWindow(SW_SHOW);   GetDlgItem(IDC_Y2)->ShowWindow(SW_SHOW);
-
-	 
-	   }
-	   else
-	   {
-		   GetDlgItem(IDC_X2)->ShowWindow(SW_HIDE);  GetDlgItem(IDC_Y2)->ShowWindow(SW_HIDE);
-	   }
+	  
 
 		//Add text box
-
-	   int y=180;
-	   int x = 25;
-	   for (int i = 1; i <= save_amount_points; i++)
-	   {
-		   if (i == 5) { x = 120; y = 180; }
-
-		   CString NumToDisplay;  NumToDisplay.Format(_T("%d"), i); //Enter i to string;
-
-		   if (labels[i - 1] == NULL) {
-			   labels[i - 1] = new CStatic;         //Print nums;
-			   labels[i - 1]->Create(NumToDisplay, WS_CHILD | WS_VISIBLE,
-				   CRect(x - 10, y, x, y + 20), this);
-		   }
-		   if (Xtextbox[i - 1] == NULL) {
-			   Xtextbox[i - 1] = new CEdit;        // Print Text Boxes
-			   Xtextbox[i - 1]->Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
-				   CRect(x, y, x + 20, y + 20), this, 8888);
-		   }
-		   if (Ytextbox[i - 1] == NULL){
-			   Ytextbox[i - 1] = new CEdit;
-		   Ytextbox[i - 1]->Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER, 
-			   CRect(x + 45, y, x + 65, y + 20), this, 8888);
+	   int i;
+	   for ( i= 0; i < save_amount_points; i++) {
+		   PolyX[i].ShowWindow(SW_SHOW);
+		   PolyY[i].ShowWindow(SW_SHOW);
+		   Polylabel[i].ShowWindow(SW_SHOW);
 	   }
-	   y += 35;
+	   for (; i < 8; i++) {
+		   PolyX[i].SetWindowTextW(_T(""));
+		   PolyX[i].ShowWindow(SW_HIDE);
+		   PolyY[i].SetWindowTextW(_T(""));
+		   PolyY[i].ShowWindow(SW_HIDE);
+		   Polylabel[i].ShowWindow(SW_HIDE);
 	   }
+
+	 
  
 }
 
@@ -447,11 +458,11 @@ void CTAB1::OnBnClickedSend() {
 			POINT* PointArray = new POINT[save_amount_points];
 			POINT* On_Screen = new POINT[save_amount_points];
 			for (int i = 0; i < this->save_amount_points; i++) {
-				Xtextbox[i]->GetWindowTextW(str);     //Take Data from textbox
-				Xtextbox[i]->SetWindowTextW(_T("")); // Reset TextBox
+				PolyX[i].GetWindowTextW(str);     //Take Data from textbox
+				PolyX[i].SetWindowTextW(_T("")); // Reset TextBox
 				x = _ttoi(str);  //Convert from Cstring to double
-				Ytextbox[i]->GetWindowTextW(str);   //Take Data from textbox
-				Ytextbox[i]->SetWindowTextW(_T("")); // Reset TextBox
+				PolyY[i].GetWindowTextW(str);   //Take Data from textbox
+				PolyY[i].SetWindowTextW(_T("")); // Reset TextBox
 				y = _ttoi(str);  //Convert from Cstring to double
 				PointArray[i].x = (double)x;
 				PointArray[i].y = (double)y;

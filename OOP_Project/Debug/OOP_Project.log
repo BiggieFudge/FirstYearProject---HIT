@@ -1,10 +1,10 @@
 ﻿  CTAB1.cpp
-D:\OOP_Project\OOP_Project\CTAB1.cpp(456,31): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(457,31): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(458,52): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(459,52): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(494,54): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(495,54): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(499,54): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(500,54): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\CTAB1.cpp(467,31): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\CTAB1.cpp(468,31): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\CTAB1.cpp(469,52): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\CTAB1.cpp(470,52): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\CTAB1.cpp(505,54): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\CTAB1.cpp(506,54): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\CTAB1.cpp(510,54): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\CTAB1.cpp(511,54): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
   OOP_Project.vcxproj -> D:\OOP_Project\Debug\OOP_Project.exe

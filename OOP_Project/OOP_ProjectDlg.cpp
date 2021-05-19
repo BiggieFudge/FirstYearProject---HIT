@@ -236,6 +236,10 @@ void COOPProjectDlg::OnPaint()
 		list <ellipse*> ::iterator ellipse_it = m_controls.m_TAB1.CircleEList.begin();
 		list <pie*> ::iterator pie_it= m_controls.m_TAB1.CirclePList.begin();
 
+
+		dc.SelectStockObject(NULL_BRUSH);      //Set the background to be transparent.
+
+
 		for (shape_it = m_controls.m_TAB1.ShapeList.begin(); shape_it != m_controls.m_TAB1.ShapeList.end(); shape_it++) {   //Test To print shapes
 			
 		
@@ -250,7 +254,7 @@ void COOPProjectDlg::OnPaint()
 			penForShapes.CreatePen(PS_SOLID, 4, arr_color[(*shape_it)->get_color()]); //Change Color according to shape.color
 			dc.SelectObject(&penForShapes);
 			
-			dc.SelectStockObject(NULL_BRUSH);      //Set the background to be transparent.
+			
 
 			if (type == "Poly") {
 				
