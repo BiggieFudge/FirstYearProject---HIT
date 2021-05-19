@@ -60,8 +60,14 @@ protected:
 	
 	COLORREF arr_color[5] = { RGB(255,0,0),RGB(0,255,0),RGB(0,0,255),RGB(255,128,0),RGB(255,255,0)};//array containing colors for shapes
 	
-	CStatic** arr_labels[5];//array of labels for info//delete me!!!!
+	CStatic** arr_labels[5];//array of labels for info
 	int arr_sizes[5];//saves sizes of inner arrays in arr_labels
+
+	//Pic test
+	HICON RemoveIcon = (HICON)LoadImage(AfxGetApp()->m_hInstance, MAKEINTRESOURCE(IDI_ICON2), IMAGE_ICON, 32, 32, 0);
+	CButton* pBtn;
+	//end pic
+
 
 	// Generated message map functions
 	virtual BOOL OnInitDialog();
@@ -82,7 +88,7 @@ public:
 	
 	CONTROLS m_controls; //Show/Hide CONTROLS DIALOG
 	afx_msg void OnBnClickedButton1();
-	
+	afx_msg void RemoveShape();
 	
 	
 };

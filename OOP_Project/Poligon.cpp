@@ -39,12 +39,12 @@ double Poligon::area()
     {
         if (i == amount_edge - 1)
         {
-            sum += Real_Coor[i].x/10 * Real_Coor[0].y/10 - Real_Coor[i].y/10 * Real_Coor[0].x/10;
+            sum += (Real_Coor[i].x/10) * (Real_Coor[0].y/10) - (Real_Coor[i].y/10) * (Real_Coor[0].x/10);
 
         }
         else
         {
-            sum += Real_Coor[i].x/10 * Real_Coor[i + 1].y/10 - Real_Coor[i].y/10 * Real_Coor[i + 1].x/10;
+            sum += (Real_Coor[i].x/10) * (Real_Coor[i + 1].y/10) - (Real_Coor[i].y/10) * (Real_Coor[i + 1].x/10);
         }
 
     }
@@ -60,7 +60,7 @@ double Poligon::perimeter()
     {
         if (i == amount_edge - 1)
         {
-            sum += vector_len(Real_Coor[i], Real_Coor[0]);
+            sum += (vector_len(Real_Coor[i], Real_Coor[0])/10);
             //fixing perimeter for vectors bigger than 2 points
             if (i > 2)
                 tmp_slope = check_slope(Real_Coor[i], Real_Coor[0]);
@@ -73,7 +73,7 @@ double Poligon::perimeter()
         }
         else
         {
-            sum += vector_len(Real_Coor[i], Real_Coor[i + 1]);
+            sum += (vector_len(Real_Coor[i], Real_Coor[i + 1])/10);
             //fixing perimeter for vectors bigger than 2 points
             tmp_slope = check_slope(Real_Coor[i], Real_Coor[i + 1]);
             if (i == 0)
@@ -117,14 +117,14 @@ string Poligon::type()
     int tmp = amount_edge;
     switch (amount_edge)
     {
-    //case 1:
-    //    return("single point");
-    //case 2:
-    //    return("vector");
-    //case 3:
-    //    return("triangle");
-    //case 4:
-    //    return("rectangle");
+    case 1:
+        return("Point");
+    case 2:
+        return("Vector");
+    case 3:
+        return("Triangle");
+    case 4:
+        return("Rectangle");
     default:
         string rt;
         rt = "Poly";

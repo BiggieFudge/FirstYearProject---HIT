@@ -13,7 +13,7 @@
 #include <iostream>
 #include <string.h>
 
-
+#define BTN_CTR 69
 
 
 #ifdef _DEBUG
@@ -72,7 +72,7 @@ COOPProjectDlg::COOPProjectDlg(CWnd* pParent /*=nullptr*/)
 void COOPProjectDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
-
+	
 }
 
 BEGIN_MESSAGE_MAP(COOPProjectDlg, CDialogEx)
@@ -81,7 +81,7 @@ BEGIN_MESSAGE_MAP(COOPProjectDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_BUTTON1, &COOPProjectDlg::OnBnClickedButton1)
-	
+	ON_BN_CLICKED( BTN_CTR , &COOPProjectDlg::RemoveShape)
 END_MESSAGE_MAP()
 
 
@@ -256,7 +256,7 @@ void COOPProjectDlg::OnPaint()
 			
 			
 
-			if (type == "Poly") {
+			if (type == "Poly" || type == "Point" || type == "Vector" || type == "Triangle" || type == "Rectangle") {
 				
 				
 				dc.Polygon((*poly_it)->GetArr(), (*poly_it)->get_amount_edge());  //Draw Polygon
@@ -350,18 +350,26 @@ void COOPProjectDlg::INFOPoly(list <Shape*> ::iterator indexS,list <Poligon*> ::
 		for (int i = 3; i < (*indexP)->get_amount_edge()+3;i++){
 
 		
-			ctmp.Format(_T("  %d: (%.1f,%.1f)"),(i-2) ,
+			ctmp.Format(_T("   %d: (%.1f,%.1f)"),(i-2) ,
 				(double)((*indexP)->get_fake_arr())[i - 3].x /10, // note:delete/10
 				(double)((*indexP)->get_fake_arr())[i - 3].y /10);// note:delete/10
 
 			
-			arr_labels[(*indexS)->get_color()][i]->Create(ctmp, WS_CHILD | WS_VISIBLE, 
-				CRect(875 +(i-3)* 55, 75 + (*indexS)->get_color() * 100, 930 + (i - 3) * 55, 105 + (*indexS)->get_color() * 100), this);
+			arr_labels[(*indexS)->get_color()][i]->Create(ctmp, WS_CHILD | WS_VISIBLE | WS_BORDER,
+				CRect(870 +(i-3)* 55, 75 + (*indexS)->get_color() * 100, 930 + (i - 3) * 55, 115 + (*indexS)->get_color() * 100), this);
+			
 		}
-		
 
 
+
+		//pic test
+		pBtn = new CButton;
+		pBtn->Create(_T("Del."), WS_CHILD | WS_VISIBLE | BS_ICON | WM_CTLCOLORBTN, CRect(1202, 30, 1232, 130), this, BTN_CTR );
 		
+	
+		pBtn->SetIcon(RemoveIcon);
+		//end pic test
+
 		(*indexS)->set_is_shown(TRUE);
 	}
 }
@@ -536,7 +544,11 @@ HBRUSH COOPProjectDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)  //Set B
 	return (HBRUSH)GetStockObject(DC_BRUSH);
 }
 
+void COOPProjectDlg::RemoveShape()//Open CONTROL dialog
+{
 
+	MessageBox(_T("LOL"), _T("LL"), MB_OK);
+}
 
 
 
