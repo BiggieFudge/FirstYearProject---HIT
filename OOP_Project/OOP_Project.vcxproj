@@ -227,12 +227,9 @@
     <None Include="res\OOPProject.rc2" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="C:\Users\Eytan\Desktop\dustbin.png" />
-    <Image Include="C:\Users\Eytan\Downloads\trash_bin_icon-icons.com_67981(1).ico" />
-    <Image Include="C:\Users\Eytan\Downloads\trash_bin_icon-icons.com_67981.ico" />
     <Image Include="res\any7n-jbh2b-001.ico" />
-    <Image Include="res\bitmap1.bmp" />
     <Image Include="res\OOP_Project.ico" />
+    <Image Include="res\trash_bin_icon-icons.com_67981(1).ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

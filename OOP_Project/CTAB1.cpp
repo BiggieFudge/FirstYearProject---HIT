@@ -223,7 +223,7 @@ void CTAB1::ShowTextBoxes() {
 			GetDlgItem(IDC_Bottom_Group)->ShowWindow(SW_SHOW);
 			GetDlgItem(IDC_X)->ShowWindow(SW_SHOW);
 			GetDlgItem(IDC_Y)->ShowWindow(SW_SHOW);
-			if (save_amount_points > 3)//if amount is bigger than 4,display x y labels in the right side as well 
+			if (save_amount_points > 4)//if amount is bigger than 4,display x y labels in the right side as well 
 			{
 				GetDlgItem(IDC_X2)->ShowWindow(SW_SHOW);   GetDlgItem(IDC_Y2)->ShowWindow(SW_SHOW);
 			}
@@ -515,6 +515,8 @@ void CTAB1::OnBnClickedSend() {
 				}
 				Poligon* p1 = new Poligon(On_Screen, PointArray, save_amount_points);
 
+				p1->set_pos_type_list(CurrentPose_poly);
+
 				PolyList.push_back(p1);
 				ShapeList.push_back(p1);
 				CurrentPose_poly++;
@@ -556,7 +558,7 @@ void CTAB1::OnBnClickedSend() {
 
 
 					Circle* c1 = new Circle(p1, p2, rad);
-
+					c1->set_pos_type_list(CurrentPose_circle_c);
 					ShapeList.push_back(c1);
 					CircleList.push_back(c1);
 					CircleCList.push_back(c1);
@@ -608,7 +610,7 @@ void CTAB1::OnBnClickedSend() {
 
 
 					ellipse* e1 = new ellipse(p1, p3, p2);
-
+					e1->set_pos_type_list(CurrentPose_circle_e);
 					delete[] p2;
 
 					ShapeList.push_back(e1);
@@ -690,6 +692,7 @@ void CTAB1::OnBnClickedSend() {
 
 					pie* e1 = new pie(p1, p3, p2, p5, p6, p4);
 
+					e1->set_pos_type_list(CurrentPose_circle_p);
 
 					ShapeList.push_back(e1);
 					CircleList.push_back(e1);
@@ -720,10 +723,10 @@ void CTAB1::OnBnClickedSend() {
 
 
 
-bool CTAB1::InputItegrity() {
+bool CTAB1::InputItegrity() {//checking input if correct
 	CString str,str2,str3;
 	if (IsDlgButtonChecked(IDC_Polygon) == BST_CHECKED) {
-		for (int i = 0; i < this->save_amount_points; i++) {
+		for (int i = 0; i < this->save_amount_points; i++) {//checking poly input
 			PolyX[i].GetWindowTextW(str);
 			if (_tstof(str) < -10 || _tstof(str) > 10) {
 				CleanInput();
@@ -740,18 +743,18 @@ bool CTAB1::InputItegrity() {
 
 		}
 	}
-	else if ((IsDlgButtonChecked(IDC_Circle_C) == BST_CHECKED)) {
+	else if ((IsDlgButtonChecked(IDC_Circle_C) == BST_CHECKED)) { //Check input itegrity for circleC
 			CircleTextBox[0].GetWindowTextW(str);
 			CircleTextBox[1].GetWindowTextW(str2);
 			CircleTextBox[2].GetWindowTextW(str3);
-			if ((_tstof(str) < -10 || _tstof(str) > 10) && (_tstof(str2) < -10 || _tstof(str2) > 10) || (_tstof(str) + _tstof(str3) < -10 || _tstof(str) + _tstof(str3) > 10 || _tstof(str2) + _tstof(str3) < -10 || _tstof(str2) + _tstof(str3) > 10) || _tstof(str2)!=0) {
+			if ((_tstof(str) < -10 || _tstof(str) > 10) || (_tstof(str2) < -10 || _tstof(str2) > 10) || (_tstof(str) + _tstof(str3) < -10 || _tstof(str) + _tstof(str3) > 10 || _tstof(str2) + _tstof(str3) < -10 || _tstof(str2) + _tstof(str3) > 10) || _tstof(str3)<0) {
 				
 				CleanInput();
 				MessageBox(_T("Invalid input"), _T("ERROR"), MB_OK);
 				return FALSE;
 			}
 		}
-	else if (IsDlgButtonChecked(IDC_Circle_E) == BST_CHECKED) {
+	else if (IsDlgButtonChecked(IDC_Circle_E) == BST_CHECKED) {//checking ellipse input
 		for (int i = 0; i < 4; i++) {
 			EllipseTextBox[i].GetWindowTextW(str);
 			if (_tstof(str) < -10 || _tstof(str) > 10) {
@@ -762,7 +765,7 @@ bool CTAB1::InputItegrity() {
 		}
 		}
 	else {
-		for (int i = 0; i < 8; i++) {
+		for (int i = 0; i < 8; i++) {//Check input itegrity for pie
 			PieTextBox[i].GetWindowTextW(str);
 			if (_tstof(str) < -10 || _tstof(str) > 10) {
 				CleanInput();
@@ -784,7 +787,7 @@ bool CTAB1::InputItegrity() {
 	
 
 
-void CTAB1::CleanInput() {
+void CTAB1::CleanInput() {//clean all the input
 	if (IsDlgButtonChecked(IDC_Polygon) == BST_CHECKED) {
 		for (int i = 0; i < this->save_amount_points; i++) {
 			PolyX[i].SetWindowTextW(_T(""));

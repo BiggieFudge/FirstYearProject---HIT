@@ -1,6 +1,8 @@
 #pragma once
 #include "Shape.h"
 
+
+
 class Poligon :public Shape
 {
 public:
@@ -19,7 +21,7 @@ public:
     const int get_amount_edge();
     POINT* GetArr();//returns the on screen points
     POINT* get_fake_arr();//returns the x,y points
-
+   // bool Is_Vector();
 
 private:
     const int amount_edge;

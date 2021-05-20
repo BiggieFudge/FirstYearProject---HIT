@@ -53,51 +53,79 @@ double Poligon::area()
 
 double Poligon::perimeter()
 {
+    //int i;
+    //double sum = 0, slope = 0, tmp_slope = 0;
+    //bool tf_slope = true;
+    ////for (i = 0; i < amount_edge; i++)
+    ////{
+    ////    if (i == amount_edge - 1)
+    ////    {
+    ////        sum += (vector_len(Real_Coor[i], Real_Coor[0])/10);
+    ////        //fixing perimeter for vectors bigger than 2 points
+    ////        if (i > 2)
+    ////            tmp_slope = check_slope(Real_Coor[i], Real_Coor[0]);
+
+    ////        if (tmp_slope != slope)
+    ////        {
+    ////            tf_slope = false;
+    ////        }
+
+    ////    }
+    ////    else
+    ////    {
+    ////        sum += (vector_len(Real_Coor[i], Real_Coor[i + 1])/10);
+    ////        //fixing perimeter for vectors bigger than 2 points
+    ////        tmp_slope = check_slope(Real_Coor[i], Real_Coor[i + 1]);
+    ////        if (i == 0)
+    ////        {
+    ////            slope = tmp_slope;
+    ////        }
+    ////        else
+    ////        {
+    ////            if (tmp_slope != slope)
+    ////            {
+    ////                tf_slope = false;
+    ////            }
+    ////        }
+    ////    }
+
+    ////}
+    //if (tf_slope == false)
+    //{
+    //    return(sum);
+    //}
+    //else
+    //{
+    //    return(sum / 2);
+    //}
     int i;
-    double sum = 0, slope = 0, tmp_slope = 0;
-    bool tf_slope = true;
+    double sum=0;
     for (i = 0; i < amount_edge; i++)
     {
         if (i == amount_edge - 1)
         {
             sum += (vector_len(Real_Coor[i], Real_Coor[0])/10);
             //fixing perimeter for vectors bigger than 2 points
-            if (i > 2)
-                tmp_slope = check_slope(Real_Coor[i], Real_Coor[0]);
-
-            if (tmp_slope != slope)
-            {
-                tf_slope = false;
-            }
+          
 
         }
         else
         {
             sum += (vector_len(Real_Coor[i], Real_Coor[i + 1])/10);
             //fixing perimeter for vectors bigger than 2 points
-            tmp_slope = check_slope(Real_Coor[i], Real_Coor[i + 1]);
-            if (i == 0)
-            {
-                slope = tmp_slope;
-            }
-            else
-            {
-                if (tmp_slope != slope)
-                {
-                    tf_slope = false;
-                }
-            }
+           
         }
 
     }
-    if (tf_slope == false)
-    {
-        return(sum);
-    }
-    else
+    if(area()==0)
     {
         return(sum / 2);
     }
+    else
+    {
+        return(sum);
+    }
+    
 }
 
 //not used right now by mfc
@@ -117,17 +145,17 @@ string Poligon::type()
     int tmp = amount_edge;
     switch (amount_edge)
     {
-    case 1:
-        return("Point");
-    case 2:
-        return("Vector");
-    case 3:
-        return("Triangle");
-    case 4:
-        return("Rectangle");
+    //case 1:
+    //    return("Point");
+    //case 2:
+    //    return("Vector");
+    //case 3:
+    //    return("Triangle");
+    //case 4:
+    //    return("Rectangle");
     default:
         string rt;
-        rt = "Poly";
+        rt = "Polygon";
         //rt += tmp + '0';
         //rt += " number of edges";
         return(rt);
@@ -140,13 +168,24 @@ double Poligon::check_slope(POINT p1, POINT p2)
 {
     if (p1.x != p2.x)
     {
-        return(p1.y - p2.y) / (p1.x - p2.x);
+        return(p1.y/10 - p2.y/10) / (p1.x/10 - p2.x/10);
     }
     else//makbil to y axis
     {
+       // return(MAX_INT);
         return(0);
     }
 }
+
+//bool Poligon::Is_Vector()
+//{
+//    int i;
+//    bool 
+//    for(i=0;i<amount_edge;i++)
+//    {
+
+//    }
+//}
 
 POINT* Poligon::GetArr()
 {

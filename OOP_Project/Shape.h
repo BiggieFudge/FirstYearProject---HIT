@@ -6,12 +6,16 @@
 
 using namespace std;
 
+
+
 class Shape
 {
+
 public:
     //Shape(int x):amount_edge(x) {}
     Shape() {}
     virtual ~Shape() {}
+
     virtual double area() = 0;
     virtual double perimeter() = 0;
     //virtual void print() = 0;
@@ -33,7 +37,14 @@ public:
     {
         return(is_shown);
     }
- 
+    
+    void set_pos_type_list(int PTL) {
+        PositionTypeList = PTL;
+    }
+    int get_pos_type_list(){
+        return PositionTypeList;
+    }
+   
 
     //old
 
@@ -53,10 +64,12 @@ public:
 
      int color_index=-1;//color for shapes in ShapeArr
      bool is_shown = false;
-    
+  
+     int PositionTypeList =-1;        //Poistion in the specifiec type of list
+     
 private:
 
-
+    
     
 
 };

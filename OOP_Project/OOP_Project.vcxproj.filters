@@ -122,16 +122,7 @@
     <Image Include="res\any7n-jbh2b-001.ico">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="res\bitmap1.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="C:\Users\Eytan\Desktop\dustbin.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="C:\Users\Eytan\Downloads\trash_bin_icon-icons.com_67981.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="C:\Users\Eytan\Downloads\trash_bin_icon-icons.com_67981(1).ico">
+    <Image Include="res\trash_bin_icon-icons.com_67981(1).ico">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

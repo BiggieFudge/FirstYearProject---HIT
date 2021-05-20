@@ -3,9 +3,10 @@
 //
 
 #pragma once
+#include "Shape.h"
 #include "CONTROLS.h"
 
-#include "Shape.h"
+
 
 
 #define SquareSide 40//constant grid length
@@ -23,16 +24,18 @@ public:
 		
 		int i,j=0;
 
-		for (i = 0; i < m_controls.m_TAB1.CurrentPose_shape; i++)//deleting info labels array
-		{
+		//for (i = 0; i < m_controls.m_TAB1.CurrentPose_shape; i++)//deleting info labels array
+		//{
 		    
-			for(j=0; j < arr_sizes[i]; j++)
-			{
-				delete(arr_labels[i][j]);
-			}
-			delete[] arr_labels[i];
-		}
-		
+		//	for(j=0; j < arr_sizes[i]; j++)
+		//	{
+		//		delete(arr_labels[i][j]);
+		//	}
+		//	delete[] arr_labels[i];
+		//}
+		delete_arr_labels();
+
+
 		list <Shape*>::iterator it;
 		for(it=m_controls.m_TAB1.ShapeList.begin();it != m_controls.m_TAB1.ShapeList.end();it++){//deleting shape array
 
@@ -65,8 +68,17 @@ protected:
 
 	//Pic test
 	HICON RemoveIcon = (HICON)LoadImage(AfxGetApp()->m_hInstance, MAKEINTRESOURCE(IDI_ICON2), IMAGE_ICON, 32, 32, 0);
-	CButton* pBtn;
+	CButton* arr_Btn[5];
 	//end pic
+
+	//iterators for shapes
+	list <Shape*> ::iterator shape_it;
+	list <Poligon*> ::iterator poly_it ;
+	list <Circle*> ::iterator circle_it;
+	list <ellipse*> ::iterator ellipse_it;
+	list <pie*> ::iterator pie_it;
+
+
 
 
 	// Generated message map functions
@@ -84,11 +96,18 @@ public:
 	void INFOCircleC(list <Shape*> ::iterator indexS, list <Circle*> ::iterator indexC);//shows info about circle
 	void INFOCircleE(list <Shape*> ::iterator indexS, list <ellipse*> ::iterator indexE);//shows info about ellipse
 	void INFOCircleP(list <Shape*> ::iterator indexS, list <pie*> ::iterator indexP);//shows info about pie
+	void delete_shape(int pos_in_shape);//deleting selected shape
+	void delete_arr_labels();
+
+	afx_msg void RemoveShape1() { delete_shape(0); }//deleting shape 1
+	afx_msg void RemoveShape2() { delete_shape(1); };//deleting shape 2
+	afx_msg void RemoveShape3() { delete_shape(2); };//deleting shape 3
+	afx_msg void RemoveShape4() { delete_shape(3); };//deleting shape 4
+	afx_msg void RemoveShape5() { delete_shape(4); };//deleting shape 5
+
 
 	
 	CONTROLS m_controls; //Show/Hide CONTROLS DIALOG
 	afx_msg void OnBnClickedButton1();
-	afx_msg void RemoveShape();
-	
 	
 };
