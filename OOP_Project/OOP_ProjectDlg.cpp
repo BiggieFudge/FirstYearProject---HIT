@@ -224,8 +224,8 @@ void COOPProjectDlg::OnPaint()
 		//create frame around show_All;
 		dc.MoveTo(869, 29);
 		dc.LineTo(1201, 29);
-		dc.LineTo(1201, 581);
-		dc.LineTo(869, 581);
+		dc.LineTo(1201, 527);
+		dc.LineTo(869, 527);
 		dc.LineTo(869, 29);
 
 
@@ -308,10 +308,11 @@ void COOPProjectDlg::OnPaint()
 			i_color++;//index for color choosing
 
 			//Draw line at end of info section
-			dc.SelectObject(&penForAxis);
-			dc.MoveTo(870, 125 + (*shape_it)->get_color() * 100);
-			dc.LineTo(1200, 125 + (*shape_it)->get_color() * 100);
-
+			if (index != 5) {  //dont draw the last line;
+				dc.SelectObject(&penForAxis);
+				dc.MoveTo(870, 125 + (*shape_it)->get_color() * 100);
+				dc.LineTo(1200, 125 + (*shape_it)->get_color() * 100);
+			}
 		}
 
 
