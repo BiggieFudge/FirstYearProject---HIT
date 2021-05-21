@@ -252,9 +252,27 @@ void COOPProjectDlg::OnPaint()
 			string type = (*shape_it)->type();
 
 
+			if ((*shape_it)->get_color() == -1)
+			{
+				int j;
+				for (j = 0; j < 5; j++)
+				{
+					if (arr_check_color[j] == false)
+					{
+						//i_color = j;
+						arr_check_color[j] = true;
+						break;
+					}
+				}
+				//(*shape_it)->set_color(i_color);
+				(*shape_it)->set_color(j);
+				
+			}
 
-		
-			(*shape_it)->set_color(index);
+		    
+			/*(*shape_it)->set_pos_shape_list()(index);*/
+			(*shape_it)->set_pos_shape_list(index);
+
 			index++;
 			penForShapes.DeleteObject();
 			penForShapes.CreatePen(PS_SOLID, 4, arr_color[(*shape_it)->get_color()]); //Change Color according to shape.color
@@ -305,12 +323,12 @@ void COOPProjectDlg::OnPaint()
 				ellipse_it++;
 				indexCircleE++;
 			}
+			
 			i_color++;//index for color choosing
-
 			//Draw line at end of info section
 			dc.SelectObject(&penForAxis);
-			dc.MoveTo(870, 125 + (*shape_it)->get_color() * 100);
-			dc.LineTo(1200, 125 + (*shape_it)->get_color() * 100);
+			dc.MoveTo(870, 125 + (*shape_it)->get_pos_shape_list() * 100);
+			dc.LineTo(1200, 125 + (*shape_it)->get_pos_shape_list() * 100);
 
 		}
 
@@ -332,13 +350,13 @@ HCURSOR COOPProjectDlg::OnQueryDragIcon()
 void COOPProjectDlg::INFOPoly(list <Shape*> ::iterator indexS, list <Poligon*> ::iterator indexP) {//delete here!!
 	if (!(*indexS)->get_is_shown()) {
 
-		arr_labels[(*indexS)->get_color()] = new CStatic * [(*indexP)->get_amount_edge() + 3];
+		arr_labels[(*indexS)->get_pos_shape_list()] = new CStatic * [(*indexP)->get_amount_edge() + 3];
 
-		arr_sizes[(*indexS)->get_color()] = (*indexP)->get_amount_edge() + 3;
+		arr_sizes[(*indexS)->get_pos_shape_list()] = (*indexP)->get_amount_edge() + 3;
 
 		for (int i = 0; i < (*indexP)->get_amount_edge() + 3; i++) {
 
-			arr_labels[(*indexS)->get_color()][i] = new CStatic;
+			arr_labels[(*indexS)->get_pos_shape_list()][i] = new CStatic;
 
 		}
 
@@ -347,16 +365,16 @@ void COOPProjectDlg::INFOPoly(list <Shape*> ::iterator indexS, list <Poligon*> :
 		CString ctmp;
 		ctmp.Format(_T("Type: %S"), (*indexS)->type().c_str());
 
-		arr_labels[(*indexS)->get_color()][0]->Create(ctmp, WS_CHILD | WS_VISIBLE,
-			CRect(875, 35 + (*indexS)->get_color() * 100, 960, 70 + (*indexS)->get_color() * 100), this);
+		arr_labels[(*indexS)->get_pos_shape_list()][0]->Create(ctmp, WS_CHILD | WS_VISIBLE,
+			CRect(875, 35 + (*indexS)->get_pos_shape_list() * 100, 960, 70 + (*indexS)->get_pos_shape_list() * 100), this);
 
 		ctmp.Format(_T("Area: %.2f"), (*indexS)->area());
-		arr_labels[(*indexS)->get_color()][1]->Create(ctmp, WS_CHILD | WS_VISIBLE,
-			CRect(990, 35 + (*indexS)->get_color() * 100, 1080, 70 + (*indexS)->get_color() * 100), this);
+		arr_labels[(*indexS)->get_pos_shape_list()][1]->Create(ctmp, WS_CHILD | WS_VISIBLE,
+			CRect(990, 35 + (*indexS)->get_pos_shape_list() * 100, 1080, 70 + (*indexS)->get_pos_shape_list() * 100), this);
 
 		ctmp.Format(_T("Parimeter: %.2f"), (*indexS)->perimeter());
-		arr_labels[(*indexS)->get_color()][2]->Create(ctmp, WS_CHILD | WS_VISIBLE,
-			CRect(1100, 35 + (*indexS)->get_color() * 100, 1200, 70 + (*indexS)->get_color() * 100), this);
+		arr_labels[(*indexS)->get_pos_shape_list()][2]->Create(ctmp, WS_CHILD | WS_VISIBLE,
+			CRect(1100, 35 + (*indexS)->get_pos_shape_list() * 100, 1200, 70 + (*indexS)->get_pos_shape_list() * 100), this);
 
 
 
@@ -369,8 +387,8 @@ void COOPProjectDlg::INFOPoly(list <Shape*> ::iterator indexS, list <Poligon*> :
 				(double)((*indexP)->get_fake_arr())[i - 3].y / 10);// note:delete/10
 
 
-			arr_labels[(*indexS)->get_color()][i]->Create(ctmp, WS_CHILD | WS_VISIBLE | WS_BORDER,
-				CRect(870 + (i - 3) * 55, 75 + (*indexS)->get_color() * 100, 930 + (i - 3) * 55, 115 + (*indexS)->get_color() * 100), this);
+			arr_labels[(*indexS)->get_pos_shape_list()][i]->Create(ctmp, WS_CHILD | WS_VISIBLE | WS_BORDER,
+				CRect(870 + (i - 3) * 55, 75 + (*indexS)->get_pos_shape_list() * 100, 930 + (i - 3) * 55, 115 + (*indexS)->get_pos_shape_list() * 100), this);
 
 		}
 
@@ -378,9 +396,9 @@ void COOPProjectDlg::INFOPoly(list <Shape*> ::iterator indexS, list <Poligon*> :
 
 		//pic test
 
-		arr_Btn[(*indexS)->get_color()] = new CButton;
-		arr_Btn[(*indexS)->get_color()]->Create(_T(""), WS_CHILD | WS_VISIBLE | BS_ICON | WM_CTLCOLORBTN, CRect(1202, 90 + (*indexS)->get_color() * 100, 1234, 122 + (*indexS)->get_color() * 100), this, RemoveBtn1 + (*indexS)->get_color());
-		arr_Btn[(*indexS)->get_color()]->SetIcon(RemoveIcon);
+		arr_Btn[(*indexS)->get_pos_shape_list()] = new CButton;
+		arr_Btn[(*indexS)->get_pos_shape_list()]->Create(_T(""), WS_CHILD | WS_VISIBLE | BS_ICON | WM_CTLCOLORBTN, CRect(1202, 90 + (*indexS)->get_pos_shape_list() * 100, 1234, 122 + (*indexS)->get_pos_shape_list() * 100), this, RemoveBtn1 + (*indexS)->get_pos_shape_list());
+		arr_Btn[(*indexS)->get_pos_shape_list()]->SetIcon(RemoveIcon);
 		//end pic test
 
 		(*indexS)->set_is_shown(TRUE);
@@ -391,11 +409,11 @@ void COOPProjectDlg::INFOCircleC(list <Shape*> ::iterator indexS, list <Circle*>
 	if (!(*indexS)->get_is_shown()) {
 
 
-		arr_labels[(*indexS)->get_color()] = new CStatic * [4];
-		arr_sizes[(*indexS)->get_color()] = 4;
+		arr_labels[(*indexS)->get_pos_shape_list()] = new CStatic * [4];
+		arr_sizes[(*indexS)->get_pos_shape_list()] = 4;
 		for (int i = 0; i < 4; i++) {
 
-			arr_labels[(*indexS)->get_color()][i] = new CStatic;
+			arr_labels[(*indexS)->get_pos_shape_list()][i] = new CStatic;
 
 		}
 
@@ -404,16 +422,16 @@ void COOPProjectDlg::INFOCircleC(list <Shape*> ::iterator indexS, list <Circle*>
 		CString ctmp;
 		ctmp.Format(_T("Type: %S"), (*indexS)->type().c_str());
 
-		arr_labels[(*indexS)->get_color()][0]->Create(ctmp, WS_CHILD | WS_VISIBLE,
-			CRect(875, 35 + (*indexS)->get_color() * 100, 960, 70 + (*indexS)->get_color() * 100), this);
+		arr_labels[(*indexS)->get_pos_shape_list()][0]->Create(ctmp, WS_CHILD | WS_VISIBLE,
+			CRect(875, 35 + (*indexS)->get_pos_shape_list() * 100, 960, 70 + (*indexS)->get_pos_shape_list() * 100), this);
 
 		ctmp.Format(_T("Area: %.2f"), (*indexS)->area());
-		arr_labels[(*indexS)->get_color()][1]->Create(ctmp, WS_CHILD | WS_VISIBLE,
-			CRect(990, 35 + (*indexS)->get_color() * 100, 1080, 70 + (*indexS)->get_color() * 100), this);
+		arr_labels[(*indexS)->get_pos_shape_list()][1]->Create(ctmp, WS_CHILD | WS_VISIBLE,
+			CRect(990, 35 + (*indexS)->get_pos_shape_list() * 100, 1080, 70 + (*indexS)->get_pos_shape_list() * 100), this);
 
 		ctmp.Format(_T("Parimeter: %.2f"), (*indexS)->perimeter());
-		arr_labels[(*indexS)->get_color()][2]->Create(ctmp, WS_CHILD | WS_VISIBLE,
-			CRect(1100, 35 + (*indexS)->get_color() * 100, 1200, 70 + (*indexS)->get_color() * 100), this);
+		arr_labels[(*indexS)->get_pos_shape_list()][2]->Create(ctmp, WS_CHILD | WS_VISIBLE,
+			CRect(1100, 35 + (*indexS)->get_pos_shape_list() * 100, 1200, 70 + (*indexS)->get_pos_shape_list() * 100), this);
 
 
 
@@ -423,13 +441,13 @@ void COOPProjectDlg::INFOCircleC(list <Shape*> ::iterator indexS, list <Circle*>
 			(*indexC)->get_radius());
 
 
-		arr_labels[(*indexS)->get_color()][3]->Create(ctmp, WS_CHILD | WS_VISIBLE,
-			CRect(875, 75 + (*indexS)->get_color() * 100, 1200, 105 + (*indexS)->get_color() * 100), this);
+		arr_labels[(*indexS)->get_pos_shape_list()][3]->Create(ctmp, WS_CHILD | WS_VISIBLE,
+			CRect(875, 75 + (*indexS)->get_pos_shape_list() * 100, 1200, 105 + (*indexS)->get_pos_shape_list() * 100), this);
 
 
-		arr_Btn[(*indexS)->get_color()] = new CButton;
-		arr_Btn[(*indexS)->get_color()]->Create(_T("Del."), WS_CHILD | WS_VISIBLE | BS_ICON | WM_CTLCOLORBTN, CRect(1202, 90 + (*indexS)->get_color() * 100, 1234, 122 + (*indexS)->get_color() * 100), this, RemoveBtn1 + (*indexS)->get_color());
-		arr_Btn[(*indexS)->get_color()]->SetIcon(RemoveIcon);
+		arr_Btn[(*indexS)->get_pos_shape_list()] = new CButton;
+		arr_Btn[(*indexS)->get_pos_shape_list()]->Create(_T("Del."), WS_CHILD | WS_VISIBLE | BS_ICON | WM_CTLCOLORBTN, CRect(1202, 90 + (*indexS)->get_pos_shape_list() * 100, 1234, 122 + (*indexS)->get_pos_shape_list() * 100), this, RemoveBtn1 + (*indexS)->get_pos_shape_list());
+		arr_Btn[(*indexS)->get_pos_shape_list()]->SetIcon(RemoveIcon);
 
 
 		(*indexS)->set_is_shown(TRUE);
@@ -445,11 +463,11 @@ void COOPProjectDlg::INFOCircleE(list <Shape*> ::iterator indexS, list <ellipse*
 {
 	if (!(*indexS)->get_is_shown()) {
 
-		arr_labels[(*indexS)->get_color()] = new CStatic * [4];
-		arr_sizes[(*indexS)->get_color()] = 4;
+		arr_labels[(*indexS)->get_pos_shape_list()] = new CStatic * [4];
+		arr_sizes[(*indexS)->get_pos_shape_list()] = 4;
 		for (int i = 0; i < 4; i++) {
 
-			arr_labels[(*indexS)->get_color()][i] = new CStatic;
+			arr_labels[(*indexS)->get_pos_shape_list()][i] = new CStatic;
 
 		}
 
@@ -458,16 +476,16 @@ void COOPProjectDlg::INFOCircleE(list <Shape*> ::iterator indexS, list <ellipse*
 		CString ctmp;
 		ctmp.Format(_T("Type: %S"), (*indexS)->type().c_str());
 
-		arr_labels[(*indexS)->get_color()][0]->Create(ctmp, WS_CHILD | WS_VISIBLE,
-			CRect(875, 35 + (*indexS)->get_color() * 100, 960, 70 + (*indexS)->get_color() * 100), this);
+		arr_labels[(*indexS)->get_pos_shape_list()][0]->Create(ctmp, WS_CHILD | WS_VISIBLE,
+			CRect(875, 35 + (*indexS)->get_pos_shape_list() * 100, 960, 70 + (*indexS)->get_pos_shape_list() * 100), this);
 
 		ctmp.Format(_T("Area: %.2f"), (*indexS)->area());
-		arr_labels[(*indexS)->get_color()][1]->Create(ctmp, WS_CHILD | WS_VISIBLE,
-			CRect(990, 35 + (*indexS)->get_color() * 100, 1080, 70 + (*indexS)->get_color() * 100), this);
+		arr_labels[(*indexS)->get_pos_shape_list()][1]->Create(ctmp, WS_CHILD | WS_VISIBLE,
+			CRect(990, 35 + (*indexS)->get_pos_shape_list() * 100, 1080, 70 + (*indexS)->get_pos_shape_list() * 100), this);
 
 		ctmp.Format(_T("Parimeter: %.2f"), (*indexS)->perimeter());
-		arr_labels[(*indexS)->get_color()][2]->Create(ctmp, WS_CHILD | WS_VISIBLE,
-			CRect(1100, 35 + (*indexS)->get_color() * 100, 1200, 70 + (*indexS)->get_color() * 100), this);
+		arr_labels[(*indexS)->get_pos_shape_list()][2]->Create(ctmp, WS_CHILD | WS_VISIBLE,
+			CRect(1100, 35 + (*indexS)->get_pos_shape_list() * 100, 1200, 70 + (*indexS)->get_pos_shape_list() * 100), this);
 
 
 
@@ -483,13 +501,13 @@ void COOPProjectDlg::INFOCircleE(list <Shape*> ::iterator indexS, list <ellipse*
 
 
 
-		arr_labels[(*indexS)->get_color()][3]->Create(ctmp, WS_CHILD | WS_VISIBLE,
-			CRect(875, 75 + (*indexS)->get_color() * 100, 1200, 105 + (*indexS)->get_color() * 100), this);
+		arr_labels[(*indexS)->get_pos_shape_list()][3]->Create(ctmp, WS_CHILD | WS_VISIBLE,
+			CRect(875, 75 + (*indexS)->get_pos_shape_list() * 100, 1200, 105 + (*indexS)->get_pos_shape_list() * 100), this);
 
 
-		arr_Btn[(*indexS)->get_color()] = new CButton;
-		arr_Btn[(*indexS)->get_color()]->Create(_T("Del."), WS_CHILD | WS_VISIBLE | BS_ICON | WM_CTLCOLORBTN, CRect(1202, 90 + (*indexS)->get_color() * 100, 1234, 122 + (*indexS)->get_color() * 100), this, RemoveBtn1 + (*indexS)->get_color());
-		arr_Btn[(*indexS)->get_color()]->SetIcon(RemoveIcon);
+		arr_Btn[(*indexS)->get_pos_shape_list()] = new CButton;
+		arr_Btn[(*indexS)->get_pos_shape_list()]->Create(_T("Del."), WS_CHILD | WS_VISIBLE | BS_ICON | WM_CTLCOLORBTN, CRect(1202, 90 + (*indexS)->get_pos_shape_list() * 100, 1234, 122 + (*indexS)->get_pos_shape_list() * 100), this, RemoveBtn1 + (*indexS)->get_pos_shape_list());
+		arr_Btn[(*indexS)->get_pos_shape_list()]->SetIcon(RemoveIcon);
 
 
 
@@ -501,11 +519,11 @@ void COOPProjectDlg::INFOCircleP(list <Shape*> ::iterator indexS, list <pie*> ::
 {
 	if (!(*indexS)->get_is_shown()) {
 
-		arr_labels[(*indexS)->get_color()] = new CStatic * [5];
-		arr_sizes[(*indexS)->get_color()] = 5;
+		arr_labels[(*indexS)->get_pos_shape_list()] = new CStatic * [5];
+		arr_sizes[(*indexS)->get_pos_shape_list()] = 5;
 		for (int i = 0; i < 5; i++) {
 
-			arr_labels[(*indexS)->get_color()][i] = new CStatic;
+			arr_labels[(*indexS)->get_pos_shape_list()][i] = new CStatic;
 
 		}
 
@@ -514,13 +532,13 @@ void COOPProjectDlg::INFOCircleP(list <Shape*> ::iterator indexS, list <pie*> ::
 		CString ctmp;
 		ctmp.Format(_T("Type: %S"), (*indexS)->type().c_str());
 
-		arr_labels[(*indexS)->get_color()][0]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(875, 35 + (*indexS)->get_color() * 100, 960, 70 + (*indexS)->get_color() * 100), this);
+		arr_labels[(*indexS)->get_pos_shape_list()][0]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(875, 35 + (*indexS)->get_pos_shape_list() * 100, 960, 70 + (*indexS)->get_pos_shape_list() * 100), this);
 
 		ctmp.Format(_T("Area: %f"), (*indexS)->area());
-		arr_labels[(*indexS)->get_color()][1]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(990, 35 + (*indexS)->get_color() * 100, 1080, 70 + (*indexS)->get_color() * 100), this);
+		arr_labels[(*indexS)->get_pos_shape_list()][1]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(990, 35 + (*indexS)->get_pos_shape_list() * 100, 1080, 70 + (*indexS)->get_pos_shape_list() * 100), this);
 
 		ctmp.Format(_T("Parimeter: %f"), (*indexS)->perimeter());
-		arr_labels[(*indexS)->get_color()][2]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(1100, 35 + (*indexS)->get_color() * 100, 1200, 70 + (*indexS)->get_color() * 100), this);
+		arr_labels[(*indexS)->get_pos_shape_list()][2]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(1100, 35 + (*indexS)->get_pos_shape_list() * 100, 1200, 70 + (*indexS)->get_pos_shape_list() * 100), this);
 
 
 
@@ -530,7 +548,7 @@ void COOPProjectDlg::INFOCircleP(list <Shape*> ::iterator indexS, list <pie*> ::
 			(double)(*indexP)->get_rp().x / 10,
 			(double)(*indexP)->get_rp().y / 10);
 
-		arr_labels[(*indexS)->get_color()][3]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(875, 75 + (*indexS)->get_color() * 100, 1200, 95 + (*indexS)->get_color() * 100), this);
+		arr_labels[(*indexS)->get_pos_shape_list()][3]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(875, 75 + (*indexS)->get_pos_shape_list() * 100, 1200, 95 + (*indexS)->get_pos_shape_list() * 100), this);
 
 		ctmp.Format(_T("Top Left:(%.1f,%.1f) ,  Bottom Right:(%.1f,%.f)"),
 			(double)(*indexP)->get_start_angle().x / 10,
@@ -538,11 +556,11 @@ void COOPProjectDlg::INFOCircleP(list <Shape*> ::iterator indexS, list <pie*> ::
 			(double)(*indexP)->get_end_angle().x / 10,
 			(double)(*indexP)->get_end_angle().y / 10);
 
-		arr_labels[(*indexS)->get_color()][4]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(875, 100 + (*indexS)->get_color() * 100, 1200, 120 + (*indexS)->get_color() * 100), this);
+		arr_labels[(*indexS)->get_pos_shape_list()][4]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(875, 100 + (*indexS)->get_pos_shape_list() * 100, 1200, 120 + (*indexS)->get_pos_shape_list() * 100), this);
 
-		arr_Btn[(*indexS)->get_color()] = new CButton;
-		arr_Btn[(*indexS)->get_color()]->Create(_T("Del."), WS_CHILD | WS_VISIBLE | BS_ICON | WM_CTLCOLORBTN, CRect(1202, 90 + (*indexS)->get_color() * 100, 1234, 122 + (*indexS)->get_color() * 100), this, RemoveBtn1 + (*indexS)->get_color());
-		arr_Btn[(*indexS)->get_color()]->SetIcon(RemoveIcon);
+		arr_Btn[(*indexS)->get_pos_shape_list()] = new CButton;
+		arr_Btn[(*indexS)->get_pos_shape_list()]->Create(_T("Del."), WS_CHILD | WS_VISIBLE | BS_ICON | WM_CTLCOLORBTN, CRect(1202, 90 + (*indexS)->get_pos_shape_list() * 100, 1234, 122 + (*indexS)->get_pos_shape_list() * 100), this, RemoveBtn1 + (*indexS)->get_pos_shape_list());
+		arr_Btn[(*indexS)->get_pos_shape_list()]->SetIcon(RemoveIcon);
 
 
 		(*indexS)->set_is_shown(TRUE);
@@ -597,6 +615,7 @@ void COOPProjectDlg::delete_shape(int pos_in_shape)//deletes selected shape
 
 
 	string type = (*S_it)->type();//checking type of shape
+	int color_index = (*S_it)->color_index;//get color index before deleting shape
 	if (type == "Polygon") {
 		list <Poligon*> ::iterator P_it = m_controls.m_TAB1.PolyList.begin();
 		advance(P_it, position_delete);
@@ -655,10 +674,10 @@ void COOPProjectDlg::delete_shape(int pos_in_shape)//deletes selected shape
 
 	}
 	
-
-
+	arr_check_color[color_index] = false;
 	S_it=m_controls.m_TAB1.ShapeList.erase(S_it);//deleting in shapelist as well
 	m_controls.m_TAB1.CurrentPose_shape--;
+	
 	
 	for (; S_it != m_controls.m_TAB1.ShapeList.end(); S_it++) {   //WORST Function ever omfgggg
 		if ((*S_it)->type() == type) {

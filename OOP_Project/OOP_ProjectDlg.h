@@ -62,6 +62,7 @@ protected:
 	
 	
 	COLORREF arr_color[5] = { RGB(255,0,0),RGB(0,255,0),RGB(0,0,255),RGB(255,128,0),RGB(255,255,0)};//array containing colors for shapes
+	bool arr_check_color[5] = {false,false,false,false,false};
 	
 	CStatic** arr_labels[5];//array of labels for info
 	int arr_sizes[5];//saves sizes of inner arrays in arr_labels

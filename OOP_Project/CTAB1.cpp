@@ -516,6 +516,7 @@ void CTAB1::OnBnClickedSend() {
 				Poligon* p1 = new Poligon(On_Screen, PointArray, save_amount_points);
 
 				p1->set_pos_type_list(CurrentPose_poly);
+				p1->set_pos_shape_list(CurrentPose_shape);
 
 				PolyList.push_back(p1);
 				ShapeList.push_back(p1);
@@ -559,6 +560,8 @@ void CTAB1::OnBnClickedSend() {
 
 					Circle* c1 = new Circle(p1, p2, rad);
 					c1->set_pos_type_list(CurrentPose_circle_c);
+					c1->set_pos_shape_list(CurrentPose_shape);
+
 					ShapeList.push_back(c1);
 					CircleList.push_back(c1);
 					CircleCList.push_back(c1);
@@ -611,6 +614,8 @@ void CTAB1::OnBnClickedSend() {
 
 					ellipse* e1 = new ellipse(p1, p3, p2);
 					e1->set_pos_type_list(CurrentPose_circle_e);
+					e1->set_pos_shape_list(CurrentPose_shape);
+
 					delete[] p2;
 
 					ShapeList.push_back(e1);
@@ -693,6 +698,7 @@ void CTAB1::OnBnClickedSend() {
 					pie* e1 = new pie(p1, p3, p2, p5, p6, p4);
 
 					e1->set_pos_type_list(CurrentPose_circle_p);
+					e1->set_pos_shape_list(CurrentPose_shape);
 
 					ShapeList.push_back(e1);
 					CircleList.push_back(e1);

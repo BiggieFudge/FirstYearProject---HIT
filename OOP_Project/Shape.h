@@ -44,6 +44,13 @@ public:
     int get_pos_type_list(){
         return PositionTypeList;
     }
+
+    void set_pos_shape_list(int PTL) {
+        Position_shape_list = PTL;
+    }
+    int get_pos_shape_list() {
+        return Position_shape_list;
+    }
    
 
     //old
@@ -63,9 +70,11 @@ public:
     Point* arr_edge;*/
 
      int color_index=-1;//color for shapes in ShapeArr
+
      bool is_shown = false;
   
      int PositionTypeList =-1;        //Poistion in the specifiec type of list
+     int Position_shape_list = -1;
      
 private:
 
