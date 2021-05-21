@@ -6,11 +6,11 @@
 class CTAB2 : public CDialogEx
 {
 	DECLARE_DYNAMIC(CTAB2)
-
+	
 public:
 	CTAB2(CWnd* pParent = nullptr);   // standard constructor
 	virtual ~CTAB2();
-
+	void DisplayEdit();
 // Dialog Data
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_TAB2 };
