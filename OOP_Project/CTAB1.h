@@ -11,12 +11,12 @@
 class CTAB1 : public CDialogEx
 {
 	DECLARE_DYNAMIC(CTAB1)
-	
+
 public:
 	CTAB1(CWnd* pParent = nullptr);   // standard constructor
 	virtual ~CTAB1();
 
-	
+
 	
 
 // Dialog Data

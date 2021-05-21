@@ -3,7 +3,6 @@
 
 #include "pch.h"
 #include "OOP_Project.h"
-#include "CTAB1.h"
 #include "CTAB2.h"
 #include "afxdialogex.h"
 
@@ -31,7 +30,5 @@ void CTAB2::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CTAB2, CDialogEx)
 END_MESSAGE_MAP()
 
-void CTAB2::DisplayEdit() {
-	
-}
+
 // CTAB2 message handlers

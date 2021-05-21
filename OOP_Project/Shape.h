@@ -8,7 +8,7 @@ using namespace std;
 
 
 
-class Shape : public CObject
+class Shape
 {
 
 public:
