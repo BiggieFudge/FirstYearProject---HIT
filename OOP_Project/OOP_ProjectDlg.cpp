@@ -131,9 +131,7 @@ BOOL COOPProjectDlg::OnInitDialog()
 
 
 
-
-
-
+	
 
 	m_controls.Create(IDD_CONTROLS, this);  //Create CONTROL DIALOG
 
