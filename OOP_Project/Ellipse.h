@@ -4,6 +4,9 @@
 class ellipse :public Circle
 {
 public:
+    DECLARE_SERIAL(ellipse);
+
+    ellipse();
     ellipse(POINT p1,POINT p2,POINT* arr_p);
     ~ellipse();
 
@@ -15,6 +18,7 @@ public:
     CRect get_rekt();
     POINT get_lp();
     POINT get_rp();
+    void Serialize(CArchive& archive);
 private:
     POINT lp;//top left point of rectangle
     POINT rp;//bottom right point of rectangle

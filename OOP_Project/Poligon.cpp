@@ -2,6 +2,8 @@
 #include "Poligon.h"
 #include <string.h>
 
+IMPLEMENT_SERIAL(Poligon, CObject, 1);
+
 Poligon::Poligon(POINT* PointArray, POINT* RealPoint, int x = 1) :amount_edge(x) {
 
 
@@ -19,8 +21,11 @@ Poligon::Poligon(POINT* PointArray, POINT* RealPoint, int x = 1) :amount_edge(x)
     //amount_tzela = check_tzela();//?
 
 }
-    
-  
+Poligon::Poligon():amount_edge(1)
+{
+   
+}
+
 
    
 
@@ -201,6 +206,23 @@ POINT* Poligon::GetArr()
  POINT* Poligon::get_fake_arr()
  {
      return(Real_Coor);
+ }
+
+ void Poligon::Serialize(CArchive& archive){
+    
+     CObject::Serialize(archive);
+    
+    //if (archive.IsStoring()) {
+    //    archive << amount_edge << end_angle << Angle_point[0] << Angle_point[1];
+    //}
+    //else {
+    //    archive >> amount_edge >> end_angle >> Angle_point[0] >> Angle_point[1];
+    //}
+    // const int amount_edge;
+    //POINT* Real_Coor;
+    //POINT* On_Screen_Coor;//for painting the poly
+    //int amount_tzela;
+
  }
 
 //int Poligon::check_tzela()//doesnt work well,check how to recognize the two slopes that result in zero,makbilim to the axis's.

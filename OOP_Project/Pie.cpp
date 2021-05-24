@@ -1,6 +1,9 @@
 #include "pch.h"
 #include "Pie.h"
 
+
+IMPLEMENT_SERIAL(pie, ellipse, 1)
+
 pie::pie(POINT p1,POINT p2,POINT* arr_p,POINT p3,POINT p4,POINT* arr_a):ellipse(p1,p2,arr_p)
 {
     start_angle=p3;
@@ -11,6 +14,12 @@ pie::pie(POINT p1,POINT p2,POINT* arr_p,POINT p3,POINT p4,POINT* arr_a):ellipse(
     Angle_point[1].x = arr_a[1].x;
     Angle_point[1].y = arr_a[1].y;
 }
+
+pie::pie()
+{
+    
+}
+
 
 pie::~pie()
 {
@@ -45,4 +54,16 @@ POINT pie::get_start_angle()
 POINT pie::get_end_angle()
 {
     return end_angle;
+}
+
+void pie::Serialize(CArchive& archive) {
+
+    ellipse::Serialize(archive);
+
+    if (archive.IsStoring()) {
+        archive << start_angle << end_angle << Angle_point[0] << Angle_point[1];
+    }
+    else {
+        archive >> start_angle >> end_angle >> Angle_point[0] >> Angle_point[1];
+    }
 }

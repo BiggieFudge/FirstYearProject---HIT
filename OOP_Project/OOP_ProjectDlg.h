@@ -110,4 +110,6 @@ public:
 	CONTROLS m_controls; //Show/Hide CONTROLS DIALOG
 	afx_msg void OnBnClickedButton1();
 	
+	afx_msg void OnBnClickedSave();
+	afx_msg void OnBnClickedLoad();
 };

@@ -1,11 +1,15 @@
 #pragma once
-#include "Shape.h"
 
+
+#include "Shape.h"
 
 
 class Poligon :public Shape
 {
 public:
+    DECLARE_SERIAL(Poligon);
+
+    Poligon();
     Poligon(POINT* ,POINT* ,int);
     ~Poligon();
     //virtual functions:
@@ -22,6 +26,8 @@ public:
     POINT* GetArr();//returns the on screen points
     POINT* get_fake_arr();//returns the x,y points
    // bool Is_Vector();
+
+    void Serialize(CArchive& archive);
 
 private:
     const int amount_edge;

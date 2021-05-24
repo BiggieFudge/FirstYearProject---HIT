@@ -91,6 +91,8 @@ BEGIN_MESSAGE_MAP(COOPProjectDlg, CDialogEx)
 	ON_BN_CLICKED(RemoveBtn4, &COOPProjectDlg::RemoveShape4)
 	ON_BN_CLICKED(RemoveBtn5, &COOPProjectDlg::RemoveShape5)
 
+	ON_BN_CLICKED(IDC_SAVE, &COOPProjectDlg::OnBnClickedSave)
+	ON_BN_CLICKED(IDC_LOAD, &COOPProjectDlg::OnBnClickedLoad)
 END_MESSAGE_MAP()
 
 
@@ -705,5 +707,47 @@ void COOPProjectDlg::delete_arr_labels()//delete arr_labels
 			delete(arr_labels[i][j]);
 		}
 		delete[] arr_labels[i];
+	}
+}
+
+
+void COOPProjectDlg::OnBnClickedSave()
+{
+	// TODO: Add your control notification handler code here
+	const TCHAR czFilter[] = _T("Axis files (*.axis)|*.axis|All FIles (*.*)|*.*");
+
+	CFileDialog fDialog(FALSE, _T("axis"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, czFilter, this);
+
+	if (fDialog.DoModal() == IDOK) {
+		CString fileName = fDialog.GetPathName();
+		CFile file(fileName, CFile::modeCreate | CFile::modeWrite);
+		CArchive ar(&file, CArchive::store);
+		shape_it = m_controls.m_TAB1.ShapeList.begin();
+		(*shape_it)->Serialize(ar);
+
+		ar.Close();
+		file.Close();
+	}
+}
+
+
+void COOPProjectDlg::OnBnClickedLoad()
+{
+	// TODO: Add your control notification handler code here
+
+	const TCHAR czFilter[] = _T("Axis files (*.axis)|*.axis|All FIles (*.*)|*.*");
+
+	CFileDialog fDialog(TRUE, _T("axis"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, czFilter, this);
+
+	if (fDialog.DoModal() == IDOK) {
+		CString fileName = fDialog.GetPathName();
+		CFile file(fileName, CFile::modeRead);
+		CArchive ar(&file, CArchive::load);
+		shape_it = m_controls.m_TAB1.ShapeList.begin();
+		(*shape_it)->Serialize(ar);
+
+		ar.Close();
+		file.Close();
+		RedrawWindow();
 	}
 }

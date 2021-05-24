@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "Circle.h"
-//#include "OOP_ProjectDlg.h"
+IMPLEMENT_SERIAL(Circle, CObject, 1)
 
 Circle::Circle()
 {
@@ -101,4 +101,25 @@ void Circle::set_center(POINT p)
 {
     center.x = p.x;
     center.y = p.y;
+}
+
+void Circle::Serialize(CArchive& archive) {
+
+    CObject::Serialize(archive);
+    
+    if (archive.IsStoring()) {
+        if (RectPoint == NULL) {
+
+        }
+        else {
+            archive << radius << radiusReal << center << RectPoint[0] << RectPoint[1];
+        }
+    }
+
+    else {
+        archive >> radius >> radiusReal >> center >> RectPoint[0] >> RectPoint[1];
+    }
+
+
+
 }

@@ -1,10 +1,15 @@
 #pragma once
+
 #include "Shape.h"
+
 #define PI 3.1415
 
 class Circle :public Shape
 {
 public:
+
+    DECLARE_SERIAL(Circle);
+
     Circle();
     Circle(POINT,POINT* ,double radius);
     ~Circle();
@@ -21,6 +26,8 @@ public:
     CRect get_rekt();
     POINT get_center();
     void set_center(POINT);
+
+    void Serialize(CArchive& archive);
 private:
     double radius;//radius according to xy map
     double radiusReal;//radius according to grid map

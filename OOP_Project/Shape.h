@@ -2,20 +2,28 @@
 #include <iostream>
 #include <math.h>
 #include "Point.h"
+
 #include <string.h>
 
 using namespace std;
 
 
 
-class Shape
+class Shape: public CObject
 {
 
 public:
+
+    
+
     //Shape(int x):amount_edge(x) {}
     Shape() {}
     virtual ~Shape() {}
 
+    virtual void Serialize(CArchive& archive){
+
+    
+    }
     virtual double area() = 0;
     virtual double perimeter() = 0;
     //virtual void print() = 0;
@@ -52,6 +60,9 @@ public:
         return Position_shape_list;
     }
    
+
+
+    
 
     //old
 
