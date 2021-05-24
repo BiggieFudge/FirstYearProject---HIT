@@ -19,7 +19,8 @@ private:
     POINT lp;//top left point of rectangle
     POINT rp;//bottom right point of rectangle
     POINT* Rect_point;//contains the real axis points;
-
+    double radius1;//created just for area and perimeter
+    double radius2;//created just for area and perimeter
 
 };
 

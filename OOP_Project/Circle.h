@@ -1,6 +1,6 @@
 #pragma once
 #include "Shape.h"
-
+#define PI 3.1415
 
 class Circle :public Shape
 {

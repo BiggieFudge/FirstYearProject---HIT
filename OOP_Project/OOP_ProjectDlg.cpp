@@ -492,7 +492,7 @@ void COOPProjectDlg::INFOCircleE(list <Shape*> ::iterator indexS, list <ellipse*
 
 
 
-		ctmp.Format(_T("Top Left:(%.1f,%.1f) ,  Bottom Right:(%.1f,%.1f)"),
+		ctmp.Format(_T("Bottom Left:(%.1f,%.1f) ,  Top Right:(%.1f,%.1f)"),
 			(double)(*indexE)->get_lp().x / 10,
 			(double)(*indexE)->get_lp().y / 10,
 			(double)(*indexE)->get_rp().x / 10,
@@ -593,7 +593,7 @@ void COOPProjectDlg::delete_shape(int pos_in_shape)//deletes selected shape
 
 
 	list <Shape*> ::iterator S_it;
-	
+	//deleting buttons
 	for (S_it = m_controls.m_TAB1.ShapeList.begin(); S_it!= m_controls.m_TAB1.ShapeList.end();  S_it++,i++) {
 		delete arr_Btn[i];
 		(*S_it)->set_is_shown(false);
@@ -682,7 +682,12 @@ void COOPProjectDlg::delete_shape(int pos_in_shape)//deletes selected shape
 		if ((*S_it)->type() == type) {
 			int x = (*S_it)->get_pos_type_list();
 			(*S_it)->set_pos_type_list(--x);   //change the index of all other objects in the specifiec list
+			
 		}
+		
+		int y = (*S_it)->get_pos_shape_list();
+		(*S_it)->set_pos_shape_list(--y);
+		
 	}
 
 

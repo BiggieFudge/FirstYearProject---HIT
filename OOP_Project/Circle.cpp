@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "Circle.h"
-
+//#include "OOP_ProjectDlg.h"
 
 Circle::Circle()
 {
@@ -32,6 +32,7 @@ Circle::Circle(POINT p,POINT* p_c,double r)
     RectPoint[1].y = p_c[1].y;
     radius = r;
     radiusReal = r * 40;   //Change if change SquareSide
+    //radiusReal = r * SquareSide;   //Change if change SquareSide
 }
 
 Circle::~Circle()
@@ -41,12 +42,12 @@ Circle::~Circle()
 
 double Circle::area()
 {
-    return(3.1415 * radius * radius);
+    return(PI * radius * radius);
 }
 
 double Circle::perimeter()
 {
-    return(3.1415 * radius * 2);
+    return(PI * radius * 2);
 }
 
 //void Circle::print()

@@ -24,22 +24,21 @@ public:
 		
 		int i,j=0;
 
-		//for (i = 0; i < m_controls.m_TAB1.CurrentPose_shape; i++)//deleting info labels array
-		//{
-		    
-		//	for(j=0; j < arr_sizes[i]; j++)
-		//	{
-		//		delete(arr_labels[i][j]);
-		//	}
-		//	delete[] arr_labels[i];
-		//}
+		
 		delete_arr_labels();
 
 
 		list <Shape*>::iterator it;
+		int index = 0;
 		for(it=m_controls.m_TAB1.ShapeList.begin();it != m_controls.m_TAB1.ShapeList.end();it++){//deleting shape array
 
-			delete[] *it;
+			
+			if ((*it)->is_shown == true)
+			{
+
+				delete arr_Btn[(*it)->get_pos_shape_list()];//deleting existing buttons
+			}
+			delete[] * it;
 		}
 
 		
