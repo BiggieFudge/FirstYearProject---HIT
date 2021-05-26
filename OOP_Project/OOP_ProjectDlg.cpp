@@ -722,11 +722,12 @@ void COOPProjectDlg::OnBnClickedSave()
 	CFileDialog fDialog(FALSE, _T("axis"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, czFilter, this);
 
 	if (fDialog.DoModal() == IDOK) {
-		
-		//SaveCircle(fDialog);
-		//SaveEllipse(fDialog);
-		//SavePoli(fDialog);
+		CFile file(fDialog.GetPathName(), CFile::modeCreate | CFile::modeWrite);
+		SaveCircle(fDialog);
+		SaveEllipse(fDialog);
+		SavePoli(fDialog);
 		SavePie(fDialog);
+		file.Close();
 	}
 }
 
@@ -741,14 +742,14 @@ void COOPProjectDlg::OnBnClickedLoad()
 	CFileDialog fDialog(TRUE, _T("axis"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, czFilter, this);
 	
 	if (fDialog.DoModal() == IDOK) {
-
+		
 		DeleteScreen();//makes sure nothing is on the screen before loading
 		
 
 		
-		//LoadEllipse(fDialog);
-		//LoadCircle(fDialog);
-		//LoadPoli(fDialog);
+		LoadEllipse(fDialog);
+		LoadCircle(fDialog);
+		LoadPoli(fDialog);
 		LoadPie(fDialog);
 
 
@@ -784,46 +785,50 @@ void COOPProjectDlg::OnBnClickedLoad()
 		//	m_controls.m_TAB1.ShapeList.push_back((*circle_it));
 		//}
 		
+		circle_it = m_controls.m_TAB1.CircleCList.begin();
+		ellipse_it= m_controls.m_TAB1.CircleEList.begin();
+		pie_it= m_controls.m_TAB1.CirclePList.begin();
+		poly_it=m_controls.m_TAB1.PolyList.begin();
 
-
-
-
-
-		//int index = 0;
-		//for( ; circle_it !=m_controls.m_TAB1.CircleCList.end() && ellipse_it!= m_controls.m_TAB1.CircleEList.end() && pie_it!= m_controls.m_TAB1.CirclePList.end();){
+		int index = 0;
+		for( ; circle_it !=m_controls.m_TAB1.CircleCList.end() ||
+			ellipse_it!= m_controls.m_TAB1.CircleEList.end() || 
+			pie_it!= m_controls.m_TAB1.CirclePList.end() || 
+			poly_it!= m_controls.m_TAB1.PolyList.end();){
 			
-		//	if ((*circle_it)->get_pos_shape_list() == index) {
-		//	 m_controls.m_TAB1.ShapeList.push_back((*circle_it));
-		//	 index++;
-		//	 circle_it++;
-		//	}
-		//	else if ((*ellipse_it)->get_pos_shape_list() == index) {
-		//		m_controls.m_TAB1.ShapeList.push_back((*ellipse_it));
-		//		index++;
-		//		ellipse_it++;
-		//	}
-		//	/*else if ((*pie_it)->get_pos_shape_list() == index) {
-		//		m_controls.m_TAB1.ShapeList.push_back((*pie_it));
-		//		index++;
-		//		pie_it++;
-		//	}*/
-			
-		//}
+			if (circle_it != m_controls.m_TAB1.CircleCList.end() &&(m_controls.m_TAB1.CircleCList.size()>0) &&(*circle_it)->get_pos_shape_list() == index) {
+			 m_controls.m_TAB1.ShapeList.push_back((*circle_it));
+			 index++;
+			 circle_it++;
 
+			}
+			else if (ellipse_it!= m_controls.m_TAB1.CircleEList.end() && (m_controls.m_TAB1.CircleEList.size()>0)&&(*ellipse_it)->get_pos_shape_list() == index) {
+				m_controls.m_TAB1.ShapeList.push_back((*ellipse_it));
+				index++;
+				ellipse_it++;
+			}
+			else if (pie_it!=m_controls.m_TAB1.CirclePList.end()&&(m_controls.m_TAB1.CirclePList.size()>0)&&(*pie_it)->get_pos_shape_list() == index) {
+				m_controls.m_TAB1.ShapeList.push_back((*pie_it));
+				index++;
+				pie_it++;
+			}
+			else if(poly_it!= m_controls.m_TAB1.PolyList.end() && (m_controls.m_TAB1.PolyList.size()>0) && (*poly_it)->get_pos_shape_list() == index)
+			{
+				m_controls.m_TAB1.ShapeList.push_back((*poly_it));
+				index++;
+				poly_it++;
+			}
+		}
 
 		
-		
-		//file.Close();
-		//ar.Close();
-		
-		//RedrawWindow();
+		RedrawWindow();
 	}
 }
 
 
 
 void COOPProjectDlg::SaveCircle(CFileDialog & fDialog) {
-	CString filename = fDialog.GetPathName();
+	CString filename = fDialog.GetFolderPath() + "\\Circle.crc";
 
 	CFile file(filename, CFile::modeCreate | CFile::modeWrite);
 
@@ -843,7 +848,7 @@ void COOPProjectDlg::LoadCircle(CFileDialog & fDialog)
 	
 	   
 
-	CString filename = fDialog.GetPathName();
+	CString filename = fDialog.GetFolderPath() + "\\Circle.crc";
 
 
 	CFile file(filename, CFile::modeRead);
@@ -870,18 +875,18 @@ void COOPProjectDlg::LoadCircle(CFileDialog & fDialog)
 	}
 		
 		
-	for (circle_it = m_controls.m_TAB1.CircleCList.begin();
-			circle_it != m_controls.m_TAB1.CircleCList.end();circle_it++) {
+	//for (circle_it = m_controls.m_TAB1.CircleCList.begin();
+	//		circle_it != m_controls.m_TAB1.CircleCList.end();circle_it++) {
 
-		m_controls.m_TAB1.ShapeList.push_back((*circle_it));
-	}
+	//	m_controls.m_TAB1.ShapeList.push_back((*circle_it));
+	//}
 		
 		
 		
 	file.Close();
 	ar.Close();
 		
-	RedrawWindow();
+	
 }
 
 
@@ -889,7 +894,7 @@ void COOPProjectDlg::LoadCircle(CFileDialog & fDialog)
 
 
 void COOPProjectDlg::SaveEllipse(CFileDialog& fDialog) {
-	CString filename = fDialog.GetPathName();
+	CString filename = fDialog.GetFolderPath() + "\\Ellipse.crc";
 
 	CFile file(filename, CFile::modeCreate | CFile::modeWrite);
 
@@ -908,7 +913,7 @@ void COOPProjectDlg::SaveEllipse(CFileDialog& fDialog) {
 void COOPProjectDlg::LoadEllipse(CFileDialog& fDialog)
 {
 
-	CString filename = fDialog.GetPathName();
+	CString filename = fDialog.GetFolderPath() + "\\Ellipse.crc";
 
 
 	CFile file(filename, CFile::modeRead);
@@ -935,24 +940,24 @@ void COOPProjectDlg::LoadEllipse(CFileDialog& fDialog)
 	}
 
 
-	for (ellipse_it = m_controls.m_TAB1.CircleEList.begin();
-		ellipse_it != m_controls.m_TAB1.CircleEList.end(); ellipse_it++) {
+	//for (ellipse_it = m_controls.m_TAB1.CircleEList.begin();
+	//	ellipse_it != m_controls.m_TAB1.CircleEList.end(); ellipse_it++) {
 
-		m_controls.m_TAB1.ShapeList.push_back((*ellipse_it));
-	}
+	//	m_controls.m_TAB1.ShapeList.push_back((*ellipse_it));
+	//}
 
 
 
 	file.Close();
 	ar.Close();
 
-	RedrawWindow();
+	
 }
 
 
 
 void COOPProjectDlg::SavePoli(CFileDialog & fDialog) {
-	CString filename = fDialog.GetPathName();
+	CString filename = fDialog.GetFolderPath() + "\\Poly.crc";
 
 	CFile file(filename, CFile::modeCreate | CFile::modeWrite);
 
@@ -961,7 +966,7 @@ void COOPProjectDlg::SavePoli(CFileDialog & fDialog) {
 
 
 
-	m_controls.m_TAB1.pie_shapes.Serialize(ar);
+	m_controls.m_TAB1.polygon_shapes.Serialize(ar);
 
 	ar.Close();
 	file.Close();
@@ -973,7 +978,7 @@ void COOPProjectDlg::LoadPoli(CFileDialog & fDialog)
 	
 	   
 
-	CString filename = fDialog.GetPathName();
+	CString filename = fDialog.GetFolderPath() + "\\Poly.crc";
 
 
 	CFile file(filename, CFile::modeRead);
@@ -995,18 +1000,18 @@ void COOPProjectDlg::LoadPoli(CFileDialog & fDialog)
 	}
 		
 		
-	for (poly_it = m_controls.m_TAB1.PolyList.begin();
-			poly_it != m_controls.m_TAB1.PolyList.end();poly_it++) {
+	//for (poly_it = m_controls.m_TAB1.PolyList.begin();
+	//		poly_it != m_controls.m_TAB1.PolyList.end();poly_it++) {
 
-		m_controls.m_TAB1.ShapeList.push_back((*poly_it));
-	}
+	//	m_controls.m_TAB1.ShapeList.push_back((*poly_it));
+	//}
 		
 		
 		
 	file.Close();
 	ar.Close();
 		
-	RedrawWindow();
+
 }
 
 void COOPProjectDlg::LoadPie(CFileDialog & fDialog) 
@@ -1014,7 +1019,7 @@ void COOPProjectDlg::LoadPie(CFileDialog & fDialog)
 	
 	   
 
-	CString filename = fDialog.GetPathName();
+	CString filename = fDialog.GetFolderPath() + "\\Pie.crc";
 
 
 	CFile file(filename, CFile::modeRead);
@@ -1040,22 +1045,22 @@ void COOPProjectDlg::LoadPie(CFileDialog & fDialog)
 	}
 		
 		
-	for (pie_it = m_controls.m_TAB1.CirclePList.begin();
-			pie_it != m_controls.m_TAB1.CirclePList.end();pie_it++) {
+	//for (pie_it = m_controls.m_TAB1.CirclePList.begin();
+	//		pie_it != m_controls.m_TAB1.CirclePList.end();pie_it++) {
 
-		m_controls.m_TAB1.ShapeList.push_back((*pie_it));
-	}
+	//	m_controls.m_TAB1.ShapeList.push_back((*pie_it));
+	//}
 		
 		
 		
 	file.Close();
 	ar.Close();
 		
-	RedrawWindow();
+	
 }
 
 void COOPProjectDlg::SavePie(CFileDialog & fDialog) {
-	CString filename = fDialog.GetPathName();
+	CString filename = fDialog.GetFolderPath() + "\\Pie.crc";
 
 	CFile file(filename, CFile::modeCreate | CFile::modeWrite);
 
