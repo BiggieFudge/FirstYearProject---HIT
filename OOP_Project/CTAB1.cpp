@@ -356,30 +356,30 @@ void CTAB1::Create_Circle_E()
 	EllipseTextBoxLabels = new CStatic[6];
 
 	EllipseTextBoxLabels[0].Create(_T("Enter Left Bottom:"), WS_CHILD | WS_VISIBLE,
-		CRect(17, 160, 200, 190), this);
+		CRect(17, 150, 200, 180), this);
 
 	EllipseTextBoxLabels[1].Create(_T("x:"), WS_CHILD | WS_VISIBLE,
-		CRect(17, 180, 30, 200), this);
+		CRect(17, 170, 30, 190), this);
 
 	EllipseTextBox[0].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
-		CRect(30, 180, 55, 200), this, 8888);
+		CRect(30, 170, 55, 190), this, 8888);
 	
 	EllipseTextBoxLabels[2].Create(_T("y:"), WS_CHILD | WS_VISIBLE,
-		CRect(57, 180, 70, 200), this);
+		CRect(57, 170, 70, 190), this);
 	EllipseTextBox[1].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
-		CRect(70, 180, 95, 200), this, 8888);
+		CRect(70, 170, 95, 190), this, 8888);
 	
 
 	EllipseTextBoxLabels[3].Create(_T("Enter Right Top:"), WS_CHILD | WS_VISIBLE,
-		CRect(17, 210, 200, 240), this);
+		CRect(17, 200, 200, 220), this);
 	EllipseTextBoxLabels[4].Create(_T("x:"), WS_CHILD | WS_VISIBLE,
-		CRect(17, 230, 30, 250), this);
+		CRect(17, 220, 30, 240), this);
 	EllipseTextBox[2].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
-		CRect(30, 230, 55, 250), this, 8888);
+		CRect(30, 220, 55, 240), this, 8888);
 	EllipseTextBoxLabels[5].Create(_T("y:"), WS_CHILD | WS_VISIBLE,
-		CRect(57, 230, 70, 250), this);
+		CRect(57, 220, 70, 240), this);
 	EllipseTextBox[3].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
-		CRect(70, 230, 95, 250), this, 8888);
+		CRect(70, 220, 95, 240), this, 8888);
 }
 
 void CTAB1::show_Circle_E()
@@ -419,34 +419,55 @@ void CTAB1::Create_Circle_P()
 
 	//input x textbox
 	PieTextBox = new CEdit[8];
+	PieTextBoxLabels = new CStatic[8];
+
+
+
+	PieTextBoxLabels[0].Create(_T("Enter Left Bottom:"), WS_CHILD | WS_VISIBLE,
+		CRect(17, 150, 200, 180), this);
+
+	PieTextBoxLabels[1].Create(_T("x:"), WS_CHILD | WS_VISIBLE,
+		CRect(17, 170, 30, 190), this);
+
 	PieTextBox[0].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
-		CRect(25, 180, 45, 200), this, 8888);
-	//input y textbox
-	
+		CRect(30, 170, 55, 190), this, 8888);
+
+	PieTextBoxLabels[2].Create(_T("y:"), WS_CHILD | WS_VISIBLE,
+		CRect(57, 170, 70, 190), this);
 	PieTextBox[1].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
-		CRect(70, 180, 90, 200), this, 8888);
-	//input radious textbox
+		CRect(70, 170, 95, 190), this, 8888);
 
+
+	PieTextBoxLabels[3].Create(_T("Enter Right Top:"), WS_CHILD | WS_VISIBLE,
+		CRect(17, 200, 200, 220), this);
+	PieTextBoxLabels[4].Create(_T("x:"), WS_CHILD | WS_VISIBLE,
+		CRect(17, 220, 30, 240), this);
 	PieTextBox[2].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
-		CRect(135, 180, 155, 200), this, 8888);
-	
+		CRect(30, 220, 55, 240), this, 8888);
+	PieTextBoxLabels[5].Create(_T("y:"), WS_CHILD | WS_VISIBLE,
+		CRect(57, 220, 70, 240), this);
 	PieTextBox[3].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
-		CRect(180, 180, 200, 200), this, 8888);
+		CRect(70, 220, 95, 240), this, 8888);
 
 
-
+	PieTextBoxLabels[6].Create(_T("Enter Start Angle:"), WS_CHILD | WS_VISIBLE,
+		CRect(17, 245, 200, 265), this);
 
 	PieTextBox[4].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
-		CRect(25, 220, 45, 240), this, 8888);
+		CRect(30, 265, 55, 285), this, 8888);
 	
 	PieTextBox[5].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
-		CRect(70, 220, 90, 240), this, 8888);
+		CRect(70, 265, 95, 285), this, 8888);
+
+
+	PieTextBoxLabels[7].Create(_T("Enter End Angle:"), WS_CHILD | WS_VISIBLE,
+		CRect(17, 285, 200, 305), this);
 
 	PieTextBox[6].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
-		CRect(135, 220, 155, 240), this, 8888);
+		CRect(30, 305, 55, 325), this, 8888);
 
 	PieTextBox[7].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
-		CRect(180, 220, 200, 240), this, 8888);
+		CRect(70, 305, 95, 325), this, 8888);
 }
 
 void CTAB1::show_Circle_P()
@@ -454,13 +475,19 @@ void CTAB1::show_Circle_P()
 	GetDlgItem(IDC_Bottom_Group)->ShowWindow(SW_SHOW);
 	if (CreateCircleP == 0) { Create_Circle_P(); CreateCircleP = 1; }
 	else
-		for (int i = 0; i < 8; i++) { PieTextBox[i].ShowWindow(SW_SHOW); }
+		for (int i = 0; i < 8; i++) { 
+			PieTextBox[i].ShowWindow(SW_SHOW);
+			PieTextBoxLabels[i].ShowWindow(SW_SHOW);
+		}
 }
 
 void CTAB1::hide_Circle_P()
 {
 	if (CreateCircleP == 1) {
-		for(int i=0; i <8; i++){ PieTextBox[i].ShowWindow(SW_HIDE); }
+		for(int i=0; i <8; i++){ 
+			PieTextBox[i].ShowWindow(SW_HIDE); 
+			PieTextBoxLabels[i].ShowWindow(SW_HIDE);
+		}
 	}
 }
 
