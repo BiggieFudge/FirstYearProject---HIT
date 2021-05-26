@@ -6,12 +6,14 @@
 
 class Circle :public Shape
 {
+    
 public:
 
     DECLARE_SERIAL(Circle);
 
     Circle();
     Circle(POINT,POINT* ,double radius);
+    Circle(const Circle&);
     ~Circle();
 
     //virtual functions:
@@ -35,6 +37,10 @@ private:
  
 
     POINT* RectPoint;//edge points of rectangle outside of circle object 
+
+
+  
+    
 };
 
 

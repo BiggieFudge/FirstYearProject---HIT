@@ -514,14 +514,19 @@ void CTAB1::OnBnClickedSend() {
 					On_Screen[i].y = (10 - (double)y) * SquareSide + SquareSide;     //ETN maths
 				}
 				Poligon* p1 = new Poligon(On_Screen, PointArray, save_amount_points);
+				
 
 				p1->set_pos_type_list(CurrentPose_poly);
 				p1->set_pos_shape_list(CurrentPose_shape);
 
+				polygon_shapes.AddTail(p1);
 				PolyList.push_back(p1);
 				ShapeList.push_back(p1);
 				CurrentPose_poly++;
 				CurrentPose_shape++;
+
+				
+
 
 				delete[] PointArray;
 				delete[] On_Screen;
@@ -559,16 +564,22 @@ void CTAB1::OnBnClickedSend() {
 
 
 					Circle* c1 = new Circle(p1, p2, rad);
+					
+
 					c1->set_pos_type_list(CurrentPose_circle_c);
 					c1->set_pos_shape_list(CurrentPose_shape);
 
 					ShapeList.push_back(c1);
 					CircleList.push_back(c1);
 					CircleCList.push_back(c1);
+					circle_shapes.AddTail(c1);
+
 
 					CurrentPose_circle++;
 					CurrentPose_shape++;
 					CurrentPose_circle_c++;
+
+					
 
 					delete[] p2;
 
@@ -613,6 +624,7 @@ void CTAB1::OnBnClickedSend() {
 
 
 					ellipse* e1 = new ellipse(p1, p3, p2);
+					//e1->position_in_shape++;
 					e1->set_pos_type_list(CurrentPose_circle_e);
 					e1->set_pos_shape_list(CurrentPose_shape);
 
@@ -621,11 +633,14 @@ void CTAB1::OnBnClickedSend() {
 					ShapeList.push_back(e1);
 					CircleList.push_back(e1);
 					CircleEList.push_back(e1);
+					ellipse_shapes.AddTail(e1);
+
 
 					CurrentPose_circle++;
 					CurrentPose_shape++;
 					CurrentPose_circle_e++;
 
+					
 
 					Main->RedrawWindow();      //Go to main window and redraw with new shape;
 
@@ -697,16 +712,21 @@ void CTAB1::OnBnClickedSend() {
 
 					pie* e1 = new pie(p1, p3, p2, p5, p6, p4);
 
+					//e1->position_in_shape++;
+
 					e1->set_pos_type_list(CurrentPose_circle_p);
 					e1->set_pos_shape_list(CurrentPose_shape);
+					
 
 					ShapeList.push_back(e1);
 					CircleList.push_back(e1);
 					CirclePList.push_back(e1);
-
+					pie_shapes.AddTail(e1);
 					CurrentPose_circle++;
 					CurrentPose_shape++;
 					CurrentPose_circle_p++;
+
+					
 
 					delete[] p2;
 					delete[] p4;

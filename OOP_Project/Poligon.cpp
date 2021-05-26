@@ -21,7 +21,8 @@ Poligon::Poligon(POINT* PointArray, POINT* RealPoint, int x = 1) :amount_edge(x)
     //amount_tzela = check_tzela();//?
 
 }
-Poligon::Poligon():amount_edge(1)
+
+Poligon::Poligon()
 {
    
 }
@@ -198,7 +199,7 @@ POINT* Poligon::GetArr()
         return On_Screen_Coor;
     
 }
- const int Poligon::get_amount_edge()
+ int Poligon::get_amount_edge()
  {
      return(amount_edge);
  }
@@ -211,6 +212,39 @@ POINT* Poligon::GetArr()
  void Poligon::Serialize(CArchive& archive){
     
      CObject::Serialize(archive);
+
+     if (archive.IsStoring()) {
+         archive << color_index << PositionTypeList << Position_shape_list << amount_edge;//shape variables except for amount edge
+         
+         int i;
+         for (i = 0; i < amount_edge; i++) {
+             archive << Real_Coor[i].x << Real_Coor[i].y;
+         }
+         
+         for (i = 0; i < amount_edge; i++) {
+             archive << On_Screen_Coor[i].x << On_Screen_Coor[i].y;
+         }
+     }
+    
+     else {
+   
+         
+         Real_Coor = new POINT[8];
+         On_Screen_Coor = new POINT[8];
+         archive >> color_index >> PositionTypeList >> Position_shape_list >> amount_edge; //shape variables except for amount edge
+         int i;
+         for (i = 0; i < amount_edge; i++) {
+             archive >> Real_Coor[i].x >> Real_Coor[i].y;
+         }
+         
+         for (i = 0; i < amount_edge; i++) {
+             archive >> On_Screen_Coor[i].x >> On_Screen_Coor[i].y;
+         }
+             
+     }
+
+
+
     
     //if (archive.IsStoring()) {
     //    archive << amount_edge << end_angle << Angle_point[0] << Angle_point[1];

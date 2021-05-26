@@ -34,6 +34,12 @@ protected:
 
 public:
 
+
+	CTypedPtrList<CObList, Circle*> circle_shapes;
+	CTypedPtrList<CObList, Poligon*> polygon_shapes;
+	CTypedPtrList<CObList, ellipse*> ellipse_shapes;
+	CTypedPtrList<CObList, pie*> pie_shapes;
+
 	list<Shape*> ShapeList;
 	list<Poligon*> PolyList;
 	list<Circle*> CircleList;

@@ -9,6 +9,7 @@
 #include "afxdialogex.h"
 #include "CONTROLS.h"
 
+
 #include <iostream>
 #include <string.h>
 
@@ -543,7 +544,7 @@ void COOPProjectDlg::INFOCircleP(list <Shape*> ::iterator indexS, list <pie*> ::
 
 
 
-		ctmp.Format(_T("Top Left:(%.1f,%.1f) ,  Bottom Right:(%.1f,%.f)"),
+		ctmp.Format(_T("Top Left:(%.1f,%.1f) ,  Bottom Right:(%.1f,%.1f)"),
 			(double)(*indexP)->get_lp().x / 10,
 			(double)(*indexP)->get_lp().y / 10,
 			(double)(*indexP)->get_rp().x / 10,
@@ -551,7 +552,7 @@ void COOPProjectDlg::INFOCircleP(list <Shape*> ::iterator indexS, list <pie*> ::
 
 		arr_labels[(*indexS)->get_pos_shape_list()][3]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(875, 75 + (*indexS)->get_pos_shape_list() * 100, 1200, 95 + (*indexS)->get_pos_shape_list() * 100), this);
 
-		ctmp.Format(_T("Top Left:(%.1f,%.1f) ,  Bottom Right:(%.1f,%.f)"),
+		ctmp.Format(_T("Top Left:(%.1f,%.1f) ,  Bottom Right:(%.1f,%.1f)"),
 			(double)(*indexP)->get_start_angle().x / 10,
 			(double)(*indexP)->get_start_angle().y / 10,
 			(double)(*indexP)->get_end_angle().x / 10,
@@ -638,7 +639,8 @@ void COOPProjectDlg::delete_shape(int pos_in_shape)//deletes selected shape
 		delete[](*C_it);
 
 		m_controls.m_TAB1.CircleCList.erase(C_it);
-	
+		
+
 		
 
 		m_controls.m_TAB1.CurrentPose_circle_c--;
@@ -676,6 +678,7 @@ void COOPProjectDlg::delete_shape(int pos_in_shape)//deletes selected shape
 	}
 	
 	arr_check_color[color_index] = false;
+
 	S_it=m_controls.m_TAB1.ShapeList.erase(S_it);//deleting in shapelist as well
 	m_controls.m_TAB1.CurrentPose_shape--;
 	
@@ -719,14 +722,11 @@ void COOPProjectDlg::OnBnClickedSave()
 	CFileDialog fDialog(FALSE, _T("axis"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, czFilter, this);
 
 	if (fDialog.DoModal() == IDOK) {
-		CString fileName = fDialog.GetPathName();
-		CFile file(fileName, CFile::modeCreate | CFile::modeWrite);
-		CArchive ar(&file, CArchive::store);
-		shape_it = m_controls.m_TAB1.ShapeList.begin();
-		(*shape_it)->Serialize(ar);
-
-		ar.Close();
-		file.Close();
+		
+		//SaveCircle(fDialog);
+		//SaveEllipse(fDialog);
+		//SavePoli(fDialog);
+		SavePie(fDialog);
 	}
 }
 
@@ -734,20 +734,371 @@ void COOPProjectDlg::OnBnClickedSave()
 void COOPProjectDlg::OnBnClickedLoad()
 {
 	// TODO: Add your control notification handler code here
+	
 
 	const TCHAR czFilter[] = _T("Axis files (*.axis)|*.axis|All FIles (*.*)|*.*");
 
 	CFileDialog fDialog(TRUE, _T("axis"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, czFilter, this);
-
+	
 	if (fDialog.DoModal() == IDOK) {
-		CString fileName = fDialog.GetPathName();
-		CFile file(fileName, CFile::modeRead);
-		CArchive ar(&file, CArchive::load);
-		shape_it = m_controls.m_TAB1.ShapeList.begin();
-		(*shape_it)->Serialize(ar);
 
-		ar.Close();
-		file.Close();
-		RedrawWindow();
+		DeleteScreen();//makes sure nothing is on the screen before loading
+		
+
+		
+		//LoadEllipse(fDialog);
+		//LoadCircle(fDialog);
+		//LoadPoli(fDialog);
+		LoadPie(fDialog);
+
+
+		//CString filename = fDialog.GetPathName();
+
+
+		//CFile file(filename, CFile::modeRead);
+		//
+		//CArchive ar(&file, CArchive::load);
+		//
+		//m_controls.m_TAB1.ShapeList.empty();
+	
+	
+
+		//
+	
+		//m_controls.m_TAB1.circle_shapes.Serialize(ar);
+		//
+
+		//
+
+
+		////circle
+		//POSITION pos = m_controls.m_TAB1.circle_shapes.GetHeadPosition();
+		//while (pos != NULL) {
+		//	m_controls.m_TAB1.CircleCList.push_back(m_controls.m_TAB1.circle_shapes.GetNext(pos));
+		//}
+		//
+		//
+		//for (circle_it = m_controls.m_TAB1.CircleCList.begin();
+		//	 circle_it != m_controls.m_TAB1.CircleCList.end();circle_it++) {
+
+		//	m_controls.m_TAB1.ShapeList.push_back((*circle_it));
+		//}
+		
+
+
+
+
+
+		//int index = 0;
+		//for( ; circle_it !=m_controls.m_TAB1.CircleCList.end() && ellipse_it!= m_controls.m_TAB1.CircleEList.end() && pie_it!= m_controls.m_TAB1.CirclePList.end();){
+			
+		//	if ((*circle_it)->get_pos_shape_list() == index) {
+		//	 m_controls.m_TAB1.ShapeList.push_back((*circle_it));
+		//	 index++;
+		//	 circle_it++;
+		//	}
+		//	else if ((*ellipse_it)->get_pos_shape_list() == index) {
+		//		m_controls.m_TAB1.ShapeList.push_back((*ellipse_it));
+		//		index++;
+		//		ellipse_it++;
+		//	}
+		//	/*else if ((*pie_it)->get_pos_shape_list() == index) {
+		//		m_controls.m_TAB1.ShapeList.push_back((*pie_it));
+		//		index++;
+		//		pie_it++;
+		//	}*/
+			
+		//}
+
+
+		
+		
+		//file.Close();
+		//ar.Close();
+		
+		//RedrawWindow();
 	}
+}
+
+
+
+void COOPProjectDlg::SaveCircle(CFileDialog & fDialog) {
+	CString filename = fDialog.GetPathName();
+
+	CFile file(filename, CFile::modeCreate | CFile::modeWrite);
+
+	CArchive ar(&file, CArchive::store);
+
+
+
+
+	m_controls.m_TAB1.circle_shapes.Serialize(ar);
+
+	ar.Close();
+	file.Close();
+}
+
+void COOPProjectDlg::LoadCircle(CFileDialog & fDialog) 
+{
+	
+	   
+
+	CString filename = fDialog.GetPathName();
+
+
+	CFile file(filename, CFile::modeRead);
+		
+	CArchive ar(&file, CArchive::load);
+		
+	
+	
+	
+	
+	m_controls.m_TAB1.circle_shapes.Serialize(ar);
+		
+		
+		
+
+
+	//circle
+	POSITION pos = m_controls.m_TAB1.circle_shapes.GetHeadPosition();
+	while (pos != NULL) {
+		m_controls.m_TAB1.CurrentPose_shape++;
+		m_controls.m_TAB1.CurrentPose_circle++;
+		m_controls.m_TAB1.CurrentPose_circle_c++;
+		m_controls.m_TAB1.CircleCList.push_back(m_controls.m_TAB1.circle_shapes.GetNext(pos));
+	}
+		
+		
+	for (circle_it = m_controls.m_TAB1.CircleCList.begin();
+			circle_it != m_controls.m_TAB1.CircleCList.end();circle_it++) {
+
+		m_controls.m_TAB1.ShapeList.push_back((*circle_it));
+	}
+		
+		
+		
+	file.Close();
+	ar.Close();
+		
+	RedrawWindow();
+}
+
+
+
+
+
+void COOPProjectDlg::SaveEllipse(CFileDialog& fDialog) {
+	CString filename = fDialog.GetPathName();
+
+	CFile file(filename, CFile::modeCreate | CFile::modeWrite);
+
+	CArchive ar(&file, CArchive::store);
+
+
+
+
+	m_controls.m_TAB1.ellipse_shapes.Serialize(ar);
+
+	ar.Close();
+	file.Close();
+}
+
+
+void COOPProjectDlg::LoadEllipse(CFileDialog& fDialog)
+{
+
+	CString filename = fDialog.GetPathName();
+
+
+	CFile file(filename, CFile::modeRead);
+
+	CArchive ar(&file, CArchive::load);
+
+
+
+
+
+	m_controls.m_TAB1.ellipse_shapes.Serialize(ar);
+
+
+
+
+
+	//ellipsa
+	POSITION pos = m_controls.m_TAB1.ellipse_shapes.GetHeadPosition();
+	while (pos != NULL) {
+		m_controls.m_TAB1.CurrentPose_shape++;
+		m_controls.m_TAB1.CurrentPose_circle++;
+		m_controls.m_TAB1.CurrentPose_circle_e++;
+		m_controls.m_TAB1.CircleEList.push_back(m_controls.m_TAB1.ellipse_shapes.GetNext(pos));
+	}
+
+
+	for (ellipse_it = m_controls.m_TAB1.CircleEList.begin();
+		ellipse_it != m_controls.m_TAB1.CircleEList.end(); ellipse_it++) {
+
+		m_controls.m_TAB1.ShapeList.push_back((*ellipse_it));
+	}
+
+
+
+	file.Close();
+	ar.Close();
+
+	RedrawWindow();
+}
+
+
+
+void COOPProjectDlg::SavePoli(CFileDialog & fDialog) {
+	CString filename = fDialog.GetPathName();
+
+	CFile file(filename, CFile::modeCreate | CFile::modeWrite);
+
+	CArchive ar(&file, CArchive::store);
+
+
+
+
+	m_controls.m_TAB1.pie_shapes.Serialize(ar);
+
+	ar.Close();
+	file.Close();
+}
+
+
+void COOPProjectDlg::LoadPoli(CFileDialog & fDialog) 
+{
+	
+	   
+
+	CString filename = fDialog.GetPathName();
+
+
+	CFile file(filename, CFile::modeRead);
+		
+	CArchive ar(&file, CArchive::load);
+		
+	
+	
+	
+	
+	m_controls.m_TAB1.polygon_shapes.Serialize(ar);
+		
+		
+	POSITION pos = m_controls.m_TAB1.polygon_shapes.GetHeadPosition();
+	while (pos != NULL) {
+		m_controls.m_TAB1.CurrentPose_shape++;
+		m_controls.m_TAB1.CurrentPose_poly++;
+		m_controls.m_TAB1.PolyList.push_back(m_controls.m_TAB1.polygon_shapes.GetNext(pos));
+	}
+		
+		
+	for (poly_it = m_controls.m_TAB1.PolyList.begin();
+			poly_it != m_controls.m_TAB1.PolyList.end();poly_it++) {
+
+		m_controls.m_TAB1.ShapeList.push_back((*poly_it));
+	}
+		
+		
+		
+	file.Close();
+	ar.Close();
+		
+	RedrawWindow();
+}
+
+void COOPProjectDlg::LoadPie(CFileDialog & fDialog) 
+{
+	
+	   
+
+	CString filename = fDialog.GetPathName();
+
+
+	CFile file(filename, CFile::modeRead);
+		
+	CArchive ar(&file, CArchive::load);
+		
+	
+	
+	
+	
+	m_controls.m_TAB1.pie_shapes.Serialize(ar);
+		
+		
+		
+
+
+	//circle
+	POSITION pos = m_controls.m_TAB1.pie_shapes.GetHeadPosition();
+	while (pos != NULL) {
+		m_controls.m_TAB1.CurrentPose_shape++;
+		m_controls.m_TAB1.CurrentPose_circle_p++;
+		m_controls.m_TAB1.CirclePList.push_back(m_controls.m_TAB1.pie_shapes.GetNext(pos));
+	}
+		
+		
+	for (pie_it = m_controls.m_TAB1.CirclePList.begin();
+			pie_it != m_controls.m_TAB1.CirclePList.end();pie_it++) {
+
+		m_controls.m_TAB1.ShapeList.push_back((*pie_it));
+	}
+		
+		
+		
+	file.Close();
+	ar.Close();
+		
+	RedrawWindow();
+}
+
+void COOPProjectDlg::SavePie(CFileDialog & fDialog) {
+	CString filename = fDialog.GetPathName();
+
+	CFile file(filename, CFile::modeCreate | CFile::modeWrite);
+
+	CArchive ar(&file, CArchive::store);
+
+
+
+
+	m_controls.m_TAB1.pie_shapes.Serialize(ar);
+
+	ar.Close();
+	file.Close();
+}
+
+void COOPProjectDlg::DeleteScreen()
+{
+    
+	m_controls.m_TAB1.CurrentPose_shape = 0;//reset count of shapes
+	m_controls.m_TAB1.CurrentPose_circle = 0;//reset count of circle
+	m_controls.m_TAB1.CurrentPose_circle_c = 0;//reset count of circleC
+	m_controls.m_TAB1.CurrentPose_circle_e = 0;//reset count of circleE
+	m_controls.m_TAB1.CurrentPose_poly = 0;//reset count of poly
+	m_controls.m_TAB1.CurrentPose_circle_p = 0;//reset count of poly
+    list <Shape*>::iterator it;
+		
+	for(it=m_controls.m_TAB1.ShapeList.begin();it != m_controls.m_TAB1.ShapeList.end();it++){//deleting shape array
+
+			
+		if ((*it)->is_shown == true)
+		{
+
+			delete arr_Btn[(*it)->get_pos_shape_list()];//deleting existing buttons
+		}
+		delete[] * it;
+	}
+	m_controls.m_TAB1.circle_shapes.RemoveAll();
+	m_controls.m_TAB1.ellipse_shapes.RemoveAll();
+	m_controls.m_TAB1.polygon_shapes.RemoveAll();
+	m_controls.m_TAB1.pie_shapes.RemoveAll();
+
+	m_controls.m_TAB1.ShapeList.clear();
+	m_controls.m_TAB1.CircleCList.clear();
+	m_controls.m_TAB1.CircleEList.clear();
+	m_controls.m_TAB1.CirclePList.clear();
+	m_controls.m_TAB1.PolyList.clear();
 }

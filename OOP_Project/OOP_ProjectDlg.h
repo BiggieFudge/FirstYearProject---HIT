@@ -22,24 +22,14 @@ public:
 	~COOPProjectDlg()
 	{
 		
-		int i,j=0;
+		//int i,j=0;
 
 		
 		delete_arr_labels();
 
+		//int index = 0;
 
-		list <Shape*>::iterator it;
-		int index = 0;
-		for(it=m_controls.m_TAB1.ShapeList.begin();it != m_controls.m_TAB1.ShapeList.end();it++){//deleting shape array
-
-			
-			if ((*it)->is_shown == true)
-			{
-
-				delete arr_Btn[(*it)->get_pos_shape_list()];//deleting existing buttons
-			}
-			delete[] * it;
-		}
+		DeleteScreen();
 
 		
 		
@@ -71,6 +61,8 @@ protected:
 	CButton* arr_Btn[5];
 	//end pic
 
+
+	
 	//iterators for shapes
 	list <Shape*> ::iterator shape_it;
 	list <Poligon*> ::iterator poly_it ;
@@ -98,6 +90,12 @@ public:
 	void INFOCircleP(list <Shape*> ::iterator indexS, list <pie*> ::iterator indexP);//shows info about pie
 	void delete_shape(int pos_in_shape);//deleting selected shape
 	void delete_arr_labels();
+	
+	template<typename T>
+	T* list_to_arr(list<T*>);//convert list to arr for serialization
+
+	template<typename T>
+	list<T*> arr_to_list(T*,int);//convert arr to list for de-serialization
 
 	afx_msg void RemoveShape1() { delete_shape(0); }//deleting shape 1
 	afx_msg void RemoveShape2() { delete_shape(1); };//deleting shape 2
@@ -112,4 +110,17 @@ public:
 	
 	afx_msg void OnBnClickedSave();
 	afx_msg void OnBnClickedLoad();
+
+
+	void SaveCircle(CFileDialog&);
+	void LoadCircle(CFileDialog&);
+	void SaveEllipse(CFileDialog&);
+	void LoadEllipse(CFileDialog&);
+	void SavePoli(CFileDialog&);
+	void LoadPoli(CFileDialog&);
+	void SavePie(CFileDialog&);
+	void LoadPie(CFileDialog&);
+
+
+	void DeleteScreen();//delete shape list and buttons
 };

@@ -98,10 +98,10 @@
     <ClCompile Include="Poligon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Ellipse.cpp">
+    <ClCompile Include="Pie.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Pie.cpp">
+    <ClCompile Include="Ellipse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

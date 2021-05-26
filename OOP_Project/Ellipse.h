@@ -8,6 +8,7 @@ public:
 
     ellipse();
     ellipse(POINT p1,POINT p2,POINT* arr_p);
+    ellipse(const ellipse&);
     ~ellipse();
 
     //virtual functions:
@@ -18,6 +19,11 @@ public:
     CRect get_rekt();
     POINT get_lp();
     POINT get_rp();
+
+    void set_rekt(CRect);
+    void set_lp(long,long);
+    void set_rp(long,long);
+
     void Serialize(CArchive& archive);
 private:
     POINT lp;//top left point of rectangle

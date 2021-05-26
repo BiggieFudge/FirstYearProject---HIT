@@ -11,6 +11,20 @@ Circle::Circle()
    RectPoint=NULL;
 }
 
+Circle::Circle(const Circle& c1)
+{
+    center.x = c1.center.x;
+    center.y = c1.center.y;
+    RectPoint = new POINT[2];
+    RectPoint[0].x = c1.RectPoint[0].x;
+    RectPoint[0].y = c1.RectPoint[0].y;
+    RectPoint[1].x = c1.RectPoint[1].x;
+    RectPoint[1].y = c1.RectPoint[1].y;
+    radius = c1.radius;
+    radiusReal = c1.radiusReal;
+}
+
+
 Circle::Circle(POINT p,POINT* p_c,double r)
 {
     //cout << "enter radious of circle:" << endl;
@@ -109,15 +123,16 @@ void Circle::Serialize(CArchive& archive) {
     
     if (archive.IsStoring()) {
         if (RectPoint == NULL) {
-
+            archive << color_index << PositionTypeList << Position_shape_list << NULL << NULL << NULL << NULL << NULL << NULL << NULL;
         }
         else {
-            archive << radius << radiusReal << center << RectPoint[0] << RectPoint[1];
+            archive << color_index << PositionTypeList << Position_shape_list << radius << radiusReal << center << RectPoint[0].x << RectPoint[0].y << RectPoint[1].x << RectPoint[1].y;
         }
     }
 
     else {
-        archive >> radius >> radiusReal >> center >> RectPoint[0] >> RectPoint[1];
+        RectPoint = new POINT[2];
+        archive >> color_index >> PositionTypeList >> Position_shape_list >> radius >> radiusReal >> center >> RectPoint[0].x >> RectPoint[0].y >> RectPoint[1].x >> RectPoint[1].y;
     }
 
 

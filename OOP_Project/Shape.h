@@ -2,28 +2,41 @@
 #include <iostream>
 #include <math.h>
 #include "Point.h"
-
 #include <string.h>
 
 using namespace std;
+
+//making an abstarct class serializable
+
+//#define IMPLEMENT_SERIAL_PURE_BASE(Shape, CObject, wSchema)
+//         CObject* PASCAL Shape::CreateObject() 
+//                 { return nullptr; } 
+//          extern AFX_CLASSINIT _init_Shape; 
+//         _IMPLEMENT_RUNTIMECLASS(Shape, CObject, wSchema, 
+//                 Shape::CreateObject, &_init_Shape) 
+//         AFX_CLASSINIT _init_Shape(RUNTIME_CLASS(Shape)); 
+//         CArchive& AFXAPI operator>>(CArchive& ar, Shape* &pOb) 
+//                 { pOb = (Shape*) ar.ReadObject(RUNTIME_CLASS(Shape));
+//                          return ar; }
+
+
 
 
 
 class Shape: public CObject
 {
-
+        //DECLARE_SERIAL(Shape)
 public:
 
     
 
     //Shape(int x):amount_edge(x) {}
-    Shape() {}
+    Shape() {
+        //position_in_shape = 0;
+    }
     virtual ~Shape() {}
 
-    virtual void Serialize(CArchive& archive){
-
-    
-    }
+    virtual void Serialize(CArchive& archive){}
     virtual double area() = 0;
     virtual double perimeter() = 0;
     //virtual void print() = 0;
@@ -59,7 +72,10 @@ public:
     int get_pos_shape_list() {
         return Position_shape_list;
     }
-   
+    //int get_pos_in_shape()
+    //{
+    //    return position_in_shape;
+    //}
 
 
     
@@ -86,6 +102,7 @@ public:
   
      int PositionTypeList =-1;        //Poistion in the specifiec type of list
      int Position_shape_list = -1;
+     //static int position_in_shape;
      
 private:
 

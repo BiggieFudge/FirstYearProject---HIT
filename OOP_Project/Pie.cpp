@@ -58,12 +58,33 @@ POINT pie::get_end_angle()
 
 void pie::Serialize(CArchive& archive) {
 
-    ellipse::Serialize(archive);
-
+    
     if (archive.IsStoring()) {
-        archive << start_angle << end_angle << Angle_point[0] << Angle_point[1];
+
+        archive << color_index << PositionTypeList << Position_shape_list;//shape class objects
+
+        archive << this->get_lp().x<<this->get_lp().y << this->get_rp().x<< this->get_rp().y <<this->get_rekt().TopLeft().x<<this->get_rekt().TopLeft().y<<this->get_rekt().BottomRight().x<<this->get_rekt().BottomRight().y;
+        
+
+
+        archive << start_angle.x << start_angle.y << end_angle.x << end_angle.y << Angle_point[0].x << Angle_point[0].y << Angle_point[1].x << Angle_point[1].y;
     }
     else {
-        archive >> start_angle >> end_angle >> Angle_point[0] >> Angle_point[1];
+        Angle_point = new POINT[2];
+         archive >> color_index >> PositionTypeList >> Position_shape_list;
+         POINT lp;
+         archive >> lp.x >> lp.y;
+         this->set_lp(lp.x,lp.y);
+
+         POINT rp;
+         archive >> rp.x >> rp.y;
+         this->set_rp(rp.x, rp.y);
+
+         long x1, y1, x2, y2;
+         archive >> x1 >> y1 >> x2>> y2;
+         this->set_rekt(CRect(x1,y1,x2,y2));
+         
+
+         archive >> start_angle.x >> start_angle.y >> end_angle.x >>end_angle.y >> Angle_point[0].x >> Angle_point[0].y >> Angle_point[1].x >> Angle_point[1].y;
     }
 }
