@@ -168,14 +168,14 @@ void CTAB1::delete_circle_textbox()
 			
 	if (CreateCircleE == 1) {
 		delete[] EllipseTextBox;
-
+		delete[] EllipseTextBoxLabels;
 	}
 
 			
 
 	if (CreateCircleP == 1) {
 		delete[] PieTextBox;
-
+		delete[] PieTextBoxLabels;
 	}
 
 			
@@ -351,37 +351,64 @@ void CTAB1::hide_Circle_C()
 
 void CTAB1::Create_Circle_E()
 {
-	//input x textbox
+	
 	EllipseTextBox = new CEdit[4];
+	EllipseTextBoxLabels = new CStatic[6];
+
+	EllipseTextBoxLabels[0].Create(_T("Enter Left Bottom:"), WS_CHILD | WS_VISIBLE,
+		CRect(17, 160, 200, 190), this);
+
+	EllipseTextBoxLabels[1].Create(_T("x:"), WS_CHILD | WS_VISIBLE,
+		CRect(17, 180, 30, 200), this);
+
 	EllipseTextBox[0].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
-		CRect(25, 180, 45, 200), this, 8888);
-	//input y textbox
-
+		CRect(30, 180, 55, 200), this, 8888);
+	
+	EllipseTextBoxLabels[2].Create(_T("y:"), WS_CHILD | WS_VISIBLE,
+		CRect(57, 180, 70, 200), this);
 	EllipseTextBox[1].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
-		CRect(70, 180, 90, 200), this, 8888);
-	//input radious textbox
+		CRect(70, 180, 95, 200), this, 8888);
+	
 
+	EllipseTextBoxLabels[3].Create(_T("Enter Right Top:"), WS_CHILD | WS_VISIBLE,
+		CRect(17, 210, 200, 240), this);
+	EllipseTextBoxLabels[4].Create(_T("x:"), WS_CHILD | WS_VISIBLE,
+		CRect(17, 230, 30, 250), this);
 	EllipseTextBox[2].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
-		CRect(135, 180, 155, 200), this, 8888);
-
+		CRect(30, 230, 55, 250), this, 8888);
+	EllipseTextBoxLabels[5].Create(_T("y:"), WS_CHILD | WS_VISIBLE,
+		CRect(57, 230, 70, 250), this);
 	EllipseTextBox[3].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
-		CRect(180, 180, 200, 200), this, 8888);
+		CRect(70, 230, 95, 250), this, 8888);
 }
 
 void CTAB1::show_Circle_E()
 {
 	GetDlgItem(IDC_Bottom_Group)->ShowWindow(SW_SHOW);
 	if (CreateCircleE == 0) { Create_Circle_E(); CreateCircleE = 1; }
-	else
-		for(int i=0; i<4; i++)
+	else {
+		int i;
+		for ( i= 0; i < 4; i++) {
 			EllipseTextBox[i].ShowWindow(SW_SHOW);
+			EllipseTextBoxLabels[i].ShowWindow(SW_SHOW);
+		}
+		for (; i < 6; i++) {
+			EllipseTextBoxLabels[i].ShowWindow(SW_SHOW);
+		}
+	}
 }
 
 void CTAB1::hide_Circle_E()
 {
 	if (CreateCircleE == 1) {
-		for(int i=0; i<4; i++)
+		int i;
+		for ( i= 0; i < 4; i++) {
 			EllipseTextBox[i].ShowWindow(SW_HIDE);
+			EllipseTextBoxLabels[i].ShowWindow(SW_HIDE);
+		}
+		for (; i < 6; i++) {
+			EllipseTextBoxLabels[i].ShowWindow(SW_HIDE);
+		}
 	}
 }
 

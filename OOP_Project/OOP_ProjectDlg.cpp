@@ -618,15 +618,19 @@ void COOPProjectDlg::delete_shape(int pos_in_shape)//deletes selected shape
 
 	string type = (*S_it)->type();//checking type of shape
 	int color_index = (*S_it)->color_index;//get color index before deleting shape
+	
 	if (type == "Polygon") {
 		list <Poligon*> ::iterator P_it = m_controls.m_TAB1.PolyList.begin();
+		
+		
 		advance(P_it, position_delete);
+		POSITION pos = m_controls.m_TAB1.polygon_shapes.Find((*P_it));
+		m_controls.m_TAB1.polygon_shapes.RemoveAt(pos);
+		
 		
 		delete[] (*P_it);
  
 		m_controls.m_TAB1.PolyList.erase(P_it);
-
-		
 
 		m_controls.m_TAB1.CurrentPose_poly--;
 		
@@ -636,6 +640,9 @@ void COOPProjectDlg::delete_shape(int pos_in_shape)//deletes selected shape
 		list <Circle*> ::iterator C_it = m_controls.m_TAB1.CircleCList.begin();
 		advance(C_it, position_delete);
 		
+		POSITION pos = m_controls.m_TAB1.circle_shapes.Find((*C_it));
+		m_controls.m_TAB1.circle_shapes.RemoveAt(pos);
+
 		delete[](*C_it);
 
 		m_controls.m_TAB1.CircleCList.erase(C_it);
@@ -652,6 +659,9 @@ void COOPProjectDlg::delete_shape(int pos_in_shape)//deletes selected shape
 		list <pie*> ::iterator pie_it  = m_controls.m_TAB1.CirclePList.begin();
 		advance(pie_it, position_delete);
 		
+		POSITION pos = m_controls.m_TAB1.pie_shapes.Find((*pie_it));
+		m_controls.m_TAB1.pie_shapes.RemoveAt(pos);
+
 		delete[](*pie_it);
 		m_controls.m_TAB1.CirclePList.erase(pie_it);
 
@@ -666,9 +676,12 @@ void COOPProjectDlg::delete_shape(int pos_in_shape)//deletes selected shape
 
 		list <ellipse*> ::iterator e_it = m_controls.m_TAB1.CircleEList.begin();
 		
-		
-		
 		advance(e_it, position_delete);
+
+		POSITION pos = m_controls.m_TAB1.ellipse_shapes.Find((*e_it));
+		m_controls.m_TAB1.ellipse_shapes.RemoveAt(pos);
+
+
 		delete[](*e_it);
 		m_controls.m_TAB1.CircleEList.erase(e_it);
 		
@@ -753,37 +766,7 @@ void COOPProjectDlg::OnBnClickedLoad()
 		LoadPie(fDialog);
 
 
-		//CString filename = fDialog.GetPathName();
-
-
-		//CFile file(filename, CFile::modeRead);
-		//
-		//CArchive ar(&file, CArchive::load);
-		//
-		//m_controls.m_TAB1.ShapeList.empty();
-	
-	
-
-		//
-	
-		//m_controls.m_TAB1.circle_shapes.Serialize(ar);
-		//
-
-		//
-
-
-		////circle
-		//POSITION pos = m_controls.m_TAB1.circle_shapes.GetHeadPosition();
-		//while (pos != NULL) {
-		//	m_controls.m_TAB1.CircleCList.push_back(m_controls.m_TAB1.circle_shapes.GetNext(pos));
-		//}
-		//
-		//
-		//for (circle_it = m_controls.m_TAB1.CircleCList.begin();
-		//	 circle_it != m_controls.m_TAB1.CircleCList.end();circle_it++) {
-
-		//	m_controls.m_TAB1.ShapeList.push_back((*circle_it));
-		//}
+		
 		
 		circle_it = m_controls.m_TAB1.CircleCList.begin();
 		ellipse_it= m_controls.m_TAB1.CircleEList.begin();

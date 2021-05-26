@@ -22,12 +22,10 @@ public:
 	~COOPProjectDlg()
 	{
 		
-		//int i,j=0;
+	
 
 		
 		delete_arr_labels();
-
-		//int index = 0;
 
 		DeleteScreen();
 
