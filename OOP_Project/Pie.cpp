@@ -31,11 +31,19 @@ double pie::area()
    
     double centerx = (get_rp().x/10 + get_lp().x/10) / 2;
     double centery = (get_rp().y/10 + get_lp().y/10) /2;
-    double angle1 = abs(atan2(start_angle.x - centerx, start_angle.y - centery) * 180 / PI);
-    double angle2 = abs((atan2(centerx-end_angle.x, centery- end_angle.y) * 180 / PI));
-    double angle = 180 - (angle1 + angle2);
-    
-    
+
+   
+    double b = sqrt(abs(pow((centerx - end_angle.x / 10), 2) + pow((centery - end_angle.y / 10), 2)));
+    double c = sqrt(abs(pow((start_angle.x / 10 - centerx), 2) + pow((start_angle.y / 10 - centery), 2)));
+
+    double angle = acos(((start_angle.x* end_angle.x)+(start_angle.y * end_angle.y)) /(b*c)) * 180 / PI;
+    if (isnan(angle)) {
+        angle = 180;
+    }
+    else if ((start_angle.x>= end_angle.x)&&(start_angle.y <= end_angle.y)) {
+        angle = 360- angle;
+    }
+
     double area = ellipse::area()-( (angle)/360 * ellipse::area());
     return(area);
 }
