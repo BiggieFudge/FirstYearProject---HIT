@@ -67,6 +67,7 @@ BOOL CONTROLS::OnInitDialog()
 
 CONTROLS::CONTROLS(CWnd* pParent /*=nullptr*/): CDialogEx(IDD_CONTROLS, pParent)
 {
+  
 }
 
 CONTROLS::~CONTROLS()

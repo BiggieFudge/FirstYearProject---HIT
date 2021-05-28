@@ -27,8 +27,13 @@ void CTAB2::DoDataExchange(CDataExchange* pDX)
 }
 
 
+
+
 BEGIN_MESSAGE_MAP(CTAB2, CDialogEx)
+	//ON_CBN_SELCHANGE(IDC_ShapeCB, &CTAB2::OnCbnSelchangeShapecb)
 END_MESSAGE_MAP()
 
 
 // CTAB2 message handlers
+
+

@@ -5,8 +5,8 @@
 #pragma once
 #include "Shape.h"
 #include "CONTROLS.h"
-
-
+#include "EDIT.h"
+#include <string.h>
 
 
 #define SquareSide 40//constant grid length
@@ -56,7 +56,12 @@ protected:
 
 	//Pic test
 	HICON RemoveIcon = (HICON)LoadImage(AfxGetApp()->m_hInstance, MAKEINTRESOURCE(IDI_ICON2), IMAGE_ICON, 32, 32, 0);
+	HICON EditIcon = (HICON)LoadImage(AfxGetApp()->m_hInstance, MAKEINTRESOURCE(IDI_ICON3), IMAGE_ICON, 32, 32, 0);
+	
+	
 	CButton* arr_Btn[5];
+
+	CButton* arr_EditBtn[5];
 	//end pic
 
 
@@ -88,18 +93,24 @@ public:
 	void INFOCircleP(list <Shape*> ::iterator indexS, list <pie*> ::iterator indexP);//shows info about pie
 	void delete_shape(int pos_in_shape);//deleting selected shape
 	void delete_arr_labels();
+	void edit_func(int);//edit selected shape
+	void delete_buttons();
 	
-	template<typename T>
-	T* list_to_arr(list<T*>);//convert list to arr for serialization
-
-	template<typename T>
-	list<T*> arr_to_list(T*,int);//convert arr to list for de-serialization
 
 	afx_msg void RemoveShape1() { delete_shape(0); }//deleting shape 1
 	afx_msg void RemoveShape2() { delete_shape(1); };//deleting shape 2
 	afx_msg void RemoveShape3() { delete_shape(2); };//deleting shape 3
 	afx_msg void RemoveShape4() { delete_shape(3); };//deleting shape 4
 	afx_msg void RemoveShape5() { delete_shape(4); };//deleting shape 5
+
+	afx_msg void EditShape1() { edit_func(1); }//editing shape 1
+	afx_msg void EditShape2() { edit_func(2); }//editing shape 2
+	afx_msg void EditShape3() { edit_func(3); }//editing shape 3
+	afx_msg void EditShape4() { edit_func(4); }//editing shape 4
+	afx_msg void EditShape5() { edit_func(5); }//editing shape 5
+
+	
+
 
 
 	
@@ -119,6 +130,6 @@ public:
 	void SavePie(CFileDialog&);
 	void LoadPie(CFileDialog&);
 
-
+	
 	void DeleteScreen();//delete shape list and buttons
 };

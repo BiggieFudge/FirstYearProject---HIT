@@ -544,7 +544,7 @@ void CTAB1::OnBnClickedSend() {
 		if (InputItegrity()) {
 			UpdateData(TRUE);
 
-			CWnd* Main = GetParent()->GetParent()->GetParent();  //Get main window functions
+			
 
 			CString str;
 
@@ -586,7 +586,7 @@ void CTAB1::OnBnClickedSend() {
 				delete[] On_Screen;
 
 
-				Main->RedrawWindow();      //Go to main window and redraw with new shape;
+				
 
 
 
@@ -637,7 +637,7 @@ void CTAB1::OnBnClickedSend() {
 
 					delete[] p2;
 
-					Main->RedrawWindow();      //Go to main window and redraw with new shape;
+					
 
 
 
@@ -696,7 +696,7 @@ void CTAB1::OnBnClickedSend() {
 
 					
 
-					Main->RedrawWindow();      //Go to main window and redraw with new shape;
+					
 
 
 
@@ -766,7 +766,7 @@ void CTAB1::OnBnClickedSend() {
 
 					pie* e1 = new pie(p1, p3, p2, p5, p6, p4);
 
-					//e1->position_in_shape++;
+					
 
 					e1->set_pos_type_list(CurrentPose_circle_p);
 					e1->set_pos_shape_list(CurrentPose_shape);
@@ -785,7 +785,7 @@ void CTAB1::OnBnClickedSend() {
 					delete[] p2;
 					delete[] p4;
 
-					Main->RedrawWindow();      //Go to main window and redraw with new shape;
+					
 
 
 
@@ -794,7 +794,11 @@ void CTAB1::OnBnClickedSend() {
 				UpdateData(FALSE);
 			}
 		}
+		CWnd* Main = GetParent()->GetParent()->GetParent();  //Get main window functions
+		Main->RedrawWindow();      //Go to main window and redraw with new shape;
 	}
+
+
 	else
 	{
 		MessageBox(_T("You enter too much shape \n FUCK YOU"), _T("ERROR"), MB_OK);
@@ -890,3 +894,4 @@ void CTAB1::CleanInput() {//clean all the input
 		}
 	}
 	}
+

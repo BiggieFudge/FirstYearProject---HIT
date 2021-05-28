@@ -63,6 +63,9 @@
     <ClInclude Include="Pie.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="EDIT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OOP_Project.cpp">
@@ -104,6 +107,9 @@
     <ClCompile Include="Ellipse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="EDIT.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="OOPProject.rc">
@@ -123,6 +129,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="res\trash_bin_icon-icons.com_67981(1).ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="C:\Users\Eytan\Downloads\pencil-striped-symbol-for-interface-edit-buttons_icon-icons.com_56782.ico">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

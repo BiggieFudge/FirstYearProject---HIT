@@ -25,7 +25,7 @@ public:
 #endif
 
 protected:
-
+	
 	virtual BOOL OnInitDialog();
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 
@@ -34,6 +34,7 @@ protected:
 
 public:
 
+	
 
 	CTypedPtrList<CObList, Circle*> circle_shapes;
 	CTypedPtrList<CObList, Poligon*> polygon_shapes;
@@ -46,6 +47,7 @@ public:
 	list<Circle*> CircleCList;
 	list<ellipse*> CircleEList;
 	list<pie*> CirclePList;
+	
 
 	int CurrentPose_shape = 0;//amount of shapes right now
 	int CurrentPose_poly = 0;//amount of polygons right now

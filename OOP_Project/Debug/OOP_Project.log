@@ -1,36 +1,40 @@
-﻿  CTAB1.cpp
-D:\OOP_Project\OOP_Project\CTAB1.cpp(565,34): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(566,34): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(567,53): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(568,53): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(610,25): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(611,56): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(612,56): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(615,25): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(616,56): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(617,56): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(658,25): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(659,50): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(663,25): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(664,50): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(670,25): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(671,50): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(675,25): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(676,50): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(723,25): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(724,50): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(728,25): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(729,50): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(735,25): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(736,50): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(740,25): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(741,50): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(747,25): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(748,50): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(752,25): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(753,50): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(758,25): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(759,50): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(763,25): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\CTAB1.cpp(764,50): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+﻿  EDIT.cpp
+D:\OOP_Project\OOP_Project\EDIT.cpp(254,33): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\EDIT.cpp(255,33): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\EDIT.cpp(256,52): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\EDIT.cpp(257,52): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\EDIT.cpp(281,23): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\EDIT.cpp(282,54): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\EDIT.cpp(283,54): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\EDIT.cpp(286,23): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\EDIT.cpp(287,54): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\EDIT.cpp(288,54): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\EDIT.cpp(314,23): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\EDIT.cpp(315,48): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\EDIT.cpp(319,23): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\EDIT.cpp(320,48): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\EDIT.cpp(326,23): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\EDIT.cpp(327,48): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\EDIT.cpp(331,23): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\EDIT.cpp(332,48): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\EDIT.cpp(338,23): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\EDIT.cpp(339,48): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\EDIT.cpp(343,23): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\EDIT.cpp(344,48): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\EDIT.cpp(349,23): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\EDIT.cpp(350,48): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\EDIT.cpp(354,23): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\EDIT.cpp(355,48): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\EDIT.cpp(373,23): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\EDIT.cpp(374,48): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\EDIT.cpp(378,23): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\EDIT.cpp(379,48): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\EDIT.cpp(385,23): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\EDIT.cpp(386,48): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\EDIT.cpp(390,23): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\EDIT.cpp(391,48): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+D:\OOP_Project\OOP_Project\EDIT.cpp(421): warning C4715: 'EDIT::PolyInputItegrity': not all control paths return a value
+D:\OOP_Project\OOP_Project\EDIT.cpp(447): warning C4715: 'EDIT::EllInputItegrity': not all control paths return a value
+D:\OOP_Project\OOP_Project\EDIT.cpp(434): warning C4715: 'EDIT::CirInputItegrity': not all control paths return a value
+D:\OOP_Project\OOP_Project\EDIT.cpp(461): warning C4715: 'EDIT::PieInputItegrity': not all control paths return a value
   OOP_Project.vcxproj -> D:\OOP_Project\Debug\OOP_Project.exe

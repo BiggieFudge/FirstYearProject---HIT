@@ -15,6 +15,8 @@
 #define IDI_ICON1                       141
 #define IDB_PNG1                        156
 #define IDI_ICON2                       158
+#define IDD_EDIT                        159
+#define IDI_ICON3                       161
 #define IDC_BUTTON1                     1000
 #define IDC_TAB                         1002
 #define IDC_Polygon                     1004
@@ -37,14 +39,18 @@
 #define IDC_Remove_Btn1                 1027
 #define IDC_LOAD                        1028
 #define IDC_SAVE                        1029
+#define IDC_TOP                         1030
+#define IDC_Bottom                      1031
+#define IDC_Update                      1032
+#define IDC_ShapeCB                     1033
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        159
+#define _APS_NEXT_RESOURCE_VALUE        162
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1030
+#define _APS_NEXT_CONTROL_VALUE         1037
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

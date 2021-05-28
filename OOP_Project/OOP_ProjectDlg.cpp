@@ -19,6 +19,12 @@
 #define RemoveBtn4 72
 #define RemoveBtn5 73
 
+#define EditBtn1 74
+#define EditBtn2 75
+#define EditBtn3 76
+#define EditBtn4 77
+#define EditBtn5 78
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -92,6 +98,13 @@ BEGIN_MESSAGE_MAP(COOPProjectDlg, CDialogEx)
 	ON_BN_CLICKED(RemoveBtn4, &COOPProjectDlg::RemoveShape4)
 	ON_BN_CLICKED(RemoveBtn5, &COOPProjectDlg::RemoveShape5)
 
+	ON_BN_CLICKED(EditBtn1, &COOPProjectDlg::EditShape1)
+	ON_BN_CLICKED(EditBtn2, &COOPProjectDlg::EditShape2)
+	ON_BN_CLICKED(EditBtn3, &COOPProjectDlg::EditShape3)
+	ON_BN_CLICKED(EditBtn4, &COOPProjectDlg::EditShape4)
+	ON_BN_CLICKED(EditBtn5, &COOPProjectDlg::EditShape5)
+
+
 	ON_BN_CLICKED(IDC_SAVE, &COOPProjectDlg::OnBnClickedSave)
 	ON_BN_CLICKED(IDC_LOAD, &COOPProjectDlg::OnBnClickedLoad)
 END_MESSAGE_MAP()
@@ -132,12 +145,12 @@ BOOL COOPProjectDlg::OnInitDialog()
 	CRect rect;
 	GetClientRect(&rect);
 
-
-
 	
 
+	
+	
 	m_controls.Create(IDD_CONTROLS, this);  //Create CONTROL DIALOG
-
+	
 
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
@@ -399,9 +412,14 @@ void COOPProjectDlg::INFOPoly(list <Shape*> ::iterator indexS, list <Poligon*> :
 		//pic test
 
 		arr_Btn[(*indexS)->get_pos_shape_list()] = new CButton;
-		arr_Btn[(*indexS)->get_pos_shape_list()]->Create(_T(""), WS_CHILD | WS_VISIBLE | BS_ICON | WM_CTLCOLORBTN, CRect(1202, 90 + (*indexS)->get_pos_shape_list() * 100, 1234, 122 + (*indexS)->get_pos_shape_list() * 100), this, RemoveBtn1 + (*indexS)->get_pos_shape_list());
+		arr_Btn[(*indexS)->get_pos_shape_list()]->Create(_T(""), WS_CHILD | WS_VISIBLE | BS_ICON , CRect(1202, 90 + (*indexS)->get_pos_shape_list() * 100, 1234, 122 + (*indexS)->get_pos_shape_list() * 100), this, RemoveBtn1 + (*indexS)->get_pos_shape_list());
 		arr_Btn[(*indexS)->get_pos_shape_list()]->SetIcon(RemoveIcon);
-		//end pic test
+
+
+		arr_EditBtn[(*indexS)->get_pos_shape_list()] = new CButton; 
+		arr_EditBtn[(*indexS)->get_pos_shape_list()]->Create(_T(""), WS_CHILD | WS_VISIBLE | BS_ICON , CRect(1202, 58 + (*indexS)->get_pos_shape_list() * 100, 1234, 90 + (*indexS)->get_pos_shape_list() * 100), this, EditBtn1 + (*indexS)->get_pos_shape_list());
+		arr_EditBtn[(*indexS)->get_pos_shape_list()]->SetIcon(EditIcon);
+		
 
 		(*indexS)->set_is_shown(TRUE);
 	}
@@ -448,9 +466,12 @@ void COOPProjectDlg::INFOCircleC(list <Shape*> ::iterator indexS, list <Circle*>
 
 
 		arr_Btn[(*indexS)->get_pos_shape_list()] = new CButton;
-		arr_Btn[(*indexS)->get_pos_shape_list()]->Create(_T("Del."), WS_CHILD | WS_VISIBLE | BS_ICON | WM_CTLCOLORBTN, CRect(1202, 90 + (*indexS)->get_pos_shape_list() * 100, 1234, 122 + (*indexS)->get_pos_shape_list() * 100), this, RemoveBtn1 + (*indexS)->get_pos_shape_list());
+		arr_Btn[(*indexS)->get_pos_shape_list()]->Create(_T("Del."), WS_CHILD | WS_VISIBLE | BS_ICON , CRect(1202, 90 + (*indexS)->get_pos_shape_list() * 100, 1234, 122 + (*indexS)->get_pos_shape_list() * 100), this, RemoveBtn1 + (*indexS)->get_pos_shape_list());
 		arr_Btn[(*indexS)->get_pos_shape_list()]->SetIcon(RemoveIcon);
 
+		arr_EditBtn[(*indexS)->get_pos_shape_list()] = new CButton; 
+		arr_EditBtn[(*indexS)->get_pos_shape_list()]->Create(_T(""), WS_CHILD | WS_VISIBLE | BS_ICON, CRect(1202, 58 + (*indexS)->get_pos_shape_list() * 100, 1234, 90 + (*indexS)->get_pos_shape_list() * 100), this, EditBtn1 + (*indexS)->get_pos_shape_list());
+		arr_EditBtn[(*indexS)->get_pos_shape_list()]->SetIcon(EditIcon);
 
 		(*indexS)->set_is_shown(TRUE);
 	}
@@ -508,10 +529,12 @@ void COOPProjectDlg::INFOCircleE(list <Shape*> ::iterator indexS, list <ellipse*
 
 
 		arr_Btn[(*indexS)->get_pos_shape_list()] = new CButton;
-		arr_Btn[(*indexS)->get_pos_shape_list()]->Create(_T("Del."), WS_CHILD | WS_VISIBLE | BS_ICON | WM_CTLCOLORBTN, CRect(1202, 90 + (*indexS)->get_pos_shape_list() * 100, 1234, 122 + (*indexS)->get_pos_shape_list() * 100), this, RemoveBtn1 + (*indexS)->get_pos_shape_list());
+		arr_Btn[(*indexS)->get_pos_shape_list()]->Create(_T("Del."), WS_CHILD | WS_VISIBLE | BS_ICON , CRect(1202, 90 + (*indexS)->get_pos_shape_list() * 100, 1234, 122 + (*indexS)->get_pos_shape_list() * 100), this, RemoveBtn1 + (*indexS)->get_pos_shape_list());
 		arr_Btn[(*indexS)->get_pos_shape_list()]->SetIcon(RemoveIcon);
 
-
+		arr_EditBtn[(*indexS)->get_pos_shape_list()] = new CButton; 
+		arr_EditBtn[(*indexS)->get_pos_shape_list()]->Create(_T(""), WS_CHILD | WS_VISIBLE | BS_ICON, CRect(1202, 58 + (*indexS)->get_pos_shape_list() * 100, 1234, 90 + (*indexS)->get_pos_shape_list() * 100), this, EditBtn1 + (*indexS)->get_pos_shape_list());
+		arr_EditBtn[(*indexS)->get_pos_shape_list()]->SetIcon(EditIcon);
 
 		(*indexS)->set_is_shown(TRUE);
 	}
@@ -561,9 +584,12 @@ void COOPProjectDlg::INFOCircleP(list <Shape*> ::iterator indexS, list <pie*> ::
 		arr_labels[(*indexS)->get_pos_shape_list()][4]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(875, 100 + (*indexS)->get_pos_shape_list() * 100, 1200, 120 + (*indexS)->get_pos_shape_list() * 100), this);
 
 		arr_Btn[(*indexS)->get_pos_shape_list()] = new CButton;
-		arr_Btn[(*indexS)->get_pos_shape_list()]->Create(_T("Del."), WS_CHILD | WS_VISIBLE | BS_ICON | WM_CTLCOLORBTN, CRect(1202, 90 + (*indexS)->get_pos_shape_list() * 100, 1234, 122 + (*indexS)->get_pos_shape_list() * 100), this, RemoveBtn1 + (*indexS)->get_pos_shape_list());
+		arr_Btn[(*indexS)->get_pos_shape_list()]->Create(_T("Del."), WS_CHILD | WS_VISIBLE | BS_ICON , CRect(1202, 90 + (*indexS)->get_pos_shape_list() * 100, 1234, 122 + (*indexS)->get_pos_shape_list() * 100), this, RemoveBtn1 + (*indexS)->get_pos_shape_list());
 		arr_Btn[(*indexS)->get_pos_shape_list()]->SetIcon(RemoveIcon);
 
+		arr_EditBtn[(*indexS)->get_pos_shape_list()] = new CButton; 
+		arr_EditBtn[(*indexS)->get_pos_shape_list()]->Create(_T(""), WS_CHILD | WS_VISIBLE | BS_ICON, CRect(1202, 58 + (*indexS)->get_pos_shape_list() * 100, 1234, 90 + (*indexS)->get_pos_shape_list() * 100), this, EditBtn1 + (*indexS)->get_pos_shape_list());
+		arr_EditBtn[(*indexS)->get_pos_shape_list()]->SetIcon(EditIcon);
 
 		(*indexS)->set_is_shown(TRUE);
 	}
@@ -588,26 +614,13 @@ HBRUSH COOPProjectDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)  //Set B
 
 void COOPProjectDlg::delete_shape(int pos_in_shape)//deletes selected shape
 {
-	int i=0;
-
-	delete_arr_labels();
-
 	
-
-
-	list <Shape*> ::iterator S_it;
-	//deleting buttons
-	for (S_it = m_controls.m_TAB1.ShapeList.begin(); S_it!= m_controls.m_TAB1.ShapeList.end();  S_it++,i++) {
-		delete arr_Btn[i];
-		(*S_it)->set_is_shown(false);
-		
-	}
-	S_it = m_controls.m_TAB1.ShapeList.begin();
-	advance(S_it, pos_in_shape);
 	
-
-
-
+    list <Shape*> ::iterator S_it;
+	
+    delete_buttons();
+    S_it = m_controls.m_TAB1.ShapeList.begin();
+    advance(S_it, pos_in_shape);
 
 	int position_delete;     //getting the position in the specifiec 'type of shape' list that we want to delete
 	
@@ -772,35 +785,42 @@ void COOPProjectDlg::OnBnClickedLoad()
 		ellipse_it= m_controls.m_TAB1.CircleEList.begin();
 		pie_it= m_controls.m_TAB1.CirclePList.begin();
 		poly_it=m_controls.m_TAB1.PolyList.begin();
-
+		
 		int index = 0;
 		for( ; circle_it !=m_controls.m_TAB1.CircleCList.end() ||
 			ellipse_it!= m_controls.m_TAB1.CircleEList.end() || 
 			pie_it!= m_controls.m_TAB1.CirclePList.end() || 
 			poly_it!= m_controls.m_TAB1.PolyList.end();){
-			
+
 			if (circle_it != m_controls.m_TAB1.CircleCList.end() &&(m_controls.m_TAB1.CircleCList.size()>0) &&(*circle_it)->get_pos_shape_list() == index) {
 			 m_controls.m_TAB1.ShapeList.push_back((*circle_it));
-			 index++;
+			 
+			
 			 circle_it++;
 
 			}
 			else if (ellipse_it!= m_controls.m_TAB1.CircleEList.end() && (m_controls.m_TAB1.CircleEList.size()>0)&&(*ellipse_it)->get_pos_shape_list() == index) {
 				m_controls.m_TAB1.ShapeList.push_back((*ellipse_it));
-				index++;
+				
 				ellipse_it++;
 			}
 			else if (pie_it!=m_controls.m_TAB1.CirclePList.end()&&(m_controls.m_TAB1.CirclePList.size()>0)&&(*pie_it)->get_pos_shape_list() == index) {
 				m_controls.m_TAB1.ShapeList.push_back((*pie_it));
-				index++;
+			
 				pie_it++;
 			}
 			else if(poly_it!= m_controls.m_TAB1.PolyList.end() && (m_controls.m_TAB1.PolyList.size()>0) && (*poly_it)->get_pos_shape_list() == index)
 			{
 				m_controls.m_TAB1.ShapeList.push_back((*poly_it));
-				index++;
+				
 				poly_it++;
 			}
+
+			
+			shape_it = m_controls.m_TAB1.ShapeList.begin(); advance(shape_it, index);
+			arr_check_color[(*shape_it)->get_color()] = true;        //Set the color as taken
+			//shape_it++;
+			index++;
 		}
 
 		
@@ -1090,3 +1110,166 @@ void COOPProjectDlg::DeleteScreen()
 	m_controls.m_TAB1.CirclePList.clear();
 	m_controls.m_TAB1.PolyList.clear();
 }
+
+
+void COOPProjectDlg::edit_func(int position)
+{
+  
+
+  
+
+   shape_it = m_controls.m_TAB1.ShapeList.begin();
+   advance(shape_it, position - 1);
+   int amount = -1;
+
+   
+   if ((*shape_it)->type() == "Polygon") {
+	   poly_it = m_controls.m_TAB1.PolyList.begin();
+	   advance(poly_it, (*shape_it)->get_pos_type_list());
+	   amount = (*poly_it)->get_amount_edge();
+		
+   }
+   else if ((*shape_it)->type() == "CircleC") {
+	   circle_it = m_controls.m_TAB1.CircleCList.begin();
+	   advance(circle_it, (*shape_it)->get_pos_type_list());
+	   amount = 3;
+
+   }
+   else if ((*shape_it)->type() == "CircleE") {
+
+	   ellipse_it = m_controls.m_TAB1.CircleEList.begin();
+	   advance(ellipse_it, (*shape_it)->get_pos_type_list());
+	   amount = 4;
+   }
+
+   else {
+	   pie_it = m_controls.m_TAB1.CirclePList.begin();
+	   advance(pie_it, (*shape_it)->get_pos_type_list());
+	   amount = 8;
+   }
+
+   
+   EDIT* m_edit = new EDIT(amount,(*shape_it)->type(),this);
+  
+   
+   if (m_edit->DoModal() == IDOK) {
+	   
+
+	   if ((*shape_it)->type() == "Polygon") {
+	        //shape functions
+			m_edit->poly_ptr->set_pos_type_list((*shape_it)->get_pos_type_list());
+			m_edit->poly_ptr->set_pos_shape_list((*shape_it)->get_pos_type_list());
+			m_edit->poly_ptr->set_color((*shape_it)->get_color());
+
+
+			POSITION pos = m_controls.m_TAB1.polygon_shapes.Find((*poly_it));
+			m_controls.m_TAB1.polygon_shapes.InsertBefore(pos, m_edit->poly_ptr);
+			m_controls.m_TAB1.polygon_shapes.RemoveAt(pos);  //remove old item from weird list
+			
+			
+			
+
+			
+			m_controls.m_TAB1.ShapeList.insert(shape_it, m_edit->poly_ptr);
+			m_controls.m_TAB1.ShapeList.remove((*shape_it));      // remove old shape
+			m_controls.m_TAB1.PolyList.insert(poly_it, m_edit->poly_ptr); 
+			m_controls.m_TAB1.PolyList.remove((*poly_it));       // remove old shape from poly list
+			
+			
+	   }
+
+	   else if ((*shape_it)->type() == "CircleC") {
+	   
+
+		   m_edit->circle_ptr->set_pos_type_list((*shape_it)->get_pos_type_list());
+		   m_edit->circle_ptr->set_pos_shape_list((*shape_it)->get_pos_type_list());
+		   m_edit->circle_ptr->set_color((*shape_it)->get_color());
+
+
+		   POSITION pos = m_controls.m_TAB1.circle_shapes.Find((*circle_it));
+		   m_controls.m_TAB1.circle_shapes.InsertBefore(pos, m_edit->circle_ptr);
+		   m_controls.m_TAB1.circle_shapes.RemoveAt(pos);  //remove old item from weird list
+
+
+
+
+
+		   m_controls.m_TAB1.ShapeList.insert(shape_it, m_edit->circle_ptr);
+		   m_controls.m_TAB1.ShapeList.remove((*shape_it));      // remove old shape
+		   m_controls.m_TAB1.CircleCList.insert(circle_it, m_edit->circle_ptr);
+		   m_controls.m_TAB1.CircleCList.remove((*circle_it));       // remove old shape from poly list
+	   
+	   }
+	   else if ((*shape_it)->type() == "CircleE") {
+
+		   m_edit->ellipse_ptr->set_pos_type_list((*shape_it)->get_pos_type_list());
+		   m_edit->ellipse_ptr->set_pos_shape_list((*shape_it)->get_pos_type_list());
+		   m_edit->ellipse_ptr->set_color((*shape_it)->get_color());
+
+
+		   POSITION pos = m_controls.m_TAB1.ellipse_shapes.Find((*ellipse_it));
+		   m_controls.m_TAB1.ellipse_shapes.InsertBefore(pos, m_edit->ellipse_ptr);
+		   m_controls.m_TAB1.ellipse_shapes.RemoveAt(pos);  //remove old item from weird list
+
+
+
+
+
+		   m_controls.m_TAB1.ShapeList.insert(shape_it, m_edit->ellipse_ptr);
+		   m_controls.m_TAB1.ShapeList.remove((*shape_it));      // remove old shape
+		   m_controls.m_TAB1.CircleEList.insert(ellipse_it, m_edit->ellipse_ptr);
+		   m_controls.m_TAB1.CircleEList.remove((*ellipse_it));       // remove old shape from poly list
+	   }
+
+	   else {
+
+		   m_edit->pie_ptr->set_pos_type_list((*shape_it)->get_pos_type_list());
+		   m_edit->pie_ptr->set_pos_shape_list((*shape_it)->get_pos_type_list());
+		   m_edit->pie_ptr->set_color((*shape_it)->get_color());
+
+
+		   POSITION pos = m_controls.m_TAB1.pie_shapes.Find((*pie_it));
+		   m_controls.m_TAB1.pie_shapes.InsertBefore(pos, m_edit->pie_ptr);
+		   m_controls.m_TAB1.pie_shapes.RemoveAt(pos);  //remove old item from weird list
+
+
+
+
+
+		   m_controls.m_TAB1.ShapeList.insert(shape_it, m_edit->pie_ptr);
+		   m_controls.m_TAB1.ShapeList.remove((*shape_it));      // remove old shape
+		   m_controls.m_TAB1.CirclePList.insert(pie_it, m_edit->pie_ptr);
+		   m_controls.m_TAB1.CirclePList.remove((*pie_it));       // remove old shape from pie list
+	   }
+
+
+
+
+
+	   delete_buttons();
+
+
+	   RedrawWindow();
+   }
+
+   
+   delete m_edit;
+}
+
+void COOPProjectDlg::delete_buttons()
+{
+
+     list <Shape*> ::iterator S_it;
+	   //deleting buttons
+	   delete_arr_labels();
+	   int i = 0;
+	   for (S_it = m_controls.m_TAB1.ShapeList.begin(); S_it != m_controls.m_TAB1.ShapeList.end(); S_it++, i++) {
+		   delete arr_Btn[i];
+		   delete arr_EditBtn[i];
+
+		   (*S_it)->set_is_shown(false);
+
+	   }
+	   
+}
+
