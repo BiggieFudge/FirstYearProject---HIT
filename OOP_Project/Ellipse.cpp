@@ -34,6 +34,8 @@ ellipse::~ellipse()
 
 double ellipse::area()
 {
+    radius1 = (double)(abs(rp.y - lp.y) / 2) / 10;
+    radius2 = (double)(abs(rp.x - lp.x) / 2) / 10;
    return((radius1*radius2* PI));
 
 }

@@ -28,7 +28,16 @@ pie::~pie()
 
 double pie::area()
 {
-    return(3);
+   
+    double centerx = (get_rp().x/10 + get_lp().x/10) / 2;
+    double centery = (get_rp().y/10 + get_lp().y/10) /2;
+    double angle1 = abs(atan2(start_angle.x - centerx, start_angle.y - centery) * 180 / PI);
+    double angle2 = abs((atan2(centerx-end_angle.x, centery- end_angle.y) * 180 / PI));
+    double angle = 180 - (angle1 + angle2);
+    
+    
+    double area = ellipse::area()-( (angle)/360 * ellipse::area());
+    return(area);
 }
 
 double pie::perimeter()
