@@ -1,6 +1,13 @@
 
 // OOP_Project.cpp : Defines the class behaviors for the application.
 //
+//memory leak test
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+
+//end test
+
 
 #include "pch.h"
 #include "framework.h"
@@ -99,9 +106,19 @@ BOOL COOPProjectApp::InitInstance()
 #if !defined(_AFXDLL) && !defined(_AFX_NO_MFC_CONTROLS_IN_DIALOGS)
 	ControlBarCleanUp();
 #endif
+	//memory leaks test
+	HANDLE hLogFile = CreateFile(L"Memory Leaks.txt", GENERIC_WRITE, FILE_SHARE_WRITE,
+		NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_FILE);
+	_CrtSetReportFile(_CRT_WARN, hLogFile);
+	//end memory leaks test
+
+
 
 	// Since the dialog has been closed, return FALSE so that we exit the
 	//  application, rather than start the application's message pump.
 	return FALSE;
+	
 }
 

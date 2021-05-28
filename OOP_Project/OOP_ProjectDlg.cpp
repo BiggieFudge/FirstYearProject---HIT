@@ -1096,6 +1096,7 @@ void COOPProjectDlg::DeleteScreen()
 		{
 
 			delete arr_Btn[(*it)->get_pos_shape_list()];//deleting existing buttons
+			delete arr_EditBtn[(*it)->get_pos_shape_list()];//deleting existing buttons
 		}
 		delete[] * it;
 	}
