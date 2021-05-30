@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Poligon.h"
 #include <string.h>
-
+#include <vector>
 IMPLEMENT_SERIAL(Poligon, CObject, 1);
 
 Poligon::Poligon(POINT* PointArray, POINT* RealPoint, int x = 1) :amount_edge(x) {
@@ -332,3 +332,49 @@ POINT* Poligon::GetArr()
 //{
 //    return(amount_tzela);
 //}
+
+ string Poligon::PrintType() {
+
+     if (get_amount_edge() == 1) { return "Point"; }
+     double Spacing = check_slope(get_fake_arr()[1], get_fake_arr()[0]);
+     int SideAmount = 1;
+     for (int i = 2; i < get_amount_edge(); i++) {
+
+         if (check_slope(get_fake_arr()[i], get_fake_arr()[i-1])) {
+             
+         }
+         else {
+             Spacing = check_slope(get_fake_arr()[i], get_fake_arr()[i - 1]);
+             SideAmount++;
+         }
+
+     }
+
+     switch (SideAmount) {
+     case 1:
+         return "Vector";
+         break;
+     case 2:
+         return "Triangle";
+         break;
+     case 3: 
+         return "Square";
+         break;
+     case 4:
+         return "Poly 5Points";
+         break;
+     case 5:
+         return "Poly 6Points";
+         break;
+     case 6:
+         return "Poly 7Points";
+         break;
+     case 7:
+         return "Poly 8Points";
+         break;
+
+     }
+
+
+
+ }

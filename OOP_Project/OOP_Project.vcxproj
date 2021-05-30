@@ -187,8 +187,6 @@
     <ClInclude Include="Circle.h" />
     <ClInclude Include="CONTROLS.h" />
     <ClInclude Include="CTAB1.h" />
-    <ClInclude Include="CTAB2.h" />
-    <ClInclude Include="CTAB3.h" />
     <ClInclude Include="EDIT.h" />
     <ClInclude Include="Ellipse.h" />
     <ClInclude Include="framework.h" />
@@ -206,8 +204,6 @@
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="CONTROLS.cpp" />
     <ClCompile Include="CTAB1.cpp" />
-    <ClCompile Include="CTAB2.cpp" />
-    <ClCompile Include="CTAB3.cpp" />
     <ClCompile Include="EDIT.cpp" />
     <ClCompile Include="Ellipse.cpp" />
     <ClCompile Include="OOP_Project.cpp" />
@@ -230,10 +226,11 @@
     <None Include="res\OOPProject.rc2" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="C:\Users\Eytan\Downloads\pencil-striped-symbol-for-interface-edit-buttons_icon-icons.com_56782.ico" />
-    <Image Include="res\any7n-jbh2b-001.ico" />
+    <Image Include="C:\Users\Eytan\Downloads\EditIcon.ico" />
+    <Image Include="res\AppIcon.ico" />
+    <Image Include="res\EditIcon.ico" />
     <Image Include="res\OOP_Project.ico" />
-    <Image Include="res\trash_bin_icon-icons.com_67981(1).ico" />
+    <Image Include="res\TrashIcon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

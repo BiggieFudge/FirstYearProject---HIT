@@ -177,13 +177,18 @@ void COOPProjectDlg::OnPaint()
 {
 
 	//create window size
-	if (change == false) { CenterWindow(); change = true; }
+	if (change == false) {
+		MoveWindow(CRect(0, 0, 1380, 900));
+		CenterWindow();
+		change = true;
+	}
 
 
 	if (IsIconic())
 	{
-		CPaintDC dc(this); // device context for painting
 
+		CPaintDC dc(this); // device context for painting
+		
 		SendMessage(WM_ICONERASEBKGND, reinterpret_cast<WPARAM>(dc.GetSafeHdc()), 0);
 
 		// Center icon in client rectangle
@@ -203,6 +208,7 @@ void COOPProjectDlg::OnPaint()
 	{
 
 		CPaintDC dc(this);
+		
 		CRect rect;
 		GetClientRect(&rect);
 		//int SquareSide = rect.Width()*(0.65) / 20;
@@ -213,6 +219,7 @@ void COOPProjectDlg::OnPaint()
 		penForSquare.CreatePen(PS_DOT, 1, RGB(128, 128, 128));
 		CPen penForAxis;
 		penForAxis.CreatePen(PS_SOLID, 3, RGB(0, 0, 0));
+		
 
 		for (int i = 1; i < 21; i++) {     // Draw Grid and Shnatot
 			for (int j = 1; j < 21; j++) {
@@ -222,13 +229,19 @@ void COOPProjectDlg::OnPaint()
 				if (i == 11 && j != 0) {
 					dc.MoveTo(i * SquareSide - 7, j * SquareSide);//shnatot on y axis
 					dc.LineTo(i * SquareSide + 7, j * SquareSide);
+				
 				}
 				if (j == 11 && i != 0) {
 					dc.MoveTo(i * SquareSide, j * SquareSide - 7); //shnatot on x axis
 					dc.LineTo(i * SquareSide, j * SquareSide + 7);
+				
 				}
 			}
 		}
+
+		
+
+
 
 		dc.MoveTo(SquareSide * 11, SquareSide);
 		dc.LineTo(SquareSide * 11, SquareSide * 21); //draw Y axis
@@ -237,8 +250,8 @@ void COOPProjectDlg::OnPaint()
 
 		//create frame around show_All;
 		dc.MoveTo(869, 29);
-		dc.LineTo(1201, 29);
-		dc.LineTo(1201, 527);
+		dc.LineTo(1331, 29);
+		dc.LineTo(1331, 527);
 		dc.LineTo(869, 527);
 		dc.LineTo(869, 29);
 
@@ -295,10 +308,20 @@ void COOPProjectDlg::OnPaint()
 
 
 			if (type == "Polygon") {
-
-				
-				dc.Polygon((*poly_it)->GetArr(), (*poly_it)->get_amount_edge());  //Draw Polygon
 				INFOPoly(shape_it, poly_it);
+
+				if ((*poly_it)->get_amount_edge() == 1) {
+					penForShapes.DeleteObject();
+					penForShapes.CreatePen(PS_SOLID, 8, arr_color[(*shape_it)->get_color()]);
+					dc.SelectObject(&penForShapes);
+					dc.Ellipse(CRect((*poly_it)->GetArr()[0].x,
+								(*poly_it)->GetArr()[0].y, 
+								(*poly_it)->GetArr()[0].x+1,
+								(*poly_it)->GetArr()[0].y+1));
+				}
+				else {
+					dc.Polygon((*poly_it)->GetArr(), (*poly_it)->get_amount_edge());  //Draw Polygon
+				}
 
 
 
@@ -343,7 +366,7 @@ void COOPProjectDlg::OnPaint()
 			if (index != 5) {  //dont draw the last line;
 			dc.SelectObject(&penForAxis);
 			dc.MoveTo(870, 125 + (*shape_it)->get_pos_shape_list() * 100);
-			dc.LineTo(1200, 125 + (*shape_it)->get_pos_shape_list() * 100);
+			dc.LineTo(1330, 125 + (*shape_it)->get_pos_shape_list() * 100);
 			}
 		}
 
@@ -378,7 +401,7 @@ void COOPProjectDlg::INFOPoly(list <Shape*> ::iterator indexS, list <Poligon*> :
 
 
 		CString ctmp;
-		ctmp.Format(_T("Type: %S"), (*indexS)->type().c_str());
+		ctmp.Format(_T("Type: %S"), (*indexP)->PrintType().c_str());
 
 		arr_labels[(*indexS)->get_pos_shape_list()][0]->Create(ctmp, WS_CHILD | WS_VISIBLE,
 			CRect(875, 35 + (*indexS)->get_pos_shape_list() * 100, 960, 70 + (*indexS)->get_pos_shape_list() * 100), this);
@@ -389,7 +412,7 @@ void COOPProjectDlg::INFOPoly(list <Shape*> ::iterator indexS, list <Poligon*> :
 
 		ctmp.Format(_T("Parimeter: %.2f"), (*indexS)->perimeter());
 		arr_labels[(*indexS)->get_pos_shape_list()][2]->Create(ctmp, WS_CHILD | WS_VISIBLE,
-			CRect(1100, 35 + (*indexS)->get_pos_shape_list() * 100, 1200, 70 + (*indexS)->get_pos_shape_list() * 100), this);
+			CRect(1200, 35 + (*indexS)->get_pos_shape_list() * 100, 1300, 70 + (*indexS)->get_pos_shape_list() * 100), this);
 
 
 
@@ -412,12 +435,12 @@ void COOPProjectDlg::INFOPoly(list <Shape*> ::iterator indexS, list <Poligon*> :
 		//pic test
 
 		arr_Btn[(*indexS)->get_pos_shape_list()] = new CButton;
-		arr_Btn[(*indexS)->get_pos_shape_list()]->Create(_T(""), WS_CHILD | WS_VISIBLE | BS_ICON , CRect(1202, 90 + (*indexS)->get_pos_shape_list() * 100, 1234, 122 + (*indexS)->get_pos_shape_list() * 100), this, RemoveBtn1 + (*indexS)->get_pos_shape_list());
+		arr_Btn[(*indexS)->get_pos_shape_list()]->Create(_T(""), WS_CHILD | WS_VISIBLE | BS_ICON , CRect(1333, 90 + (*indexS)->get_pos_shape_list() * 100, 1365, 122 + (*indexS)->get_pos_shape_list() * 100), this, RemoveBtn1 + (*indexS)->get_pos_shape_list());
 		arr_Btn[(*indexS)->get_pos_shape_list()]->SetIcon(RemoveIcon);
 
 
 		arr_EditBtn[(*indexS)->get_pos_shape_list()] = new CButton; 
-		arr_EditBtn[(*indexS)->get_pos_shape_list()]->Create(_T(""), WS_CHILD | WS_VISIBLE | BS_ICON , CRect(1202, 58 + (*indexS)->get_pos_shape_list() * 100, 1234, 90 + (*indexS)->get_pos_shape_list() * 100), this, EditBtn1 + (*indexS)->get_pos_shape_list());
+		arr_EditBtn[(*indexS)->get_pos_shape_list()]->Create(_T(""), WS_CHILD | WS_VISIBLE | BS_ICON , CRect(1333, 58 + (*indexS)->get_pos_shape_list() * 100, 1365, 90 + (*indexS)->get_pos_shape_list() * 100), this, EditBtn1 + (*indexS)->get_pos_shape_list());
 		arr_EditBtn[(*indexS)->get_pos_shape_list()]->SetIcon(EditIcon);
 		
 
@@ -440,7 +463,8 @@ void COOPProjectDlg::INFOCircleC(list <Shape*> ::iterator indexS, list <Circle*>
 
 
 		CString ctmp;
-		ctmp.Format(_T("Type: %S"), (*indexS)->type().c_str());
+		//ctmp.Format(_T("Type: %S"), (*indexS)->type().c_str());
+		ctmp.Format(_T("Type: Circle"));
 
 		arr_labels[(*indexS)->get_pos_shape_list()][0]->Create(ctmp, WS_CHILD | WS_VISIBLE,
 			CRect(875, 35 + (*indexS)->get_pos_shape_list() * 100, 960, 70 + (*indexS)->get_pos_shape_list() * 100), this);
@@ -451,7 +475,7 @@ void COOPProjectDlg::INFOCircleC(list <Shape*> ::iterator indexS, list <Circle*>
 
 		ctmp.Format(_T("Parimeter: %.2f"), (*indexS)->perimeter());
 		arr_labels[(*indexS)->get_pos_shape_list()][2]->Create(ctmp, WS_CHILD | WS_VISIBLE,
-			CRect(1100, 35 + (*indexS)->get_pos_shape_list() * 100, 1200, 70 + (*indexS)->get_pos_shape_list() * 100), this);
+			CRect(1200, 35 + (*indexS)->get_pos_shape_list() * 100, 1300, 70 + (*indexS)->get_pos_shape_list() * 100), this);
 
 
 
@@ -466,11 +490,11 @@ void COOPProjectDlg::INFOCircleC(list <Shape*> ::iterator indexS, list <Circle*>
 
 
 		arr_Btn[(*indexS)->get_pos_shape_list()] = new CButton;
-		arr_Btn[(*indexS)->get_pos_shape_list()]->Create(_T("Del."), WS_CHILD | WS_VISIBLE | BS_ICON , CRect(1202, 90 + (*indexS)->get_pos_shape_list() * 100, 1234, 122 + (*indexS)->get_pos_shape_list() * 100), this, RemoveBtn1 + (*indexS)->get_pos_shape_list());
+		arr_Btn[(*indexS)->get_pos_shape_list()]->Create(_T("Del."), WS_CHILD | WS_VISIBLE | BS_ICON , CRect(1333, 90 + (*indexS)->get_pos_shape_list() * 100, 1365, 122 + (*indexS)->get_pos_shape_list() * 100), this, RemoveBtn1 + (*indexS)->get_pos_shape_list());
 		arr_Btn[(*indexS)->get_pos_shape_list()]->SetIcon(RemoveIcon);
 
 		arr_EditBtn[(*indexS)->get_pos_shape_list()] = new CButton; 
-		arr_EditBtn[(*indexS)->get_pos_shape_list()]->Create(_T(""), WS_CHILD | WS_VISIBLE | BS_ICON, CRect(1202, 58 + (*indexS)->get_pos_shape_list() * 100, 1234, 90 + (*indexS)->get_pos_shape_list() * 100), this, EditBtn1 + (*indexS)->get_pos_shape_list());
+		arr_EditBtn[(*indexS)->get_pos_shape_list()]->Create(_T(""), WS_CHILD | WS_VISIBLE | BS_ICON, CRect(1333, 58 + (*indexS)->get_pos_shape_list() * 100, 1365, 90 + (*indexS)->get_pos_shape_list() * 100), this, EditBtn1 + (*indexS)->get_pos_shape_list());
 		arr_EditBtn[(*indexS)->get_pos_shape_list()]->SetIcon(EditIcon);
 
 		(*indexS)->set_is_shown(TRUE);
@@ -497,7 +521,7 @@ void COOPProjectDlg::INFOCircleE(list <Shape*> ::iterator indexS, list <ellipse*
 
 
 		CString ctmp;
-		ctmp.Format(_T("Type: %S"), (*indexS)->type().c_str());
+		ctmp.Format(_T("Type: Ellipse"));
 
 		arr_labels[(*indexS)->get_pos_shape_list()][0]->Create(ctmp, WS_CHILD | WS_VISIBLE,
 			CRect(875, 35 + (*indexS)->get_pos_shape_list() * 100, 960, 70 + (*indexS)->get_pos_shape_list() * 100), this);
@@ -508,7 +532,7 @@ void COOPProjectDlg::INFOCircleE(list <Shape*> ::iterator indexS, list <ellipse*
 
 		ctmp.Format(_T("Parimeter: %.2f"), (*indexS)->perimeter());
 		arr_labels[(*indexS)->get_pos_shape_list()][2]->Create(ctmp, WS_CHILD | WS_VISIBLE,
-			CRect(1100, 35 + (*indexS)->get_pos_shape_list() * 100, 1200, 70 + (*indexS)->get_pos_shape_list() * 100), this);
+			CRect(1200, 35 + (*indexS)->get_pos_shape_list() * 100, 1300, 70 + (*indexS)->get_pos_shape_list() * 100), this);
 
 
 
@@ -529,11 +553,11 @@ void COOPProjectDlg::INFOCircleE(list <Shape*> ::iterator indexS, list <ellipse*
 
 
 		arr_Btn[(*indexS)->get_pos_shape_list()] = new CButton;
-		arr_Btn[(*indexS)->get_pos_shape_list()]->Create(_T("Del."), WS_CHILD | WS_VISIBLE | BS_ICON , CRect(1202, 90 + (*indexS)->get_pos_shape_list() * 100, 1234, 122 + (*indexS)->get_pos_shape_list() * 100), this, RemoveBtn1 + (*indexS)->get_pos_shape_list());
+		arr_Btn[(*indexS)->get_pos_shape_list()]->Create(_T("Del."), WS_CHILD | WS_VISIBLE | BS_ICON , CRect(1333, 90 + (*indexS)->get_pos_shape_list() * 100, 1365, 122 + (*indexS)->get_pos_shape_list() * 100), this, RemoveBtn1 + (*indexS)->get_pos_shape_list());
 		arr_Btn[(*indexS)->get_pos_shape_list()]->SetIcon(RemoveIcon);
 
 		arr_EditBtn[(*indexS)->get_pos_shape_list()] = new CButton; 
-		arr_EditBtn[(*indexS)->get_pos_shape_list()]->Create(_T(""), WS_CHILD | WS_VISIBLE | BS_ICON, CRect(1202, 58 + (*indexS)->get_pos_shape_list() * 100, 1234, 90 + (*indexS)->get_pos_shape_list() * 100), this, EditBtn1 + (*indexS)->get_pos_shape_list());
+		arr_EditBtn[(*indexS)->get_pos_shape_list()]->Create(_T(""), WS_CHILD | WS_VISIBLE | BS_ICON, CRect(1333, 58 + (*indexS)->get_pos_shape_list() * 100, 1365, 90 + (*indexS)->get_pos_shape_list() * 100), this, EditBtn1 + (*indexS)->get_pos_shape_list());
 		arr_EditBtn[(*indexS)->get_pos_shape_list()]->SetIcon(EditIcon);
 
 		(*indexS)->set_is_shown(TRUE);
@@ -552,10 +576,12 @@ void COOPProjectDlg::INFOCircleP(list <Shape*> ::iterator indexS, list <pie*> ::
 
 		}
 
+		
+
 
 
 		CString ctmp;
-		ctmp.Format(_T("Type: %S"), (*indexS)->type().c_str());
+		ctmp.Format(_T("Type: Pie"));
 
 		arr_labels[(*indexS)->get_pos_shape_list()][0]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(875, 35 + (*indexS)->get_pos_shape_list() * 100, 960, 70 + (*indexS)->get_pos_shape_list() * 100), this);
 
@@ -563,19 +589,19 @@ void COOPProjectDlg::INFOCircleP(list <Shape*> ::iterator indexS, list <pie*> ::
 		arr_labels[(*indexS)->get_pos_shape_list()][1]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(990, 35 + (*indexS)->get_pos_shape_list() * 100, 1080, 70 + (*indexS)->get_pos_shape_list() * 100), this);
 
 		ctmp.Format(_T("Parimeter: %f"), (*indexS)->perimeter());
-		arr_labels[(*indexS)->get_pos_shape_list()][2]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(1100, 35 + (*indexS)->get_pos_shape_list() * 100, 1200, 70 + (*indexS)->get_pos_shape_list() * 100), this);
+		arr_labels[(*indexS)->get_pos_shape_list()][2]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(1200, 35 + (*indexS)->get_pos_shape_list() * 100, 1300, 70 + (*indexS)->get_pos_shape_list() * 100), this);
 
 
 
-		ctmp.Format(_T("Top Left:(%.1f,%.1f) ,  Bottom Right:(%.1f,%.1f)"),
-			(double)(*indexP)->get_lp().x / 10,
-			(double)(*indexP)->get_lp().y / 10,
-			(double)(*indexP)->get_rp().x / 10,
-			(double)(*indexP)->get_rp().y / 10);
+		ctmp.Format(_T("Center Point: (%.1f,%.1f). Radius:%.1f. Angle:%.1f"),
+			(double)(*indexP)->get_center().x / 10,
+			(double)(*indexP)->get_center().y / 10,
+			(double)(*indexP)->get_radius(),
+			(*indexP)->get_angle());
 
 		arr_labels[(*indexS)->get_pos_shape_list()][3]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(875, 75 + (*indexS)->get_pos_shape_list() * 100, 1200, 95 + (*indexS)->get_pos_shape_list() * 100), this);
 
-		ctmp.Format(_T("Top Left:(%.1f,%.1f) ,  Bottom Right:(%.1f,%.1f)"),
+		ctmp.Format(_T("Start Point:(%.1f,%.1f) ,  End Point:(%.1f,%.1f)"),
 			(double)(*indexP)->get_start_angle().x / 10,
 			(double)(*indexP)->get_start_angle().y / 10,
 			(double)(*indexP)->get_end_angle().x / 10,
@@ -583,12 +609,17 @@ void COOPProjectDlg::INFOCircleP(list <Shape*> ::iterator indexS, list <pie*> ::
 
 		arr_labels[(*indexS)->get_pos_shape_list()][4]->Create(ctmp, WS_CHILD | WS_VISIBLE, CRect(875, 100 + (*indexS)->get_pos_shape_list() * 100, 1200, 120 + (*indexS)->get_pos_shape_list() * 100), this);
 
+		
+
+		
+
+
 		arr_Btn[(*indexS)->get_pos_shape_list()] = new CButton;
-		arr_Btn[(*indexS)->get_pos_shape_list()]->Create(_T("Del."), WS_CHILD | WS_VISIBLE | BS_ICON , CRect(1202, 90 + (*indexS)->get_pos_shape_list() * 100, 1234, 122 + (*indexS)->get_pos_shape_list() * 100), this, RemoveBtn1 + (*indexS)->get_pos_shape_list());
+		arr_Btn[(*indexS)->get_pos_shape_list()]->Create(_T("Del."), WS_CHILD | WS_VISIBLE | BS_ICON , CRect(1333, 90 + (*indexS)->get_pos_shape_list() * 100, 1365, 122 + (*indexS)->get_pos_shape_list() * 100), this, RemoveBtn1 + (*indexS)->get_pos_shape_list());
 		arr_Btn[(*indexS)->get_pos_shape_list()]->SetIcon(RemoveIcon);
 
 		arr_EditBtn[(*indexS)->get_pos_shape_list()] = new CButton; 
-		arr_EditBtn[(*indexS)->get_pos_shape_list()]->Create(_T(""), WS_CHILD | WS_VISIBLE | BS_ICON, CRect(1202, 58 + (*indexS)->get_pos_shape_list() * 100, 1234, 90 + (*indexS)->get_pos_shape_list() * 100), this, EditBtn1 + (*indexS)->get_pos_shape_list());
+		arr_EditBtn[(*indexS)->get_pos_shape_list()]->Create(_T(""), WS_CHILD | WS_VISIBLE | BS_ICON, CRect(1333, 58 + (*indexS)->get_pos_shape_list() * 100, 1365, 90 + (*indexS)->get_pos_shape_list() * 100), this, EditBtn1 + (*indexS)->get_pos_shape_list());
 		arr_EditBtn[(*indexS)->get_pos_shape_list()]->SetIcon(EditIcon);
 
 		(*indexS)->set_is_shown(TRUE);
@@ -607,13 +638,20 @@ void COOPProjectDlg::OnBnClickedButton1()//Open CONTROL dialog
 
 HBRUSH COOPProjectDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)  //Set Background
 {
+	//if (nCtlColor == 4) {
+	//	SetBkMode(pDC->GetSafeHdc(),TRANSPARENT);
+	//	return (HBRUSH)GetStockObject(NULL_BRUSH);
+	//}
+	
 	return (HBRUSH)GetStockObject(DC_BRUSH);
+	
 }
 
 
 
 void COOPProjectDlg::delete_shape(int pos_in_shape)//deletes selected shape
 {
+	
 	
 	
     list <Shape*> ::iterator S_it;
@@ -1100,6 +1138,13 @@ void COOPProjectDlg::DeleteScreen()
 		}
 		delete[] * it;
 	}
+
+	
+	//deleting x y number labels on grid
+	
+	
+	
+
 	m_controls.m_TAB1.circle_shapes.RemoveAll();
 	m_controls.m_TAB1.ellipse_shapes.RemoveAll();
 	m_controls.m_TAB1.polygon_shapes.RemoveAll();
@@ -1273,4 +1318,6 @@ void COOPProjectDlg::delete_buttons()
 	   }
 	   
 }
+
+
 

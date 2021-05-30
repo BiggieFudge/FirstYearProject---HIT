@@ -72,6 +72,7 @@ public:
 
 
 	bool CreatePoly = 0;//check if created textboxes and labels
+	bool show_save = 0;//if to show save or not
 	CEdit* PolyX;//TextBoxes for point input
 	CEdit* PolyY;//TextBoxes for point input
 	CStatic* Polylabel;//display point number labels

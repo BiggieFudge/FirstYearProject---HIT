@@ -39,12 +39,6 @@
     <ClInclude Include="CTAB1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CTAB2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CTAB3.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Shape.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -83,12 +77,6 @@
     <ClCompile Include="CTAB1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CTAB2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CTAB3.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Shape.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -125,13 +113,16 @@
     <Image Include="res\OOP_Project.ico">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="res\any7n-jbh2b-001.ico">
+    <Image Include="res\AppIcon.ico">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="res\trash_bin_icon-icons.com_67981(1).ico">
+    <Image Include="res\TrashIcon.ico">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="C:\Users\Eytan\Downloads\pencil-striped-symbol-for-interface-edit-buttons_icon-icons.com_56782.ico">
+    <Image Include="C:\Users\Eytan\Downloads\EditIcon.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\EditIcon.ico">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

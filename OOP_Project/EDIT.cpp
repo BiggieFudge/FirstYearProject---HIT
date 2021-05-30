@@ -124,57 +124,54 @@ void EDIT::create_text_boxes()
 	   CreateCir = 1;
    }
    else if(type=="CircleP") {
-	   PieTextBox = new CEdit[8];
-	   PieTextBoxLabels = new CStatic[8];
+	   PieTextBox = new CEdit[7];
+	   PieTextBoxLabels = new CStatic[6];
+
+
 	   int y = 0;
 
-
-	   PieTextBoxLabels[0].Create(_T("Enter Left Bottom:"), WS_CHILD | WS_VISIBLE,
-		   CRect(17, y, 200, y + 20), this);
+	   PieTextBoxLabels[0].Create(_T("Enter Center Point:"), WS_CHILD | WS_VISIBLE,
+		   CRect(25, y, 250, 32), this);
 
 	   PieTextBoxLabels[1].Create(_T("x:"), WS_CHILD | WS_VISIBLE,
-		   CRect(17, y+20, 30, y+40), this);
+		   CRect(15,y+22, 30, y+52), this);
+
+	   PieTextBoxLabels[2].Create(_T("y:"), WS_CHILD | WS_VISIBLE,
+		   CRect(80,y+22, 95, y+52), this);
+
+	   PieTextBoxLabels[3].Create(_T("Radius:"), WS_CHILD | WS_VISIBLE,
+		   CRect(15, y+52, 80, y+82), this);
 
 	   PieTextBox[0].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
-		   CRect(30, y+20, 55, y+40), this, 8888);
-	   
-	   PieTextBoxLabels[2].Create(_T("y:"), WS_CHILD | WS_VISIBLE,
-		   CRect(57, y+20, 70, y+40), this);
+		   CRect(30, y+22, 55, y+42), this, 8888);	//input x textbox
+
+
 	   PieTextBox[1].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
-		   CRect(70, y+20, 95, y+40), this, 8888);
+		   CRect(100, y+22, 125, y+42), this, 8888);//input y textbox
 
 
-	   PieTextBoxLabels[3].Create(_T("Enter Right Top:"), WS_CHILD | WS_VISIBLE,
-		   CRect(17, y+50, 200, y + 90), this);
-	   PieTextBoxLabels[4].Create(_T("x:"), WS_CHILD | WS_VISIBLE,
-		   CRect(17, y+70, 30, y + 90), this);
 	   PieTextBox[2].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
-		   CRect(30, y+70, 55, y + 90), this, 8888);
-	   PieTextBoxLabels[5].Create(_T("y:"), WS_CHILD | WS_VISIBLE,
-		   CRect(57, y+70, 70, y + 90), this);
+		   CRect(77, y+52, 110, y+72), this, 8888);//input radious textbox
+
+
+	   PieTextBoxLabels[4].Create(_T("Enter Start Angle:"), WS_CHILD | WS_VISIBLE,
+		   CRect(17, y+72, 200, y+92), this);
+
 	   PieTextBox[3].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
-		   CRect(70, y+70, 95, y+90), this, 8888);
-
-
-	   PieTextBoxLabels[6].Create(_T("Enter Start Angle:"), WS_CHILD | WS_VISIBLE,
-		   CRect(17, y+95, 200, y+115), this);
+		   CRect(30, y+92, 55, y+112), this, 8888);
 
 	   PieTextBox[4].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
-		   CRect(30, y+115, 55, y+135), this, 8888);
+		   CRect(70, y+92, 95, y+112), this, 8888);
+
+
+	   PieTextBoxLabels[5].Create(_T("Enter End Angle:"), WS_CHILD | WS_VISIBLE,
+		   CRect(17, y+112, 200, y+142), this);
 
 	   PieTextBox[5].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
-		   CRect(70, y+115, 95, y+135), this, 8888);
-
-
-	   PieTextBoxLabels[7].Create(_T("Enter End Angle:"), WS_CHILD | WS_VISIBLE,
-		   CRect(17, y +135, 200, y +155), this);
+		   CRect(30, y+142, 55, y+162), this, 8888);
 
 	   PieTextBox[6].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
-		   CRect(30, y+ 155, 55, y + 175), this, 8888);
-
-	   PieTextBox[7].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
-		   CRect(70, y + 155, 95, y+ 175), this, 8888);
-	   CreatePie = 1;
+		   CRect(70, y+142, 95, y+162), this, 8888);
    }
    else
    {
@@ -298,67 +295,70 @@ void EDIT::OnBnClickedOk()
 
 		else if (type == "CircleP") {
 
-			POINT p1;
 
-			POINT* p2 = new POINT[2];
+			POINT center;
 
-			POINT p3;
+
+			POINT* p2 = new POINT[2];//rect points
+
+			POINT p3;//start point
 
 			POINT* p4 = new POINT[2];
 
-			POINT p5;
+			POINT p5;  //end point
 
-			POINT p6;
+
 			PieTextBox[0].GetWindowTextW(str);
 			PieTextBox[0].SetWindowTextW(_T(""));// Reset TextBox
-			p1.x = _tstof(str) * 10; // CASTING TO DOUBLE
-			p2[0].x = ((_tstof(str)) + 10) * SquareSide + SquareSide;
+			center.x = _tstof(str) * 10; // CASTING TO DOUBLE
+
+
+
 
 			PieTextBox[1].GetWindowTextW(str);
 			PieTextBox[1].SetWindowTextW(_T(""));// Reset TextBox
-			p1.y = _tstof(str) * 10; // CASTING TO DOUBLE
-			p2[0].y = (10 - (_tstof(str))) * SquareSide + SquareSide;
+			center.y = _tstof(str) * 10; // CASTING TO DOUBLE
+
 
 
 
 			PieTextBox[2].GetWindowTextW(str);
 			PieTextBox[2].SetWindowTextW(_T(""));// Reset TextBox
-			p3.x = _tstof(str) * 10; // CASTING TO DOUBLE
-			p2[1].x = ((_tstof(str)) + 10) * SquareSide + SquareSide;
+			double radius = _tstof(str); // CASTING TO DOUBLE
+
+			p2[0].x = ((center.x / 10 + radius) + 10) * SquareSide + SquareSide;
+			p2[0].y = (10 - (center.y / 10 + radius)) * SquareSide + SquareSide;
+			p2[1].x = ((center.x / 10 - radius) + 10) * SquareSide + SquareSide;
+			p2[1].y = (10 - (center.y / 10 - radius)) * SquareSide + SquareSide;
+
 
 			PieTextBox[3].GetWindowTextW(str);
 			PieTextBox[3].SetWindowTextW(_T(""));// Reset TextBox
-			p3.y = _tstof(str) * 10; // CASTING TO DOUBLE
-			p2[1].y = (10 - (_tstof(str))) * SquareSide + SquareSide;
-
-
-
+			p3.x = _tstof(str) * 10; // CASTING TO DOUBLE
+			p4[0].x = ((_tstof(str)) + 10) * SquareSide + SquareSide;
 			PieTextBox[4].GetWindowTextW(str);
 			PieTextBox[4].SetWindowTextW(_T(""));// Reset TextBox
-			p5.x = _tstof(str) * 10; // CASTING TO DOUBLE
-			p4[0].x = ((_tstof(str)) + 10) * SquareSide + SquareSide;
-
-			PieTextBox[5].GetWindowTextW(str);
-			PieTextBox[5].SetWindowTextW(_T(""));// Reset TextBox
-			p5.y = _tstof(str) * 10;// CASTING TO DOUBLE
+			p3.y = _tstof(str) * 10; // CASTING TO DOUBLE
 			p4[0].y = (10 - (_tstof(str))) * SquareSide + SquareSide;
 
 
-			PieTextBox[6].GetWindowTextW(str);
-			PieTextBox[6].SetWindowTextW(_T(""));// Reset TextBox
-			p6.x = _tstof(str) * 10; // CASTING TO DOUBLE
+
+			PieTextBox[5].GetWindowTextW(str);
+			PieTextBox[5].SetWindowTextW(_T(""));// Reset TextBox
+			p5.x = _tstof(str) * 10; // CASTING TO DOUBLE
 			p4[1].x = ((_tstof(str)) + 10) * SquareSide + SquareSide;
 
-			PieTextBox[7].GetWindowTextW(str);
-			PieTextBox[7].SetWindowTextW(_T(""));// Reset TextBox
-			p6.y = _tstof(str) * 10; // CASTING TO DOUBLE
+			PieTextBox[6].GetWindowTextW(str);
+			PieTextBox[6].SetWindowTextW(_T(""));// Reset TextBox
+			p5.y = _tstof(str) * 10;// CASTING TO DOUBLE
 			p4[1].y = (10 - (_tstof(str))) * SquareSide + SquareSide;
 
-			pie_ptr = new pie(p1, p3, p2, p5, p6, p4);
 
-		
+			pie_ptr = new pie(center, p2, radius, p3, p5, p4);
+
 			delete[] p2;
 			delete[] p4;
+
 		}
 		else if (type == "CircleE") {
 
@@ -448,8 +448,29 @@ bool EDIT::EllInputItegrity() {
 
 
 bool EDIT::PieInputItegrity() {
-	CString str;
-	for (int i = 0; i < 8; i++) {//Check input itegrity for pie
+	CString str,str2,str3;
+
+	PieTextBox[0].GetWindowTextW(str);
+	PieTextBox[1].GetWindowTextW(str2);
+	PieTextBox[2].GetWindowTextW(str3);
+	if ((_tstof(str) < -10 || _tstof(str) > 10) || (_tstof(str2) < -10 || _tstof(str2) > 10) || (_tstof(str) + _tstof(str3) < -10 || _tstof(str) + _tstof(str3) > 10 || _tstof(str2) + _tstof(str3) < -10 || _tstof(str2) + _tstof(str3) > 10) || _tstof(str3) < 0) {
+
+		CleanInput();
+		MessageBox(_T("Invalid input"), _T("ERROR"), MB_OK);
+		return FALSE;
+	}
+
+	for (int i = 3; i < 7; i++) {//Check input itegrity for pie
+		PieTextBox[i].GetWindowTextW(str);
+		if (_tstof(str) < -10 || _tstof(str) > 10) {
+			CleanInput();
+			MessageBox(_T("Invalid input"), _T("ERROR"), MB_OK);
+			return FALSE;
+		}
+
+	}
+
+	for (int i = 0; i < 7; i++) {//Check input itegrity for pie
 		PieTextBox[i].GetWindowTextW(str);
 		if (_tstof(str) < -10 || _tstof(str) > 10) {
 			CleanInput();

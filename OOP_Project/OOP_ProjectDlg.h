@@ -22,12 +22,11 @@ public:
 	~COOPProjectDlg()
 	{
 		
-	
-
-		
 		delete_arr_labels();
 
 		DeleteScreen();
+
+		
 
 		
 		
@@ -45,6 +44,8 @@ public:
 
 // Implementation
 protected:
+
+
 	HICON m_hIcon;
 	
 	
@@ -54,7 +55,7 @@ protected:
 	CStatic** arr_labels[5];//array of labels for info
 	int arr_sizes[5];//saves sizes of inner arrays in arr_labels
 
-	//Pic test
+	
 	HICON RemoveIcon = (HICON)LoadImage(AfxGetApp()->m_hInstance, MAKEINTRESOURCE(IDI_ICON2), IMAGE_ICON, 32, 32, 0);
 	HICON EditIcon = (HICON)LoadImage(AfxGetApp()->m_hInstance, MAKEINTRESOURCE(IDI_ICON3), IMAGE_ICON, 32, 32, 0);
 	
@@ -62,7 +63,12 @@ protected:
 	CButton* arr_Btn[5];
 
 	CButton* arr_EditBtn[5];
-	//end pic
+	
+	//CStatic* label_x = new CStatic[20];//number labels on x axis
+	//CStatic* label_y = new CStatic[20];//number labels on y axis
+
+	CStatic* label_x;//number labels on x axis
+	CStatic* label_y;//number labels on y axis
 
 
 	
@@ -132,4 +138,5 @@ public:
 
 	
 	void DeleteScreen();//delete shape list and buttons
+
 };

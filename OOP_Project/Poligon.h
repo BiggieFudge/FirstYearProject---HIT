@@ -28,7 +28,7 @@ public:
    // bool Is_Vector();
 
     void Serialize(CArchive& archive);
-
+    string PrintType();
 private:
     int amount_edge;
     POINT* Real_Coor;

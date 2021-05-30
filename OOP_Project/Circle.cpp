@@ -117,6 +117,21 @@ void Circle::set_center(POINT p)
     center.y = p.y;
 }
 
+void Circle::set_rekt(CRect r)
+{
+    if(RectPoint==NULL)
+    {
+         RectPoint = new POINT[2];
+    }
+    RectPoint[0].x = r.TopLeft().x;
+    RectPoint[0].y = r.TopLeft().y;
+    RectPoint[1].x =r.BottomRight().x;
+    RectPoint[1].y = r.BottomRight().y;
+    
+}
+
+
+
 void Circle::Serialize(CArchive& archive) {
 
     CObject::Serialize(archive);
@@ -138,3 +153,4 @@ void Circle::Serialize(CArchive& archive) {
 
 
 }
+

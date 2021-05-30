@@ -29,7 +29,13 @@ public:
     POINT get_center();
     void set_center(POINT);
 
+    void set_rekt(CRect);
+
+
+
     void Serialize(CArchive& archive);
+
+ 
 private:
     double radius;//radius according to xy map
     double radiusReal;//radius according to grid map

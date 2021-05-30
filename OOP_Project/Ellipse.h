@@ -25,6 +25,13 @@ public:
     void set_rp(long,long);
 
     void Serialize(CArchive& archive);
+    double get_radius_small() {
+        return radius1;
+    }
+    double get_radius_big() {
+        return radius2;
+    }
+
 private:
     POINT lp;//top left point of rectangle
     POINT rp;//bottom right point of rectangle
