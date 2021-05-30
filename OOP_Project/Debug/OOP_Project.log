@@ -1,34 +1,3 @@
-﻿  Storage.cpp
-D:\OOP_Project\OOP_Project\Storage.cpp(586,34): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\Storage.cpp(587,34): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\Storage.cpp(588,53): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\Storage.cpp(589,53): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\Storage.cpp(631,25): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\Storage.cpp(632,56): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\Storage.cpp(633,56): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\Storage.cpp(636,25): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\Storage.cpp(637,56): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\Storage.cpp(638,56): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\Storage.cpp(679,25): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\Storage.cpp(680,50): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\Storage.cpp(684,25): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\Storage.cpp(685,50): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\Storage.cpp(691,25): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\Storage.cpp(692,50): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\Storage.cpp(696,25): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\Storage.cpp(697,50): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\Storage.cpp(743,29): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\Storage.cpp(750,29): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\Storage.cpp(759,59): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\Storage.cpp(760,59): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\Storage.cpp(761,59): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\Storage.cpp(762,59): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\Storage.cpp(767,25): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\Storage.cpp(768,50): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\Storage.cpp(771,25): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\Storage.cpp(772,50): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\Storage.cpp(778,25): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\Storage.cpp(779,50): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\Storage.cpp(783,25): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-D:\OOP_Project\OOP_Project\Storage.cpp(784,50): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+﻿  Poligon.cpp
+D:\OOP_Project\OOP_Project\Poligon.cpp(153): warning C4715: 'Poligon::PrintType': not all control paths return a value
   OOP_Project.vcxproj -> D:\OOP_Project\Debug\OOP_Project.exe

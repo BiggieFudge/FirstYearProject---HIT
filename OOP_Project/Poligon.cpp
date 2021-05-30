@@ -106,19 +106,21 @@ string Poligon::type()
 
 string Poligon::PrintType() {
 
-    if (get_amount_edge() == 1) { return "Point"; }
-    double Spacing = check_slope(get_fake_arr()[1], get_fake_arr()[0]);
+    if (get_amount_edge() == 1) { 
+        return "Point"; }
+
+
+    double Spacing = check_slope(get_fake_arr()[0], get_fake_arr()[1]);
     int SideAmount = 1;
+
     for (int i = 2; i <= get_amount_edge(); i++) {
 
-        if (check_slope(get_fake_arr()[i], get_fake_arr()[i - 1]) == Spacing) {
+        if (check_slope(get_fake_arr()[i-1], get_fake_arr()[i]) != Spacing) {
 
-        }
-        else {
-            Spacing = check_slope(get_fake_arr()[i], get_fake_arr()[i - 1]);
             SideAmount++;
-        }
 
+        }
+        Spacing = check_slope(get_fake_arr()[i - 1], get_fake_arr()[i]);
     }
 
     switch (SideAmount) {
@@ -153,14 +155,14 @@ string Poligon::PrintType() {
 //extra functions:
 double Poligon::check_slope(POINT p1, POINT p2)
 {
-    if (p1.x != p2.x)
+    if ( (p1.x / 10 - p2.x / 10) != 0)
     {
         return(p1.y/10 - p2.y/10) / (p1.x/10 - p2.x/10);
     }
     else//makbil to y axis
     {
-       // return(MAX_INT);
-        return(0);
+        
+        return(999);
     }
 }
 

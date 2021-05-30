@@ -136,7 +136,10 @@ public:
 	void SavePie(CFileDialog&);
 	void LoadPie(CFileDialog&);
 
-	
+	void DrawBase(CDC*);
+	void DrawShapes(CDC*);
+
+
 	void DeleteScreen();//delete shape list and buttons
 
 };

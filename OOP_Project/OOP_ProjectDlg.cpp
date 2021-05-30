@@ -209,172 +209,185 @@ void COOPProjectDlg::OnPaint()
 
 		CPaintDC dc(this);
 		
-		CRect rect;
-		GetClientRect(&rect);
-		//int SquareSide = rect.Width()*(0.65) / 20;
+		DrawBase(&dc);   //Draw Graphics of the app
 
-
-
-		CPen penForSquare;
-		penForSquare.CreatePen(PS_DOT, 1, RGB(128, 128, 128));
-		CPen penForAxis;
-		penForAxis.CreatePen(PS_SOLID, 3, RGB(0, 0, 0));
-		
-
-		for (int i = 1; i < 21; i++) {     // Draw Grid and Shnatot
-			for (int j = 1; j < 21; j++) {
-				dc.SelectObject(&penForSquare);
-				dc.Rectangle(CRect(i * SquareSide, j * SquareSide, i * SquareSide + SquareSide, j * SquareSide + SquareSide)); //Draw Square
-				dc.SelectObject(&penForAxis);
-				if (i == 11 && j != 0) {
-					dc.MoveTo(i * SquareSide - 7, j * SquareSide);//shnatot on y axis
-					dc.LineTo(i * SquareSide + 7, j * SquareSide);
-				
-				}
-				if (j == 11 && i != 0) {
-					dc.MoveTo(i * SquareSide, j * SquareSide - 7); //shnatot on x axis
-					dc.LineTo(i * SquareSide, j * SquareSide + 7);
-				
-				}
-			}
+		if (m_controls.m_TAB1.CurrentPose_shape > 0) { //only enter drawshape if there are shapes
+			DrawShapes(&dc);
 		}
 
-		
-
-
-
-		dc.MoveTo(SquareSide * 11, SquareSide);
-		dc.LineTo(SquareSide * 11, SquareSide * 21); //draw Y axis
-		dc.MoveTo(SquareSide, SquareSide * 11);
-		dc.LineTo(SquareSide * 21, SquareSide * 11); //draw X axis
-
-		//create frame around show_All;
-		dc.MoveTo(869, 29);
-		dc.LineTo(1331, 29);
-		dc.LineTo(1331, 527);
-		dc.LineTo(869, 527);
-		dc.LineTo(869, 29);
-
-
-
-
-
-		CPen penForShapes;
-
-
-		int i_color = 0;//index for color choosing
-		int indexPoly = 0, indexCircleC = 0, indexCircleP = 0, indexCircleE = 0;     // Create and reset index's
-
-		poly_it = m_controls.m_TAB1.PolyList.begin();      //RESERT ITTERATORS
-		circle_it = m_controls.m_TAB1.CircleCList.begin();
-		pie_it = m_controls.m_TAB1.CirclePList.begin();
-		ellipse_it = m_controls.m_TAB1.CircleEList.begin();
-		dc.SelectStockObject(NULL_BRUSH);      //Set the background to be transparent.
-
-		int index = 0;
-		for (shape_it = m_controls.m_TAB1.ShapeList.begin(); shape_it != m_controls.m_TAB1.ShapeList.end(); shape_it++) {   //Test To print shapes
-
-
-
-			string type = (*shape_it)->type();
-
-
-			if ((*shape_it)->get_color() == -1)
-			{
-				int j;
-				for (j = 0; j < 5; j++)
-				{
-					if (arr_check_color[j] == false)
-					{
-						//i_color = j;
-						arr_check_color[j] = true;
-						break;
-					}
-				}
-				//(*shape_it)->set_color(i_color);
-				(*shape_it)->set_color(j);
-				
-			}
-
-		    
-			/*(*shape_it)->set_pos_shape_list()(index);*/
-			(*shape_it)->set_pos_shape_list(index);
-
-			index++;
-			penForShapes.DeleteObject();
-			penForShapes.CreatePen(PS_SOLID, 4, arr_color[(*shape_it)->get_color()]); //Change Color according to shape.color
-			dc.SelectObject(&penForShapes);
-
-
-
-			if (type == "Polygon") {
-				INFOPoly(shape_it, poly_it);
-
-				if ((*poly_it)->get_amount_edge() == 1) {    //Draw Point
-					penForShapes.DeleteObject();
-					penForShapes.CreatePen(PS_SOLID, 8, arr_color[(*shape_it)->get_color()]);
-					dc.SelectObject(&penForShapes);
-					dc.Ellipse(CRect((*poly_it)->GetArr()[0].x,
-								(*poly_it)->GetArr()[0].y, 
-								(*poly_it)->GetArr()[0].x+1,
-								(*poly_it)->GetArr()[0].y+1));
-				}
-				else {
-					dc.Polygon((*poly_it)->GetArr(), (*poly_it)->get_amount_edge());  //Draw Polygon
-				}
-
-
-
-				indexPoly++;
-				poly_it++;
-			}
-			else if (type == "CircleC") {
-
-				
-				dc.Ellipse((*circle_it)->get_rekt());            //Draw CircleC
-				INFOCircleC(shape_it, circle_it);
-
-
-
-				indexCircleC++;
-				circle_it++;
-			}
-			else if (type == "CircleP") {
-
-
-				
-				dc.Pie((*pie_it)->get_rekt(),
-					(*pie_it)->get_angle_point()[0],
-					(*pie_it)->get_angle_point()[1]);   //Draw CircleP
-				INFOCircleP(shape_it, pie_it);
-
-				indexCircleP++;
-				pie_it++;
-			}
-			else {
-
-				
-				dc.Ellipse((*ellipse_it)->get_rekt());  //Draw Ellipse
-				INFOCircleE(shape_it, ellipse_it);
-
-				ellipse_it++;
-				indexCircleE++;
-			}
-			
-			i_color++;//index for color choosing
-			//Draw line at end of info section
-			if (index != 5) {  //dont draw the last line;
-			dc.SelectObject(&penForAxis);
-			dc.MoveTo(870, 125 + (*shape_it)->get_pos_shape_list() * 100);
-			dc.LineTo(1330, 125 + (*shape_it)->get_pos_shape_list() * 100);
-			}
-		}
 
 
 	}
 
 }
+void COOPProjectDlg::DrawShapes(CDC* dc) {
+	CPen penForSquare;
+	penForSquare.CreatePen(PS_DOT, 1, RGB(128, 128, 128));
+	CPen penForAxis;
+	penForAxis.CreatePen(PS_SOLID, 3, RGB(0, 0, 0));
+	CPen penForShapes;
 
+
+	int i_color = 0;//index for color choosing
+	int indexPoly = 0, indexCircleC = 0, indexCircleP = 0, indexCircleE = 0;     // Create and reset index's
+
+	poly_it = m_controls.m_TAB1.PolyList.begin();      //RESERT ITTERATORS
+	circle_it = m_controls.m_TAB1.CircleCList.begin();
+	pie_it = m_controls.m_TAB1.CirclePList.begin();
+	ellipse_it = m_controls.m_TAB1.CircleEList.begin();
+	dc->SelectStockObject(NULL_BRUSH);      //Set the background to be transparent.
+
+	int index = 0;
+	for (shape_it = m_controls.m_TAB1.ShapeList.begin(); shape_it != m_controls.m_TAB1.ShapeList.end(); shape_it++) {   //Test To print shapes
+
+
+
+		string type = (*shape_it)->type();
+
+
+		if ((*shape_it)->get_color() == -1)
+		{
+			int j;
+			for (j = 0; j < 5; j++)
+			{
+				if (arr_check_color[j] == false)
+				{
+					//i_color = j;
+					arr_check_color[j] = true;
+					break;
+				}
+			}
+			
+			(*shape_it)->set_color(j);
+
+		}
+
+
+		(*shape_it)->set_pos_shape_list(index);
+
+		index++;
+		penForShapes.DeleteObject();
+		penForShapes.CreatePen(PS_SOLID, 4, arr_color[(*shape_it)->get_color()]); //Change Color according to shape.color
+		dc->SelectObject(&penForShapes);
+
+
+
+		if (type == "Polygon") {
+			INFOPoly(shape_it, poly_it);
+
+			if ((*poly_it)->get_amount_edge() == 1) {    //Draw Point
+				penForShapes.DeleteObject();
+				penForShapes.CreatePen(PS_SOLID, 8, arr_color[(*shape_it)->get_color()]);
+				dc->SelectObject(&penForShapes);
+				POINT poly_itGetArr = (*poly_it)->GetArr()[0]; //Get the point location
+				dc->Ellipse(CRect(poly_itGetArr.x,
+					poly_itGetArr.y,
+					poly_itGetArr.x + 1,
+					poly_itGetArr.y + 1));
+			}
+			else {
+				dc->Polygon((*poly_it)->GetArr(), (*poly_it)->get_amount_edge());  //Draw Polygon
+			}
+
+
+
+			indexPoly++;
+			poly_it++;
+		}
+		else if (type == "CircleC") {
+
+
+			dc->Ellipse((*circle_it)->get_rekt());            //Draw CircleC
+			INFOCircleC(shape_it, circle_it);
+
+
+
+			indexCircleC++;
+			circle_it++;
+		}
+		else if (type == "CircleP") {
+
+
+			POINT* pie_angle_point = new POINT[2];
+			pie_angle_point = (*pie_it)->get_angle_point();
+
+
+			dc->Pie((*pie_it)->get_rekt(),
+				pie_angle_point[0],
+				pie_angle_point[1]);   //Draw CircleP
+			INFOCircleP(shape_it, pie_it);
+
+
+
+			delete[] pie_angle_point;
+			indexCircleP++;
+			pie_it++;
+		}
+		else {
+
+
+			dc->Ellipse((*ellipse_it)->get_rekt());  //Draw Ellipse
+			INFOCircleE(shape_it, ellipse_it);
+
+			ellipse_it++;
+			indexCircleE++;
+		}
+
+		i_color++;//index for color choosing
+		//Draw line at end of info section
+		if (index != 5) {  //dont draw the last line;
+			dc->SelectObject(&penForAxis);
+			dc->MoveTo(870, 125 + (*shape_it)->get_pos_shape_list() * 100);
+			dc->LineTo(1330, 125 + (*shape_it)->get_pos_shape_list() * 100);
+		}
+	}
+}
+void COOPProjectDlg::DrawBase(CDC* dc) {
+
+	CPen penForSquare;
+	penForSquare.CreatePen(PS_DOT, 1, RGB(128, 128, 128));
+	CPen penForAxis;
+	penForAxis.CreatePen(PS_SOLID, 3, RGB(0, 0, 0));
+	
+
+
+	for (int i = 1; i < 21; i++) {     // Draw Grid and Shnatot
+		for (int j = 1; j < 21; j++) {
+			dc->SelectObject(&penForSquare);
+			dc->Rectangle(CRect(i * SquareSide, j * SquareSide, i * SquareSide + SquareSide, j * SquareSide + SquareSide)); //Draw Square
+			dc->SelectObject(&penForAxis);
+			if (i == 11 && j != 0) {
+				dc->MoveTo(i * SquareSide - 7, j * SquareSide);//shnatot on y axis
+				dc->LineTo(i * SquareSide + 7, j * SquareSide);
+
+			}
+			if (j == 11 && i != 0) {
+				dc->MoveTo(i * SquareSide, j * SquareSide - 7); //shnatot on x axis
+				dc->LineTo(i * SquareSide, j * SquareSide + 7);
+
+			}
+		}
+	}
+
+
+
+
+
+	dc->MoveTo(SquareSide * 11, SquareSide);
+	dc->LineTo(SquareSide * 11, SquareSide * 21); //draw Y axis
+	dc->MoveTo(SquareSide, SquareSide * 11);
+	dc->LineTo(SquareSide * 21, SquareSide * 11); //draw X axis
+
+	//create frame around info page;
+	dc->MoveTo(869, 29);
+	dc->LineTo(1331, 29);
+	dc->LineTo(1331, 527);
+	dc->LineTo(869, 527);
+	dc->LineTo(869, 29);
+
+
+
+}
 
 
 // The system calls this function to obtain the cursor to display while the user drags
@@ -388,13 +401,16 @@ HCURSOR COOPProjectDlg::OnQueryDragIcon()
 void COOPProjectDlg::INFOPoly(list <Shape*> ::iterator indexS, list <Poligon*> ::iterator indexP) {//delete here!!
 	if (!(*indexS)->get_is_shown()) {
 
-		arr_labels[(*indexS)->get_pos_shape_list()] = new CStatic * [(*indexP)->get_amount_edge() + 3];
+		int indexS_pos_shape_list = (*indexS)->get_pos_shape_list();
 
-		arr_sizes[(*indexS)->get_pos_shape_list()] = (*indexP)->get_amount_edge() + 3;
+
+		arr_labels[indexS_pos_shape_list] = new CStatic * [(*indexP)->get_amount_edge() + 3];
+
+		arr_sizes[indexS_pos_shape_list] = (*indexP)->get_amount_edge() + 3;
 
 		for (int i = 0; i < (*indexP)->get_amount_edge() + 3; i++) {
 
-			arr_labels[(*indexS)->get_pos_shape_list()][i] = new CStatic;
+			arr_labels[indexS_pos_shape_list][i] = new CStatic;
 
 		}
 
@@ -403,16 +419,16 @@ void COOPProjectDlg::INFOPoly(list <Shape*> ::iterator indexS, list <Poligon*> :
 		CString ctmp;
 		ctmp.Format(_T("Type: %S"), (*indexP)->PrintType().c_str());
 
-		arr_labels[(*indexS)->get_pos_shape_list()][0]->Create(ctmp, WS_CHILD | WS_VISIBLE,
-			CRect(875, 35 + (*indexS)->get_pos_shape_list() * 100, 960, 70 + (*indexS)->get_pos_shape_list() * 100), this);
+		arr_labels[indexS_pos_shape_list][0]->Create(ctmp, WS_CHILD | WS_VISIBLE,
+			CRect(875, 35 + indexS_pos_shape_list * 100, 960, 70 + indexS_pos_shape_list * 100), this);
 
 		ctmp.Format(_T("Area: %.2f"), (*indexS)->area());
-		arr_labels[(*indexS)->get_pos_shape_list()][1]->Create(ctmp, WS_CHILD | WS_VISIBLE,
-			CRect(990, 35 + (*indexS)->get_pos_shape_list() * 100, 1080, 70 + (*indexS)->get_pos_shape_list() * 100), this);
+		arr_labels[indexS_pos_shape_list][1]->Create(ctmp, WS_CHILD | WS_VISIBLE,
+			CRect(990, 35 + indexS_pos_shape_list * 100, 1080, 70 + indexS_pos_shape_list * 100), this);
 
 		ctmp.Format(_T("Parimeter: %.2f"), (*indexS)->perimeter());
-		arr_labels[(*indexS)->get_pos_shape_list()][2]->Create(ctmp, WS_CHILD | WS_VISIBLE,
-			CRect(1200, 35 + (*indexS)->get_pos_shape_list() * 100, 1300, 70 + (*indexS)->get_pos_shape_list() * 100), this);
+		arr_labels[indexS_pos_shape_list][2]->Create(ctmp, WS_CHILD | WS_VISIBLE,
+			CRect(1200, 35 + indexS_pos_shape_list * 100, 1300, 70 + indexS_pos_shape_list * 100), this);
 
 
 
@@ -420,27 +436,26 @@ void COOPProjectDlg::INFOPoly(list <Shape*> ::iterator indexS, list <Poligon*> :
 		for (int i = 3; i < (*indexP)->get_amount_edge() + 3; i++) {
 
 
-			ctmp.Format(_T("   %d: (%.1f,%.1f)"), (i - 2),
-				(double)((*indexP)->get_fake_arr())[i - 3].x / 10, // note:delete/10
-				(double)((*indexP)->get_fake_arr())[i - 3].y / 10);// note:delete/10
+			ctmp.Format(_T(" %d: (%.1f,%.1f)"), (i - 2),
+				(double)((*indexP)->get_fake_arr())[i - 3].x / 10, 
+				(double)((*indexP)->get_fake_arr())[i - 3].y / 10);
 
 
-			arr_labels[(*indexS)->get_pos_shape_list()][i]->Create(ctmp, WS_CHILD | WS_VISIBLE | WS_BORDER,
-				CRect(870 + (i - 3) * 55, 75 + (*indexS)->get_pos_shape_list() * 100, 930 + (i - 3) * 55, 115 + (*indexS)->get_pos_shape_list() * 100), this);
+			arr_labels[indexS_pos_shape_list][i]->Create(ctmp, WS_CHILD | WS_VISIBLE | WS_BORDER,
+				CRect(870 + (i - 3) * 55, 75 + indexS_pos_shape_list * 100, 930 + (i - 3) * 55, 115 + indexS_pos_shape_list  * 100), this);
 
 		}
 
 
 
-		//pic test
-
+		
 		arr_Btn[(*indexS)->get_pos_shape_list()] = new CButton;
-		arr_Btn[(*indexS)->get_pos_shape_list()]->Create(_T(""), WS_CHILD | WS_VISIBLE | BS_ICON , CRect(1333, 90 + (*indexS)->get_pos_shape_list() * 100, 1365, 122 + (*indexS)->get_pos_shape_list() * 100), this, RemoveBtn1 + (*indexS)->get_pos_shape_list());
+		arr_Btn[(*indexS)->get_pos_shape_list()]->Create(_T(""), WS_CHILD | WS_VISIBLE | BS_ICON , CRect(1333, 90 + indexS_pos_shape_list * 100, 1365, 122 + indexS_pos_shape_list * 100), this, RemoveBtn1 + indexS_pos_shape_list);
 		arr_Btn[(*indexS)->get_pos_shape_list()]->SetIcon(RemoveIcon);
 
 
 		arr_EditBtn[(*indexS)->get_pos_shape_list()] = new CButton; 
-		arr_EditBtn[(*indexS)->get_pos_shape_list()]->Create(_T(""), WS_CHILD | WS_VISIBLE | BS_ICON , CRect(1333, 58 + (*indexS)->get_pos_shape_list() * 100, 1365, 90 + (*indexS)->get_pos_shape_list() * 100), this, EditBtn1 + (*indexS)->get_pos_shape_list());
+		arr_EditBtn[(*indexS)->get_pos_shape_list()]->Create(_T(""), WS_CHILD | WS_VISIBLE | BS_ICON , CRect(1333, 58 + indexS_pos_shape_list * 100, 1365, 90 + indexS_pos_shape_list * 100), this, EditBtn1 + indexS_pos_shape_list);
 		arr_EditBtn[(*indexS)->get_pos_shape_list()]->SetIcon(EditIcon);
 		
 
