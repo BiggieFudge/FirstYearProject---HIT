@@ -1,0 +1,15 @@
+Detected memory leaks!
+Dumping objects ->
+{17234} normal block at 0x07B59D10, 16 bytes long.
+ Data: <                > B8 01 00 00 F0 00 00 00 E0 01 00 00 B8 01 00 00 
+{17233} normal block at 0x07B59890, 16 bytes long.
+ Data: <    h   h       > 08 02 00 00 68 01 00 00 68 01 00 00 08 02 00 00 
+{17232} client block at 0x07AD9AC0, subtype c0, 104 bytes long.
+d:\agent\_work\3\s\src\vctools\VC7Libs\Ship\ATLMFC\Src\MFC\dumpcont.cpp(23) : atlTraceGeneral - a pie object at $07AD9AC0, 104 bytes long
+{10476} normal block at 0x07B59D90, 16 bytes long.
+ Data: <                > B8 01 00 00 F0 00 00 00 B8 01 00 00 B8 01 00 00 
+{10475} normal block at 0x07B59E90, 16 bytes long.
+ Data: <    h   h       > 08 02 00 00 68 01 00 00 68 01 00 00 08 02 00 00 
+{10474} client block at 0x07AD9308, subtype c0, 104 bytes long.
+d:\agent\_work\3\s\src\vctools\VC7Libs\Ship\ATLMFC\Src\MFC\dumpcont.cpp(23) : atlTraceGeneral - a pie object at $07AD9308, 104 bytes long
+Object dump complete.

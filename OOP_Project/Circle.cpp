@@ -27,16 +27,7 @@ Circle::Circle(const Circle& c1)
 
 Circle::Circle(POINT p,POINT* p_c,double r)
 {
-    //cout << "enter radious of circle:" << endl;
-    //cin >> radious;
-    //while (radious < 0)
-    //{
-    //    cout << "enter only non negetive values into radious:" << endl;
-    //    cout << "enter radious of circle:" << endl;
-    //    cin >> radious;
-    //}
-    //cout << "enter center of circle:" << endl;
-    //center.input_point();
+    
     center.x = p.x;
     center.y = p.y;
     RectPoint = new POINT[2];
@@ -64,13 +55,7 @@ double Circle::perimeter()
     return(PI * radius * 2);
 }
 
-//void Circle::print()
-//{
-//    cout << "center point is:";
-//    center.print();
-//    cout << endl;
-//    cout << "radious is:" << radius << endl;
-//}
+
 
 string Circle::type()
 {
@@ -78,7 +63,7 @@ string Circle::type()
 }
 //getters and setters
 
-double Circle::get_radius()
+double Circle::get_radius() 
 {
     return(radius);
 }

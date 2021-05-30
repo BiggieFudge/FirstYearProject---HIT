@@ -310,7 +310,7 @@ void COOPProjectDlg::OnPaint()
 			if (type == "Polygon") {
 				INFOPoly(shape_it, poly_it);
 
-				if ((*poly_it)->get_amount_edge() == 1) {
+				if ((*poly_it)->get_amount_edge() == 1) {    //Draw Point
 					penForShapes.DeleteObject();
 					penForShapes.CreatePen(PS_SOLID, 8, arr_color[(*shape_it)->get_color()]);
 					dc.SelectObject(&penForShapes);

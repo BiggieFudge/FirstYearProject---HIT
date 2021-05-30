@@ -1,8 +1,10 @@
 #include "pch.h"
 #include "Poligon.h"
-#include <string.h>
-#include <vector>
+
+
 IMPLEMENT_SERIAL(Poligon, CObject, 1);
+
+
 
 Poligon::Poligon(POINT* PointArray, POINT* RealPoint, int x = 1) :amount_edge(x) {
 
@@ -18,11 +20,11 @@ Poligon::Poligon(POINT* PointArray, POINT* RealPoint, int x = 1) :amount_edge(x)
         Real_Coor[i].x = RealPoint[i].x;
         Real_Coor[i].y = RealPoint[i].y;
     }
-    //amount_tzela = check_tzela();//?
+    
 
 }
 
-Poligon::Poligon()
+Poligon::Poligon()  //Default constrctur for serialization
 {
    
 }
@@ -59,51 +61,7 @@ double Poligon::area()
 
 double Poligon::perimeter()
 {
-    //int i;
-    //double sum = 0, slope = 0, tmp_slope = 0;
-    //bool tf_slope = true;
-    ////for (i = 0; i < amount_edge; i++)
-    ////{
-    ////    if (i == amount_edge - 1)
-    ////    {
-    ////        sum += (vector_len(Real_Coor[i], Real_Coor[0])/10);
-    ////        //fixing perimeter for vectors bigger than 2 points
-    ////        if (i > 2)
-    ////            tmp_slope = check_slope(Real_Coor[i], Real_Coor[0]);
-
-    ////        if (tmp_slope != slope)
-    ////        {
-    ////            tf_slope = false;
-    ////        }
-
-    ////    }
-    ////    else
-    ////    {
-    ////        sum += (vector_len(Real_Coor[i], Real_Coor[i + 1])/10);
-    ////        //fixing perimeter for vectors bigger than 2 points
-    ////        tmp_slope = check_slope(Real_Coor[i], Real_Coor[i + 1]);
-    ////        if (i == 0)
-    ////        {
-    ////            slope = tmp_slope;
-    ////        }
-    ////        else
-    ////        {
-    ////            if (tmp_slope != slope)
-    ////            {
-    ////                tf_slope = false;
-    ////            }
-    ////        }
-    ////    }
-
-    ////}
-    //if (tf_slope == false)
-    //{
-    //    return(sum);
-    //}
-    //else
-    //{
-    //    return(sum / 2);
-    //}
+    
     int i;
     double sum=0;
     for (i = 0; i < amount_edge; i++)
@@ -134,38 +92,61 @@ double Poligon::perimeter()
     
 }
 
-//not used right now by mfc
-//void Poligon::print()
-//{
-//    int i;
-//    for (i = 0; i < amount_edge; i++)
-//    {
-//        cout << "point " << i + 1 << " is: ";
-//        arr_edge[i].print();
-//        cout << endl;
-//    }
-//}
+
 
 string Poligon::type()
 {
-    int tmp = amount_edge;
-    switch (amount_edge)
-    {
-    //case 1:
-    //    return("Point");
-    //case 2:
-    //    return("Vector");
-    //case 3:
-    //    return("Triangle");
-    //case 4:
-    //    return("Rectangle");
-    default:
-        string rt;
-        rt = "Polygon";
-        //rt += tmp + '0';
-        //rt += " number of edges";
-        return(rt);
+    
+    return "Polygon";
+    
+
+}
+
+
+
+string Poligon::PrintType() {
+
+    if (get_amount_edge() == 1) { return "Point"; }
+    double Spacing = check_slope(get_fake_arr()[1], get_fake_arr()[0]);
+    int SideAmount = 1;
+    for (int i = 2; i <= get_amount_edge(); i++) {
+
+        if (check_slope(get_fake_arr()[i], get_fake_arr()[i - 1]) == Spacing) {
+
+        }
+        else {
+            Spacing = check_slope(get_fake_arr()[i], get_fake_arr()[i - 1]);
+            SideAmount++;
+        }
+
     }
+
+    switch (SideAmount) {
+    case 1:
+        return "Vector";
+        break;
+    case 2:
+        return "Triangle";
+        break;
+    case 3:
+        return "Square";
+        break;
+    case 4:
+        return "Poly 5Points";
+        break;
+    case 5:
+        return "Poly 6Points";
+        break;
+    case 6:
+        return "Poly 7Points";
+        break;
+    case 7:
+        return "Poly 8Points";
+        break;
+
+    }
+
+
 
 }
 
@@ -183,15 +164,6 @@ double Poligon::check_slope(POINT p1, POINT p2)
     }
 }
 
-//bool Poligon::Is_Vector()
-//{
-//    int i;
-//    bool 
-//    for(i=0;i<amount_edge;i++)
-//    {
-
-//    }
-//}
 
 POINT* Poligon::GetArr()
 {
@@ -245,136 +217,6 @@ POINT* Poligon::GetArr()
 
 
 
-    
-    //if (archive.IsStoring()) {
-    //    archive << amount_edge << end_angle << Angle_point[0] << Angle_point[1];
-    //}
-    //else {
-    //    archive >> amount_edge >> end_angle >> Angle_point[0] >> Angle_point[1];
-    //}
-    // const int amount_edge;
-    //POINT* Real_Coor;
-    //POINT* On_Screen_Coor;//for painting the poly
-    //int amount_tzela;
 
  }
 
-//int Poligon::check_tzela()//doesnt work well,check how to recognize the two slopes that result in zero,makbilim to the axis's.
-//{
-
-//    if (amount_edge == 1)
-//    {
-//        return(0);
-//    }
-//    else if (amount_edge == 2)
-//    {
-//        if (arr_edge[0] == arr_edge[1])
-//        {
-//            return(0);
-//        }
-//        else
-//        {
-//            return(1);
-//        }
-//    }
-//    else
-//    {
-//        int sum = 0, i;
-//        Point p;
-//        double  slope, tmp_slope;
-//        for (i = 0; i < amount_edge; i++)
-//        {
-//            if (i == amount_edge - 1)
-//            {
-//                tmp_slope = check_slope(arr_edge[i], arr_edge[0]);
-//                p = arr_edge[i];
-//                if (arr_edge[0] != p && slope != tmp_slope)
-//                {
-//                    sum++;
-//                }
-//            }
-//            else
-//            {
-
-//                tmp_slope = check_slope(arr_edge[i], arr_edge[i + 1]);
-//                p = arr_edge[i];
-//                if (i == 0)
-//                {
-
-//                    slope = tmp_slope;
-//                    if (arr_edge[i + 1] != p)
-//                    {
-//                        sum++;
-//                    }
-//                }
-//                else
-//                {
-//                    if (arr_edge[i + 1] != p && slope != tmp_slope)
-//                    {
-//                        sum++;
-//                        slope = tmp_slope;
-//                    }
-//                }
-//            }
-
-//        }
-//        return(sum);
-//    }
-
-
-
-
-
-//}
-
-////getters setters
-//int Poligon::get_tzela()
-//{
-//    return(amount_tzela);
-//}
-
- string Poligon::PrintType() {
-
-     if (get_amount_edge() == 1) { return "Point"; }
-     double Spacing = check_slope(get_fake_arr()[1], get_fake_arr()[0]);
-     int SideAmount = 1;
-     for (int i = 2; i < get_amount_edge(); i++) {
-
-         if (check_slope(get_fake_arr()[i], get_fake_arr()[i-1])) {
-             
-         }
-         else {
-             Spacing = check_slope(get_fake_arr()[i], get_fake_arr()[i - 1]);
-             SideAmount++;
-         }
-
-     }
-
-     switch (SideAmount) {
-     case 1:
-         return "Vector";
-         break;
-     case 2:
-         return "Triangle";
-         break;
-     case 3: 
-         return "Square";
-         break;
-     case 4:
-         return "Poly 5Points";
-         break;
-     case 5:
-         return "Poly 6Points";
-         break;
-     case 6:
-         return "Poly 7Points";
-         break;
-     case 7:
-         return "Poly 8Points";
-         break;
-
-     }
-
-
-
- }

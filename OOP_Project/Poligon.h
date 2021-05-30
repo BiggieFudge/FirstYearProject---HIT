@@ -4,36 +4,53 @@
 #include "Shape.h"
 
 
-class Poligon :public Shape
-{
+class Poligon 
+    :public Shape {
 public:
     DECLARE_SERIAL(Poligon);
 
+    //Constructors
     Poligon();
     Poligon(POINT* ,POINT* ,int);
     ~Poligon();
-    //virtual functions:
-    double area();
-    double perimeter();
-    //void print();
-    string type();
-    //extra functions:
-    double check_slope(POINT, POINT);
-    //int check_tzela();
-    //getters setters
-    //int get_tzela();
-    int get_amount_edge();
-    POINT* GetArr();//returns the on screen points
-    POINT* get_fake_arr();//returns the x,y points
-   // bool Is_Vector();
 
     void Serialize(CArchive& archive);
+
+    //Get/Set
+    int get_amount_edge(); //return number of points;
+
+    POINT* GetArr();//returns the on screen points
+
+    POINT* get_fake_arr();//returns the x,y points
+
+
+
+    //virtual functions:
+    double area();
+
+    double perimeter();
+
+    string type();
+
+
+
+    //extra functions:
+    double check_slope(POINT, POINT);
+
     string PrintType();
+   
+ 
+
+    
+    
 private:
-    int amount_edge;
-    POINT* Real_Coor;
+
+    int amount_edge; //number of points
+
+    POINT* Real_Coor; //Coordination for information(user enter points)
+
     POINT* On_Screen_Coor;//for painting the poly
-    int amount_tzela;
+    
 
 };
 

@@ -36,13 +36,10 @@
     <ClInclude Include="CONTROLS.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CTAB1.h">
+    <ClInclude Include="Storage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Shape.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Point.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Circle.h">
@@ -74,13 +71,10 @@
     <ClCompile Include="CONTROLS.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CTAB1.cpp">
+    <ClCompile Include="Storage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Shape.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Point.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Circle.cpp">

@@ -6,15 +6,15 @@
 #include "Pie.h"
 #include <list>
 
-// CTAB1 dialog
+// Stroage dialog
 
-class CTAB1 : public CDialogEx
+class Stroage : public CDialogEx
 {
-	DECLARE_DYNAMIC(CTAB1)
+	DECLARE_DYNAMIC(Stroage)
 
 public:
-	CTAB1(CWnd* pParent = nullptr);   // standard constructor
-	virtual ~CTAB1();
+	Stroage(CWnd* pParent = nullptr);   // standard constructor
+	virtual ~Stroage();
 
 
 	
@@ -63,11 +63,7 @@ public:
 
 	
 
-	CStatic IDC_XX2;//display x label
-	CStatic IDC_YY2;//display y label
-	CStatic IDC_XX;//display x label
-	CStatic IDC_YY;//display y label
-	
+
 	
 
 

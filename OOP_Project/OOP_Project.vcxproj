@@ -186,7 +186,7 @@
   <ItemGroup>
     <ClInclude Include="Circle.h" />
     <ClInclude Include="CONTROLS.h" />
-    <ClInclude Include="CTAB1.h" />
+    <ClInclude Include="Storage.h" />
     <ClInclude Include="EDIT.h" />
     <ClInclude Include="Ellipse.h" />
     <ClInclude Include="framework.h" />
@@ -194,7 +194,6 @@
     <ClInclude Include="OOP_ProjectDlg.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Pie.h" />
-    <ClInclude Include="Point.h" />
     <ClInclude Include="Poligon.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Shape.h" />
@@ -203,7 +202,7 @@
   <ItemGroup>
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="CONTROLS.cpp" />
-    <ClCompile Include="CTAB1.cpp" />
+    <ClCompile Include="Storage.cpp" />
     <ClCompile Include="EDIT.cpp" />
     <ClCompile Include="Ellipse.cpp" />
     <ClCompile Include="OOP_Project.cpp" />
@@ -215,7 +214,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Pie.cpp" />
-    <ClCompile Include="Point.cpp" />
     <ClCompile Include="Poligon.cpp" />
     <ClCompile Include="Shape.cpp" />
   </ItemGroup>

@@ -13,7 +13,7 @@ ellipse::ellipse(POINT p1,POINT p2,POINT* arr_p) :Circle()
     radius1 = (double)(abs(rp.y - lp.y)/2)/10;
     radius2 = (double)(abs(rp.x - lp.x)/2)/10;
 }
-ellipse::ellipse()
+ellipse::ellipse()  // For Serialization
 {
    
 }

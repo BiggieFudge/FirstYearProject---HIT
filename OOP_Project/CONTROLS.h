@@ -1,5 +1,5 @@
 #pragma once
-#include "CTAB1.h"
+#include "Storage.h"
 
 
 // CONTROLS dialog
@@ -30,7 +30,7 @@ public:
 
 	//TAB CONTROL
 	CTabCtrl m_tabc;
-	CTAB1 m_TAB1;
+	Stroage m_TAB1;
 	//CTAB2 m_TAB2;
 	//CTAB3 m_TAB3;
 	afx_msg void OnTcnSelchangeIdPreviewPrev(NMHDR* pNMHDR, LRESULT* pResult);

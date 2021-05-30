@@ -1,45 +1,42 @@
-// CTAB1.cpp : implementation file
+// Stroage.cpp : implementation file
 //
 
 #include "pch.h"
 #include "OOP_Project.h"
 #include "OOP_ProjectDlg.h"
-#include "CTAB1.h"
+#include "Storage.h"
 #include "afxdialogex.h"
 
 
 
-// CTAB1 dialog
+// Stroage dialog
 
-IMPLEMENT_DYNAMIC(CTAB1, CDialogEx)
+IMPLEMENT_DYNAMIC(Stroage, CDialogEx)
 
-CTAB1::CTAB1(CWnd* pParent /*=nullptr*/)
+Stroage::Stroage(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_TAB1, pParent)
 	, m_strTextCtrl(_T(""))
 {
 
 }  
 
-CTAB1::~CTAB1()
+Stroage::~Stroage()
 {
 	
 }
 
-void CTAB1::DoDataExchange(CDataExchange* pDX)
+void Stroage::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 
 	DDX_Control(pDX, IDC_Points, m_comboBoxCtrl);
 	DDX_CBString(pDX, IDC_Points, m_strTextCtrl);
-	DDX_Control(pDX, IDC_X, IDC_XX);
-	DDX_Control(pDX, IDC_Y, IDC_YY);
-	DDX_Control(pDX, IDC_X2, IDC_XX2);
-	DDX_Control(pDX, IDC_Y2, IDC_YY2);
+
 	DDX_Control(pDX, IDC_Circle_Group, IDC_Circle_GroupV);
 
 }
 
-BOOL CTAB1::OnInitDialog()
+BOOL Stroage::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 
@@ -55,26 +52,26 @@ BOOL CTAB1::OnInitDialog()
 }
 
 
-BEGIN_MESSAGE_MAP(CTAB1, CDialogEx)
-	ON_BN_CLICKED(IDC_Polygon, &CTAB1::OnBnClickedPolygon)
-	ON_BN_CLICKED(IDC_Circle, &CTAB1::OnBnClickedCircle)
-	ON_CBN_SELCHANGE(IDC_Points, &CTAB1::OnCbnSelchangePoints)
-	ON_CBN_SELCHANGE(IDC_Points, &CTAB1::OnCbnSelchangePoints)
+BEGIN_MESSAGE_MAP(Stroage, CDialogEx)
+	ON_BN_CLICKED(IDC_Polygon, &Stroage::OnBnClickedPolygon)
+	ON_BN_CLICKED(IDC_Circle, &Stroage::OnBnClickedCircle)
+	ON_CBN_SELCHANGE(IDC_Points, &Stroage::OnCbnSelchangePoints)
+	ON_CBN_SELCHANGE(IDC_Points, &Stroage::OnCbnSelchangePoints)
 
-	ON_BN_CLICKED(IDC_Circle_C, &CTAB1::OnBnClickedCircleC)
-	ON_BN_CLICKED(IDC_Circle_E, &CTAB1::OnBnClickedCircleE)
-	ON_BN_CLICKED(IDC_Circle_P, &CTAB1::OnBnClickedCircleP)
-	ON_BN_CLICKED(IDC_Send, &CTAB1::OnBnClickedSend)
+	ON_BN_CLICKED(IDC_Circle_C, &Stroage::OnBnClickedCircleC)
+	ON_BN_CLICKED(IDC_Circle_E, &Stroage::OnBnClickedCircleE)
+	ON_BN_CLICKED(IDC_Circle_P, &Stroage::OnBnClickedCircleP)
+	ON_BN_CLICKED(IDC_Send, &Stroage::OnBnClickedSend)
 END_MESSAGE_MAP()
 
 
-// CTAB1 message handlers
+// Stroage message handlers
 
 
 
 
 //check if clicked on polygon option
-void CTAB1::OnBnClickedPolygon()
+void Stroage::OnBnClickedPolygon()
 {
 	// TODO: Add your control notification handler code here
 	if ( IsDlgButtonChecked(IDC_Polygon) == BST_CHECKED )//if chosen poligon
@@ -90,7 +87,7 @@ void CTAB1::OnBnClickedPolygon()
 	
 }
 //display everything that is connected to poly
-void CTAB1::show_Poly() {
+void Stroage::show_Poly() {
 	Create_Poly();
 	
 	GetDlgItem(IDC_Circle_Group)->ShowWindow(SW_SHOW);
@@ -106,12 +103,12 @@ void CTAB1::show_Poly() {
 	
 }
 //hide everything that is connected to poly
-void CTAB1::hide_Poly()
+void Stroage::hide_Poly()
 {
 	GetDlgItem(IDC_X)->ShowWindow(SW_HIDE);
 	GetDlgItem(IDC_Y)->ShowWindow(SW_HIDE);
 	
-	//GetDlgItem(IDC_Bottom_Group)->ShowWindow(SW_HIDE);
+	
 	GetDlgItem(IDC_label)->ShowWindow(SW_HIDE);
 
 	GetDlgItem(IDC_Points)->ShowWindow(SW_HIDE);   
@@ -120,7 +117,7 @@ void CTAB1::hide_Poly()
 
 
 
-void CTAB1::Create_Poly() {//creating poly textboxes and labels
+void Stroage::Create_Poly() {//creating poly textboxes and labels
 	if (CreatePoly == 0) {   //Check if memory allocated
 		PolyX = new CEdit[8];
 		PolyY = new CEdit[8];
@@ -149,7 +146,7 @@ void CTAB1::Create_Poly() {//creating poly textboxes and labels
 
 
 //deleting text boxes for input points in polygon
-void CTAB1::delete_buttons()
+void Stroage::delete_buttons()
 {
 	if (CreatePoly) {
 		
@@ -159,8 +156,9 @@ void CTAB1::delete_buttons()
 	}
 	
 }
+
 //deleting text boxes for input points in circle
-void CTAB1::delete_circle_textbox()
+void Stroage::delete_circle_textbox()
 {
 	if(CreateCircleC==1){
 		delete[] CircleTextBox;
@@ -188,7 +186,7 @@ void CTAB1::delete_circle_textbox()
 
 
 //check if clicked on circle categorie option
-void CTAB1::OnBnClickedCircle()
+void Stroage::OnBnClickedCircle()
 {
 	if ( IsDlgButtonChecked(IDC_Circle) == BST_CHECKED )//if chosen circle
 	{
@@ -203,23 +201,23 @@ void CTAB1::OnBnClickedCircle()
 	}
 
 }
-void CTAB1::show_Circle() {
+void Stroage::show_Circle() {
 	GetDlgItem(IDC_Circle_Group)->ShowWindow(SW_SHOW); 
 	GetDlgItem(IDC_Circle_Group)->SetWindowTextW(_T("Circle Type:"));
 	GetDlgItem(IDC_Circle_C)->ShowWindow(SW_SHOW); GetDlgItem(IDC_Circle_E)->ShowWindow(SW_SHOW); GetDlgItem(IDC_Circle_P)->ShowWindow(SW_SHOW);
 
 }
-void CTAB1::hide_Circle()
+void Stroage::hide_Circle()
 {
 	GetDlgItem(IDC_Circle_Group)->ShowWindow(SW_HIDE); GetDlgItem(IDC_Circle_C)->ShowWindow(SW_HIDE); GetDlgItem(IDC_Circle_E)->ShowWindow(SW_HIDE); GetDlgItem(IDC_Circle_P)->ShowWindow(SW_HIDE);
-	//GetDlgItem(IDC_Bottom_Group)->ShowWindow(SW_HIDE);
+	
 	hide_Circle_C(); hide_Circle_E(); hide_Circle_P();
 }
 
 
 
 //Function for displaying textboxes when moving from circle to poly
-void CTAB1::ShowTextBoxes() {
+void Stroage::ShowTextBoxes() {
 	if (isHidden == 1) {
 		for (int i = 0; i < save_amount_points; i++) {
 			Polylabel[i].ShowWindow(SW_SHOW);
@@ -239,7 +237,7 @@ void CTAB1::ShowTextBoxes() {
 	}
 }
 //Function for moving from poly to circle so we need to hide the textboxes createdl
-void CTAB1::HideTextBoxes() {
+void Stroage::HideTextBoxes() {
 	for (int i = 0; i < save_amount_points; i++) {
 		Polylabel[i].ShowWindow(SW_HIDE);
 		PolyX[i].ShowWindow(SW_HIDE);
@@ -252,7 +250,7 @@ void CTAB1::HideTextBoxes() {
 
 
 //choosing the number of points desired
-void CTAB1::OnCbnSelchangePoints()
+void Stroage::OnCbnSelchangePoints()
 {
 	
 	save_amount_points = m_comboBoxCtrl.GetCurSel() + 1;//get value according to place in combo box(starting from 0)
@@ -309,7 +307,7 @@ void CTAB1::OnCbnSelchangePoints()
 
 
 //display everything that is connected to Circle C
-void CTAB1::Create_Circle_C()
+void Stroage::Create_Circle_C()
 {
 		
 		CircleTextBox = new CEdit[3];
@@ -338,7 +336,7 @@ void CTAB1::Create_Circle_C()
 			CRect(77, 230, 110, 250), this, 8888);//input radious textbox
 }
 
-void CTAB1::show_Circle_C()
+void Stroage::show_Circle_C()
 {
 	GetDlgItem(IDC_Bottom_Group)->ShowWindow(SW_SHOW);
 	if (CreateCircleC == 0) { Create_Circle_C(); CreateCircleC = 1; }
@@ -350,7 +348,7 @@ void CTAB1::show_Circle_C()
 	CircleTextBoxLabels[3].ShowWindow(SW_SHOW);
 }
 
-void CTAB1::hide_Circle_C()
+void Stroage::hide_Circle_C()
 {
 	if (CreateCircleC == 1) {
 		for (int i = 0; i < 3; i++) {
@@ -362,7 +360,7 @@ void CTAB1::hide_Circle_C()
 }
 
 
-void CTAB1::Create_Circle_E()
+void Stroage::Create_Circle_E()
 {
 	
 	EllipseTextBox = new CEdit[4];
@@ -395,7 +393,7 @@ void CTAB1::Create_Circle_E()
 		CRect(70, 220, 95, 240), this, 8888);
 }
 
-void CTAB1::show_Circle_E()
+void Stroage::show_Circle_E()
 {
 	GetDlgItem(IDC_Bottom_Group)->ShowWindow(SW_SHOW);
 	if (CreateCircleE == 0) { Create_Circle_E(); CreateCircleE = 1; }
@@ -411,7 +409,7 @@ void CTAB1::show_Circle_E()
 	}
 }
 
-void CTAB1::hide_Circle_E()
+void Stroage::hide_Circle_E()
 {
 	if (CreateCircleE == 1) {
 		int i;
@@ -427,7 +425,7 @@ void CTAB1::hide_Circle_E()
 
 
 
-void CTAB1::Create_Circle_P()
+void Stroage::Create_Circle_P()
 {
 
 	//input x textbox
@@ -481,7 +479,7 @@ void CTAB1::Create_Circle_P()
 		CRect(70, 305, 95, 325), this, 8888);
 }
 
-void CTAB1::show_Circle_P(){
+void Stroage::show_Circle_P(){
 	GetDlgItem(IDC_Bottom_Group)->ShowWindow(SW_SHOW);
 	if (CreateCircleP == 0) { Create_Circle_P(); CreateCircleP = 1; }
 	else {
@@ -493,7 +491,7 @@ void CTAB1::show_Circle_P(){
 	}
 }
 
-void CTAB1::hide_Circle_P()
+void Stroage::hide_Circle_P()
 {
 	if (CreateCircleP == 1) {
 		for(int i=0; i <6; i++){ 
@@ -511,7 +509,7 @@ void CTAB1::hide_Circle_P()
 
 //On Circle Radio button click
 
-void CTAB1::OnBnClickedCircleC()
+void Stroage::OnBnClickedCircleC()
 {
 	if ( IsDlgButtonChecked(IDC_Circle_C) == BST_CHECKED )//if chosen circle 
 	{
@@ -527,7 +525,7 @@ void CTAB1::OnBnClickedCircleC()
 }
 
 
-void CTAB1::OnBnClickedCircleE()
+void Stroage::OnBnClickedCircleE()
 {
 	if ( IsDlgButtonChecked(IDC_Circle_E) == BST_CHECKED )//if chosen ellipse
 	{
@@ -544,7 +542,7 @@ void CTAB1::OnBnClickedCircleE()
 }
 
 
-void CTAB1::OnBnClickedCircleP()
+void Stroage::OnBnClickedCircleP()
 {
 	if ( IsDlgButtonChecked(IDC_Circle_P) == BST_CHECKED )//if chosen pie
 	{
@@ -562,7 +560,7 @@ void CTAB1::OnBnClickedCircleP()
 }
 
 
-void CTAB1::OnBnClickedSend() {
+void Stroage::OnBnClickedSend() {
 	if (CurrentPose_shape < 5)
 	{
 		if (InputItegrity()) {
@@ -838,7 +836,7 @@ void CTAB1::OnBnClickedSend() {
 
 
 
-bool CTAB1::InputItegrity() {//checking input if correct
+bool Stroage::InputItegrity() {//checking input if correct
 	CString str,str2,str3;
 	if (IsDlgButtonChecked(IDC_Polygon) == BST_CHECKED) {
 		for (int i = 0; i < this->save_amount_points; i++) {//checking poly input
@@ -913,7 +911,7 @@ bool CTAB1::InputItegrity() {//checking input if correct
 	
 
 
-void CTAB1::CleanInput() {//clean all the input
+void Stroage::CleanInput() {//clean all the input
 	if (IsDlgButtonChecked(IDC_Polygon) == BST_CHECKED) {
 		for (int i = 0; i < this->save_amount_points; i++) {
 			PolyX[i].SetWindowTextW(_T(""));
