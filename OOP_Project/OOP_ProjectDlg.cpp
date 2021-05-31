@@ -531,7 +531,7 @@ void COOPProjectDlg::INFOCircleE(list <Shape*> ::iterator indexS, list <ellipse*
 		arr_labels[indexS_pos_shape_list][0]->Create(ctmp, WS_CHILD | WS_VISIBLE,
 			CRect(875, 35 + indexS_pos_shape_list * 100, 960, 70 + indexS_pos_shape_list * 100), this);
 
-		ctmp.Format(_T("Area: %f.  Color: %S "), (*indexS)->area(),arr_color_names[(*indexS)->get_color()].c_str());
+		ctmp.Format(_T("Area: %.2f  Color: %S "), (*indexS)->area(),arr_color_names[(*indexS)->get_color()].c_str());
 		arr_labels[indexS_pos_shape_list][1]->Create(ctmp, WS_CHILD | WS_VISIBLE,
 			CRect(990, 35 + indexS_pos_shape_list * 100, 1200, 70 + indexS_pos_shape_list * 100), this);
 

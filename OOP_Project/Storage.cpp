@@ -830,7 +830,7 @@ void Stroage::OnBnClickedSend() {
 
 	else
 	{
-		MessageBox(_T("You enter too much shape \n FUCK YOU"), _T("ERROR"), MB_OK);
+		MessageBox(_T("There are already 5 Shapes on scrren\n Please delete a shape"), _T("Insuffient Space"), MB_OK);
 	}
 }
 
