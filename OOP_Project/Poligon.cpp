@@ -108,12 +108,16 @@ string Poligon::PrintType() {
 
     if (get_amount_edge() == 1) { 
         return "Point"; }
-
+    else if (get_amount_edge() == 2)
+    {
+        return "Vector";
+    }
 
     double Spacing = check_slope(get_fake_arr()[0], get_fake_arr()[1]);
+    double first_spacing = Spacing;
     int SideAmount = 1;
 
-    for (int i = 2; i <= get_amount_edge(); i++) {
+  /*  for (int i = 2; i <= get_amount_edge(); i++) {
 
         if (check_slope(get_fake_arr()[i-1], get_fake_arr()[i]) != Spacing) {
 
@@ -121,28 +125,58 @@ string Poligon::PrintType() {
 
         }
         Spacing = check_slope(get_fake_arr()[i - 1], get_fake_arr()[i]);
+    }*/
+
+    for (int i = 1; i < get_amount_edge(); i++) {
+
+        if (i == amount_edge - 1)
+        {
+            if (check_slope(get_fake_arr()[i], get_fake_arr()[0]) != Spacing&& check_slope(get_fake_arr()[i], get_fake_arr()[0]) != first_spacing) {
+
+                SideAmount++;
+                
+            }
+            //Spacing = check_slope(get_fake_arr()[i], get_fake_arr()[0]);
+        }
+        else
+        {
+            if (check_slope(get_fake_arr()[i], get_fake_arr()[i+1]) != Spacing) {
+
+                SideAmount++;
+                Spacing = check_slope(get_fake_arr()[i], get_fake_arr()[i + 1]);
+            }
+           
+        }
+
+
+       
+        
     }
+
 
     switch (SideAmount) {
     case 1:
         return "Vector";
         break;
+    //no case 2
     case 2:
+        return "No such shape";
+    case 3:
         return "Triangle";
         break;
-    case 3:
-        return "Square";
-        break;
     case 4:
-        return "Poly 5Points";
+        return "Rectangle";
         break;
     case 5:
-        return "Poly 6Points";
+        return "Poly 5Points";
         break;
     case 6:
-        return "Poly 7Points";
+        return "Poly 6Points";
         break;
     case 7:
+        return "Poly 7Points";
+        break;
+    case 8:
         return "Poly 8Points";
         break;
 
@@ -203,9 +237,11 @@ POINT* Poligon::GetArr()
      else {
    
          
-         Real_Coor = new POINT[8];
-         On_Screen_Coor = new POINT[8];
+        /* Real_Coor = new POINT[8];
+         On_Screen_Coor = new POINT[8];*/
          archive >> color_index >> PositionTypeList >> Position_shape_list >> amount_edge; //shape variables except for amount edge
+         Real_Coor = new POINT[amount_edge];
+         On_Screen_Coor = new POINT[amount_edge];
          int i;
          for (i = 0; i < amount_edge; i++) {
              archive >> Real_Coor[i].x >> Real_Coor[i].y;

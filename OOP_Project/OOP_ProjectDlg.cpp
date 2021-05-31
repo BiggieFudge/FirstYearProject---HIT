@@ -436,7 +436,7 @@ void COOPProjectDlg::INFOPoly(list <Shape*> ::iterator indexS, list <Poligon*> :
 		for (int i = 3; i < (*indexP)->get_amount_edge() + 3; i++) {
 
 
-			ctmp.Format(_T(" %d: (%.1f,%.1f)"), (i - 2),
+			ctmp.Format(_T(" %d: (%.0f,%.0f)"), (i - 2),
 				(double)((*indexP)->get_fake_arr())[i - 3].x / 10, 
 				(double)((*indexP)->get_fake_arr())[i - 3].y / 10);
 
@@ -822,6 +822,7 @@ void COOPProjectDlg::OnBnClickedLoad()
 	
 	if (fDialog.DoModal() == IDOK) {
 		
+
 		DeleteScreen();//makes sure nothing is on the screen before loading
 		
 
@@ -1133,7 +1134,7 @@ void COOPProjectDlg::SavePie(CFileDialog & fDialog) {
 
 void COOPProjectDlg::DeleteScreen()
 {
-    
+	delete_arr_labels();//added recently//deleting info labels before reseting indexes
 	m_controls.m_TAB1.CurrentPose_shape = 0;//reset count of shapes
 	m_controls.m_TAB1.CurrentPose_circle = 0;//reset count of circle
 	m_controls.m_TAB1.CurrentPose_circle_c = 0;//reset count of circleC
@@ -1155,7 +1156,10 @@ void COOPProjectDlg::DeleteScreen()
 	}
 
 	
-	//deleting x y number labels on grid
+	
+	
+
+	
 	
 	
 	
@@ -1166,10 +1170,12 @@ void COOPProjectDlg::DeleteScreen()
 	m_controls.m_TAB1.pie_shapes.RemoveAll();
 
 	m_controls.m_TAB1.ShapeList.clear();
+	m_controls.m_TAB1.CircleList.clear();//added recently
 	m_controls.m_TAB1.CircleCList.clear();
 	m_controls.m_TAB1.CircleEList.clear();
 	m_controls.m_TAB1.CirclePList.clear();
 	m_controls.m_TAB1.PolyList.clear();
+	
 }
 
 

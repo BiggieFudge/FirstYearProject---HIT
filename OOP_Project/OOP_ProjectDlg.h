@@ -22,7 +22,7 @@ public:
 	~COOPProjectDlg()
 	{
 		
-		delete_arr_labels();
+		//delete_arr_labels();
 
 		DeleteScreen();
 
