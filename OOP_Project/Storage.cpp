@@ -243,7 +243,7 @@ void Stroage::HideTextBoxes() {
 		PolyX[i].ShowWindow(SW_HIDE);
 		PolyY[i].ShowWindow(SW_HIDE);
 	}
-	//HIDE ALL X,Y LABEL (and yo kids)
+	//hide x,y labels
 	GetDlgItem(IDC_X)->ShowWindow(SW_HIDE); GetDlgItem(IDC_Y)->ShowWindow(SW_HIDE); GetDlgItem(IDC_X2)->ShowWindow(SW_HIDE);	GetDlgItem(IDC_Y2)->ShowWindow(SW_HIDE);
 	isHidden = 1;
 }
@@ -373,12 +373,12 @@ void Stroage::Create_Circle_E()
 		CRect(17, 170, 30, 190), this);
 
 	EllipseTextBox[0].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
-		CRect(30, 170, 55, 190), this, 8888);
+		CRect(30, 170, 55, 190), this, 8888); //lb.x text box
 	
 	EllipseTextBoxLabels[2].Create(_T("y:"), WS_CHILD | WS_VISIBLE,
 		CRect(57, 170, 70, 190), this);
 	EllipseTextBox[1].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
-		CRect(70, 170, 95, 190), this, 8888);
+		CRect(70, 170, 95, 190), this, 8888);//lb.y text box
 	
 
 	EllipseTextBoxLabels[3].Create(_T("Enter Right Top:"), WS_CHILD | WS_VISIBLE,
@@ -386,11 +386,11 @@ void Stroage::Create_Circle_E()
 	EllipseTextBoxLabels[4].Create(_T("x:"), WS_CHILD | WS_VISIBLE,
 		CRect(17, 220, 30, 240), this);
 	EllipseTextBox[2].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
-		CRect(30, 220, 55, 240), this, 8888);
+		CRect(30, 220, 55, 240), this, 8888);//rt.x text box
 	EllipseTextBoxLabels[5].Create(_T("y:"), WS_CHILD | WS_VISIBLE,
 		CRect(57, 220, 70, 240), this);
 	EllipseTextBox[3].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
-		CRect(70, 220, 95, 240), this, 8888);
+		CRect(70, 220, 95, 240), this, 8888);//rt.y text box
 }
 
 void Stroage::show_Circle_E()
@@ -463,20 +463,20 @@ void Stroage::Create_Circle_P()
 		CRect(17, 245, 200, 265), this);
 
 	PieTextBox[3].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
-		CRect(30, 265, 55, 285), this, 8888);
+		CRect(30, 265, 55, 285), this, 8888);//start_angle.x
 	
 	PieTextBox[4].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
-		CRect(70, 265, 95, 285), this, 8888);
+		CRect(70, 265, 95, 285), this, 8888);//start_angle.y
 
 
 	PieTextBoxLabels[5].Create(_T("Enter End Angle:"), WS_CHILD | WS_VISIBLE,
 		CRect(17, 285, 200, 305), this);
 
 	PieTextBox[5].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
-		CRect(30, 305, 55, 325), this, 8888);
+		CRect(30, 305, 55, 325), this, 8888);//end_angle.x
 
 	PieTextBox[6].Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
-		CRect(70, 305, 95, 325), this, 8888);
+		CRect(70, 305, 95, 325), this, 8888);//end_angle.y
 }
 
 void Stroage::show_Circle_P(){
@@ -646,12 +646,12 @@ void Stroage::OnBnClickedSend() {
 					c1->set_pos_shape_list(CurrentPose_shape);
 
 					ShapeList.push_back(c1);
-					//CircleList.push_back(c1);
+			
 					CircleCList.push_back(c1);
 					circle_shapes.AddTail(c1);
 
 
-					//CurrentPose_circle++;
+				
 					CurrentPose_shape++;
 					CurrentPose_circle_c++;
 
@@ -700,19 +700,19 @@ void Stroage::OnBnClickedSend() {
 
 
 					ellipse* e1 = new ellipse(p1, p3, p2);
-					//e1->position_in_shape++;
+				
 					e1->set_pos_type_list(CurrentPose_circle_e);
 					e1->set_pos_shape_list(CurrentPose_shape);
 
 					delete[] p2;
 
 					ShapeList.push_back(e1);
-					//CircleList.push_back(e1);
+				
 					CircleEList.push_back(e1);
 					ellipse_shapes.AddTail(e1);
 
 
-					//CurrentPose_circle++;
+				
 					CurrentPose_shape++;
 					CurrentPose_circle_e++;
 
@@ -802,10 +802,10 @@ void Stroage::OnBnClickedSend() {
 					
 
 					ShapeList.push_back(e1);
-					//CircleList.push_back(e1);
+					
 					CirclePList.push_back(e1);
 					pie_shapes.AddTail(e1);
-					//CurrentPose_circle++;
+					
 					CurrentPose_shape++;
 					CurrentPose_circle_p++;
 

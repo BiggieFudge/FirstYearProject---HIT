@@ -720,7 +720,7 @@ void COOPProjectDlg::delete_shape(int pos_in_shape)//deletes selected shape
 		
 
 		m_controls.m_TAB1.CurrentPose_circle_p--;
-		//m_controls.m_TAB1.CurrentPose_circle--;
+		
 
 
 	}
@@ -738,7 +738,7 @@ void COOPProjectDlg::delete_shape(int pos_in_shape)//deletes selected shape
 		m_controls.m_TAB1.CircleEList.erase(e_it);
 		
 		m_controls.m_TAB1.CurrentPose_circle_e--;
-		//m_controls.m_TAB1.CurrentPose_circle--;
+	
 
 	}
 	
@@ -748,7 +748,7 @@ void COOPProjectDlg::delete_shape(int pos_in_shape)//deletes selected shape
 	m_controls.m_TAB1.CurrentPose_shape--;
 	
 	
-	for (; S_it != m_controls.m_TAB1.ShapeList.end(); S_it++) {   //WORST Function ever omfgggg
+	for (; S_it != m_controls.m_TAB1.ShapeList.end(); S_it++) {   
 		if ((*S_it)->type() == type) {
 			int x = (*S_it)->get_pos_type_list();
 			(*S_it)->set_pos_type_list(--x);   //change the index of all other objects in the specifiec list
@@ -969,7 +969,7 @@ void COOPProjectDlg::LoadEllipse(CFileDialog& fDialog)
 	POSITION pos = m_controls.m_TAB1.ellipse_shapes.GetHeadPosition();
 	while (pos != NULL) {
 		m_controls.m_TAB1.CurrentPose_shape++;
-		//m_controls.m_TAB1.CurrentPose_circle++;
+		
 		m_controls.m_TAB1.CurrentPose_circle_e++;
 		m_controls.m_TAB1.CircleEList.push_back(m_controls.m_TAB1.ellipse_shapes.GetNext(pos));
 	}
@@ -1098,7 +1098,6 @@ void COOPProjectDlg::DeleteScreen()
 {
 	delete_arr_labels();//added recently//deleting info labels before reseting indexes
 	m_controls.m_TAB1.CurrentPose_shape = 0;//reset count of shapes
-	//m_controls.m_TAB1.CurrentPose_circle = 0;//reset count of circle
 	m_controls.m_TAB1.CurrentPose_circle_c = 0;//reset count of circleC
 	m_controls.m_TAB1.CurrentPose_circle_e = 0;//reset count of circleE
 	m_controls.m_TAB1.CurrentPose_poly = 0;//reset count of poly
@@ -1132,7 +1131,6 @@ void COOPProjectDlg::DeleteScreen()
 	m_controls.m_TAB1.pie_shapes.RemoveAll();
 
 	m_controls.m_TAB1.ShapeList.clear();
-	//m_controls.m_TAB1.CircleList.clear();//added recently
 	m_controls.m_TAB1.CircleCList.clear();
 	m_controls.m_TAB1.CircleEList.clear();
 	m_controls.m_TAB1.CirclePList.clear();

@@ -20,13 +20,8 @@ BOOL CONTROLS::OnInitDialog()
 	CTabCtrl* pTabCtrl = (CTabCtrl*)GetDlgItem(IDC_TAB);
 	m_TAB1.Create(IDD_TAB1, pTabCtrl);  // TAB1 Connection
 
-	//CTabCtrl* pTabCtrl2 = (CTabCtrl*)GetDlgItem(IDC_TAB);
-	//m_TAB2.Create(IDD_TAB2, pTabCtrl2);// TAB2 Connection
 
-	//CTabCtrl* pTabCtrl3 = (CTabCtrl*)GetDlgItem(IDC_TAB);
-	//m_TAB3.Create(IDD_TAB3, pTabCtrl3);// TAB3 Connection
-
-	TCITEM item1/*, item2, item3*/;
+	TCITEM item1;
 
 	//choosing name for tab
 	item1.mask = TCIF_TEXT | TCIF_PARAM;  
@@ -34,31 +29,14 @@ BOOL CONTROLS::OnInitDialog()
 	item1.pszText = _T("Add new Shape");
 	pTabCtrl->InsertItem(0, &item1);      
 
-	//item2.mask = TCIF_TEXT | TCIF_PARAM;
-	//item2.lParam = (LPARAM)&m_TAB2;
-	//item2.pszText = _T("Remove Shape");
-	//pTabCtrl2->InsertItem(1, &item2);
 
-	//item3.mask = TCIF_TEXT | TCIF_PARAM;
-	//item3.lParam = (LPARAM)&m_TAB3;
-	//item3.pszText = _T("Edit Shape");
-	//pTabCtrl3->InsertItem(2, &item3);
-
-	CRect rcItem1/*rcItem2,rcItem3*/;
+	CRect rcItem1;
 
 	//choosing position/visibilty for tab
 	pTabCtrl->GetItemRect(0, &rcItem1);
 	m_TAB1.SetWindowPos(NULL, rcItem1.left, rcItem1.bottom + 1, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 	m_TAB1.ShowWindow(SW_SHOW);
 
-	//pTabCtrl2->GetItemRect(0, &rcItem2);
-	//m_TAB2.SetWindowPos(NULL, rcItem2.left, rcItem2.bottom + 1, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
-	//m_TAB2.ShowWindow(SW_HIDE); // Hide by default every page that is not 1;
-
-	//pTabCtrl3->GetItemRect(0, &rcItem3);
-	//m_TAB3.SetWindowPos(NULL, rcItem3.left, rcItem3.bottom + 1, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
-	//m_TAB3.ShowWindow(SW_HIDE); // Hide by default every page that is not 1;
-	//END TAB CONTROL
 
 
 	return TRUE;//must return true!!!!
@@ -109,20 +87,8 @@ void CONTROLS::OnSelchangeTabcontrol(NMHDR* pNMHDR, LRESULT* pResult)
 	if (iSel == 0) // First Tab Chosen
 	{
 		m_TAB1.ShowWindow(SW_SHOW);
-		//m_TAB2.ShowWindow(SW_HIDE);
-		//m_TAB3.ShowWindow(SW_HIDE);
+		
 	}
-	//else if (iSel == 1)// Second Tab Chosen
-	//{
-	//	m_TAB2.ShowWindow(SW_SHOW);
-	//	m_TAB1.ShowWindow(SW_HIDE);
-	//	m_TAB3.ShowWindow(SW_HIDE);
-	//}
-	//else {  //Third Tab
-	//	m_TAB3.ShowWindow(SW_SHOW);
-	//	m_TAB2.ShowWindow(SW_HIDE);
-	//	m_TAB1.ShowWindow(SW_HIDE);
-	//}
-	//ADD new TAB here!
+	
 }
 //END TAB CONTROL

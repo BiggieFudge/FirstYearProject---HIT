@@ -57,16 +57,17 @@ public:
 	CEdit* PieTextBox;
 
 
-
+	//create text box
 	void create_text_boxes();
 
+	//checking input 
 	bool PolyInputItegrity();
 	bool CirInputItegrity();
 	bool EllInputItegrity();
 	bool PieInputItegrity();
 	void CleanInput();
 
-
+	//deleting buttons
 	void deletePoly();
 	void deleteCir();
 	void deleteEll();
