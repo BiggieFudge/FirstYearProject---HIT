@@ -35,7 +35,7 @@ protected:
 public:
 
 	
-
+    //
 	CTypedPtrList<CObList, Circle*> circle_shapes;
 	CTypedPtrList<CObList, Poligon*> polygon_shapes;
 	CTypedPtrList<CObList, ellipse*> ellipse_shapes;
@@ -43,7 +43,7 @@ public:
 
 	list<Shape*> ShapeList;
 	list<Poligon*> PolyList;
-	list<Circle*> CircleList;
+	//list<Circle*> CircleList;
 	list<Circle*> CircleCList;
 	list<ellipse*> CircleEList;
 	list<pie*> CirclePList;
@@ -51,7 +51,7 @@ public:
 
 	int CurrentPose_shape = 0;//amount of shapes right now
 	int CurrentPose_poly = 0;//amount of polygons right now
-	int CurrentPose_circle = 0;//amount of circles right now
+	//int CurrentPose_circle = 0;//amount of circles right now
 	int CurrentPose_circle_c = 0;//amount of circles right now
 	int CurrentPose_circle_e = 0;//amount of circles right now
 	int CurrentPose_circle_p = 0;//amount of circles right now

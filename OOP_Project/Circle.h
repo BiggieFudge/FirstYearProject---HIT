@@ -27,10 +27,10 @@ public:
 
 
     //getters/setters:
-    double get_radius();
-    double get_radius_real();
+    double get_radius() const;
+    double get_radius_real() const;
     CRect get_rekt();
-    POINT get_center();
+    POINT get_center() const;
 
     void set_center(POINT);
 

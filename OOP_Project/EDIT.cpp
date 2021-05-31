@@ -217,19 +217,19 @@ void EDIT::OnBnClickedOk()
 {
 	// TODO: Add your control notification handler code here
 	
-	if (type == "Polygon" && PolyInputItegrity()) {
+	if (type == "Polygon" && !PolyInputItegrity()) {
 		
 		CDialogEx::OnCancel();
 	}
-	else if (type == "CircleC" && CirInputItegrity()) {
+	else if (type == "CircleC" && !CirInputItegrity()) {
 	
 		CDialogEx::OnCancel();
 	}
-	else if (type == "CircleE" && EllInputItegrity()) {
+	else if (type == "CircleE" && !EllInputItegrity()) {
 		
 		CDialogEx::OnCancel();
 	}
-	else if(type =="CircleP" && PieInputItegrity()) {
+	else if(type =="CircleP" && !PieInputItegrity()) {
 	
 		CDialogEx::OnCancel();
 	}
@@ -418,6 +418,7 @@ bool EDIT::PolyInputItegrity() {
 		}
 
 	}
+	return TRUE;
 }
 
 bool EDIT::CirInputItegrity() {
@@ -425,12 +426,18 @@ bool EDIT::CirInputItegrity() {
 	CircleTextBox[0].GetWindowTextW(str);
 	CircleTextBox[1].GetWindowTextW(str2);
 	CircleTextBox[2].GetWindowTextW(str3);
+	if (str3 == "") {
+		CleanInput();
+		MessageBox(_T("Invalid input"), _T("ERROR"), MB_OK);
+		return FALSE;
+	}
 	if ((_tstof(str) < -10 || _tstof(str) > 10) || (_tstof(str2) < -10 || _tstof(str2) > 10) || (_tstof(str) + _tstof(str3) < -10 || _tstof(str) + _tstof(str3) > 10 || _tstof(str2) + _tstof(str3) < -10 || _tstof(str2) + _tstof(str3) > 10) || _tstof(str3) < 0) {
 
 		CleanInput();
 		MessageBox(_T("Invalid input"), _T("ERROR"), MB_OK);
 		return FALSE;
 	}
+	return TRUE;
 }
 
 
@@ -444,6 +451,7 @@ bool EDIT::EllInputItegrity() {
 			return FALSE;
 		}
 	}
+	return TRUE;
 }
 
 
@@ -453,6 +461,11 @@ bool EDIT::PieInputItegrity() {
 	PieTextBox[0].GetWindowTextW(str);
 	PieTextBox[1].GetWindowTextW(str2);
 	PieTextBox[2].GetWindowTextW(str3);
+	if (str3 == "") {
+		CleanInput();
+		MessageBox(_T("Invalid input"), _T("ERROR"), MB_OK);
+		return FALSE;
+	}
 	if ((_tstof(str) < -10 || _tstof(str) > 10) || (_tstof(str2) < -10 || _tstof(str2) > 10) || (_tstof(str) + _tstof(str3) < -10 || _tstof(str) + _tstof(str3) > 10 || _tstof(str2) + _tstof(str3) < -10 || _tstof(str2) + _tstof(str3) > 10) || _tstof(str3) < 0) {
 
 		CleanInput();
@@ -469,16 +482,9 @@ bool EDIT::PieInputItegrity() {
 		}
 
 	}
+	return TRUE;
 
-	for (int i = 0; i < 7; i++) {//Check input itegrity for pie
-		PieTextBox[i].GetWindowTextW(str);
-		if (_tstof(str) < -10 || _tstof(str) > 10) {
-			CleanInput();
-			MessageBox(_T("Invalid input"), _T("ERROR"), MB_OK);
-			return FALSE;
-		}
-
-	}
+	
 }
 
 
@@ -500,10 +506,11 @@ void EDIT::CleanInput() {//clean all the input
 		}
 	}
 	else {
-		for (int i = 0; i < 8; i++) {
+		for (int i = 0; i < 7; i++) {
 			PieTextBox[i].SetWindowTextW(_T(""));
 		}
 	}
+
 }
 
 void EDIT::deletePoly() {

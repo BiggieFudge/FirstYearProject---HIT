@@ -104,7 +104,7 @@ string Poligon::type()
 
 
 
-string Poligon::PrintType() {
+string Poligon::PrintType() {  //Check the true shape of polygon
 
     if (get_amount_edge() == 1) { 
         return "Point"; }
@@ -117,15 +117,7 @@ string Poligon::PrintType() {
     double first_spacing = Spacing;
     int SideAmount = 1;
 
-  /*  for (int i = 2; i <= get_amount_edge(); i++) {
-
-        if (check_slope(get_fake_arr()[i-1], get_fake_arr()[i]) != Spacing) {
-
-            SideAmount++;
-
-        }
-        Spacing = check_slope(get_fake_arr()[i - 1], get_fake_arr()[i]);
-    }*/
+ 
 
     for (int i = 1; i < get_amount_edge(); i++) {
 
@@ -136,7 +128,7 @@ string Poligon::PrintType() {
                 SideAmount++;
                 
             }
-            //Spacing = check_slope(get_fake_arr()[i], get_fake_arr()[0]);
+            
         }
         else
         {
@@ -158,9 +150,9 @@ string Poligon::PrintType() {
     case 1:
         return "Vector";
         break;
-    //no case 2
     case 2:
-        return "No such shape";
+        return "2 Vectors";
+        break;
     case 3:
         return "Triangle";
         break;
@@ -201,18 +193,18 @@ double Poligon::check_slope(POINT p1, POINT p2)
 }
 
 
-POINT* Poligon::GetArr()
+POINT* Poligon::GetArr() const
 {
    
         return On_Screen_Coor;
     
 }
- int Poligon::get_amount_edge()
+ int Poligon::get_amount_edge() const
  {
      return(amount_edge);
  }
 
- POINT* Poligon::get_fake_arr()
+ POINT* Poligon::get_fake_arr() const
  {
      return(Real_Coor);
  }

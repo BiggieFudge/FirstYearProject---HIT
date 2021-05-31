@@ -646,12 +646,12 @@ void Stroage::OnBnClickedSend() {
 					c1->set_pos_shape_list(CurrentPose_shape);
 
 					ShapeList.push_back(c1);
-					CircleList.push_back(c1);
+					//CircleList.push_back(c1);
 					CircleCList.push_back(c1);
 					circle_shapes.AddTail(c1);
 
 
-					CurrentPose_circle++;
+					//CurrentPose_circle++;
 					CurrentPose_shape++;
 					CurrentPose_circle_c++;
 
@@ -707,12 +707,12 @@ void Stroage::OnBnClickedSend() {
 					delete[] p2;
 
 					ShapeList.push_back(e1);
-					CircleList.push_back(e1);
+					//CircleList.push_back(e1);
 					CircleEList.push_back(e1);
 					ellipse_shapes.AddTail(e1);
 
 
-					CurrentPose_circle++;
+					//CurrentPose_circle++;
 					CurrentPose_shape++;
 					CurrentPose_circle_e++;
 
@@ -802,10 +802,10 @@ void Stroage::OnBnClickedSend() {
 					
 
 					ShapeList.push_back(e1);
-					CircleList.push_back(e1);
+					//CircleList.push_back(e1);
 					CirclePList.push_back(e1);
 					pie_shapes.AddTail(e1);
-					CurrentPose_circle++;
+					//CurrentPose_circle++;
 					CurrentPose_shape++;
 					CurrentPose_circle_p++;
 
@@ -860,6 +860,11 @@ bool Stroage::InputItegrity() {//checking input if correct
 			CircleTextBox[0].GetWindowTextW(str);
 			CircleTextBox[1].GetWindowTextW(str2);
 			CircleTextBox[2].GetWindowTextW(str3);
+			if (str3 == "") {
+				CleanInput();
+				MessageBox(_T("Invalid input"), _T("ERROR"), MB_OK);
+				return FALSE;
+			}
 			if ((_tstof(str) < -10 || _tstof(str) > 10) || (_tstof(str2) < -10 || _tstof(str2) > 10) || (_tstof(str) + _tstof(str3) < -10 || _tstof(str) + _tstof(str3) > 10 || _tstof(str2) + _tstof(str3) < -10 || _tstof(str2) + _tstof(str3) > 10) || _tstof(str3)<0) {
 				
 				CleanInput();
@@ -882,6 +887,11 @@ bool Stroage::InputItegrity() {//checking input if correct
 		PieTextBox[0].GetWindowTextW(str);
 		PieTextBox[1].GetWindowTextW(str2);
 		PieTextBox[2].GetWindowTextW(str3);
+		if (str3 == "") {
+			CleanInput();
+			MessageBox(_T("Invalid input"), _T("ERROR"), MB_OK);
+			return FALSE;
+		}
 		if ((_tstof(str) < -10 || _tstof(str) > 10) || (_tstof(str2) < -10 || _tstof(str2) > 10) || (_tstof(str) + _tstof(str3) < -10 || _tstof(str) + _tstof(str3) > 10 || _tstof(str2) + _tstof(str3) < -10 || _tstof(str2) + _tstof(str3) > 10) || _tstof(str3) < 0) {
 
 			CleanInput();

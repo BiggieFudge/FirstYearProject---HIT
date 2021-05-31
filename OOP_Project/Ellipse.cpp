@@ -58,12 +58,12 @@ CRect ellipse::get_rekt()
    
 }
 
-POINT ellipse::get_lp()
+POINT ellipse::get_lp() const
 {
     return lp;
 }
 
-POINT ellipse::get_rp()
+POINT ellipse::get_rp() const
 {
     return rp;
 }
@@ -93,6 +93,16 @@ void ellipse::set_rp(long x1,long y1)
     rp.x = x1;
     rp.y = y1;
 }
+
+ double ellipse::get_radius_small() const
+ {
+        return radius1;
+ }
+    double ellipse::get_radius_big() const
+ {
+        return radius2;
+ }
+
 
 void ellipse::Serialize(CArchive& archive)
 {

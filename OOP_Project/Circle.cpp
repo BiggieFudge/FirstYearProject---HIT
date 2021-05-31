@@ -45,12 +45,12 @@ Circle::~Circle()
     delete[] RectPoint;
 }
 
-double Circle::area()
+double Circle::area() 
 {
     return(PI * radius * radius);
 }
 
-double Circle::perimeter()
+double Circle::perimeter() 
 {
     return(PI * radius * 2);
 }
@@ -63,12 +63,12 @@ string Circle::type()
 }
 //getters and setters
 
-double Circle::get_radius() 
+double Circle::get_radius() const
 {
     return(radius);
 }
 
-double Circle::get_radius_real()
+double Circle::get_radius_real() const
 {
     return radiusReal;
 }
@@ -91,7 +91,7 @@ CRect Circle::get_rekt()
     return(CRect(this->RectPoint[0].x, this->RectPoint[0].y, this->RectPoint[1].x, this->RectPoint[1].y));
 }
 
-POINT Circle::get_center()
+POINT Circle::get_center() const
 {
     return(center);
 }

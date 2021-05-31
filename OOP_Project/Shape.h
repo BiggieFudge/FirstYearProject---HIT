@@ -41,7 +41,7 @@ public:
         
         color_index = x;
     }
-    int get_color()
+    int get_color() const 
     {
         return(color_index);
     }
@@ -49,7 +49,7 @@ public:
     {
         is_shown = x;
     }
-    bool get_is_shown()
+    bool get_is_shown() const
     {
         return(is_shown);
     }
@@ -57,14 +57,14 @@ public:
     void set_pos_type_list(int PTL) {
         PositionTypeList = PTL;
     }
-    int get_pos_type_list(){
+    int get_pos_type_list()const {
         return PositionTypeList;
     }
 
     void set_pos_shape_list(int PTL) {
         Position_shape_list = PTL;
     }
-    int get_pos_shape_list() {
+    int get_pos_shape_list()const {
         return Position_shape_list;
     }
    

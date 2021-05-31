@@ -21,20 +21,16 @@ public:
 
     //getters/setters:
     CRect get_rekt();
-    POINT get_lp();
-    POINT get_rp();
+    POINT get_lp() const;
+    POINT get_rp() const;
 
     void set_rekt(CRect);
     void set_lp(long,long);
     void set_rp(long,long);
 
     
-    double get_radius_small() {
-        return radius1;
-    }
-    double get_radius_big() {
-        return radius2;
-    }
+    double get_radius_small() const;
+    double get_radius_big() const;
 
 private:
     POINT lp;//top left point of rectangle

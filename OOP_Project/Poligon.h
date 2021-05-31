@@ -17,11 +17,11 @@ public:
     void Serialize(CArchive& archive);
 
     //Get/Set
-    int get_amount_edge(); //return number of points;
+    int get_amount_edge() const; //return number of points;
 
-    POINT* GetArr();//returns the on screen points
+    POINT* GetArr() const;//returns the on screen points
 
-    POINT* get_fake_arr();//returns the x,y points
+    POINT* get_fake_arr() const;//returns the x,y points
 
 
 

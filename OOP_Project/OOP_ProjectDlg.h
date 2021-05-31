@@ -22,7 +22,7 @@ public:
 	~COOPProjectDlg()
 	{
 		
-		//delete_arr_labels();
+		
 
 		DeleteScreen();
 
@@ -50,7 +50,8 @@ protected:
 	
 	
 	COLORREF arr_color[5] = { RGB(255,0,0),RGB(0,255,0),RGB(0,0,255),RGB(255,128,0),RGB(255,255,0)};//array containing colors for shapes
-	bool arr_check_color[5] = {false,false,false,false,false};
+	string arr_color_names[5] = { "red","green","blue","orange","yellow" };//names of colors according to arr_color indexes
+	bool arr_check_color[5] = {false,false,false,false,false};//array contains which color is used
 	
 	CStatic** arr_labels[5];//array of labels for info
 	int arr_sizes[5];//saves sizes of inner arrays in arr_labels
@@ -60,15 +61,11 @@ protected:
 	HICON EditIcon = (HICON)LoadImage(AfxGetApp()->m_hInstance, MAKEINTRESOURCE(IDI_ICON3), IMAGE_ICON, 32, 32, 0);
 	
 	
-	CButton* arr_Btn[5];
+	CButton* arr_Btn[5];//array containing delete button
 
-	CButton* arr_EditBtn[5];
+	CButton* arr_EditBtn[5];//array containing edit button
 	
-	//CStatic* label_x = new CStatic[20];//number labels on x axis
-	//CStatic* label_y = new CStatic[20];//number labels on y axis
 
-	CStatic* label_x;//number labels on x axis
-	CStatic* label_y;//number labels on y axis
 
 
 	
@@ -97,11 +94,13 @@ public:
 	void INFOCircleC(list <Shape*> ::iterator indexS, list <Circle*> ::iterator indexC);//shows info about circle
 	void INFOCircleE(list <Shape*> ::iterator indexS, list <ellipse*> ::iterator indexE);//shows info about ellipse
 	void INFOCircleP(list <Shape*> ::iterator indexS, list <pie*> ::iterator indexP);//shows info about pie
-	void delete_shape(int pos_in_shape);//deleting selected shape
-	void delete_arr_labels();
-	void edit_func(int);//edit selected shape
-	void delete_buttons();
 	
+	
+	void delete_shape(int pos_in_shape);//deleting selected shape
+	void delete_arr_labels();//deleting info labels
+	void edit_func(int);//edit selected shape
+	void delete_buttons();//deleting edit and delete buttons
+	void CreateButton(int);//create edit and delete buttons
 
 	afx_msg void RemoveShape1() { delete_shape(0); }//deleting shape 1
 	afx_msg void RemoveShape2() { delete_shape(1); };//deleting shape 2
@@ -121,12 +120,13 @@ public:
 
 	
 	CONTROLS m_controls; //Show/Hide CONTROLS DIALOG
-	afx_msg void OnBnClickedButton1();
+	afx_msg void OnBnClickedButton1();//when click create shape
 	
-	afx_msg void OnBnClickedSave();
-	afx_msg void OnBnClickedLoad();
+	afx_msg void OnBnClickedSave();//when click save button
+	afx_msg void OnBnClickedLoad();//when click load button
 
 
+	//save and load for all shapes
 	void SaveCircle(CFileDialog&);
 	void LoadCircle(CFileDialog&);
 	void SaveEllipse(CFileDialog&);
@@ -136,10 +136,10 @@ public:
 	void SavePie(CFileDialog&);
 	void LoadPie(CFileDialog&);
 
-	void DrawBase(CDC*);
-	void DrawShapes(CDC*);
+	void DrawBase(CDC*);//draw grid and background
+	void DrawShapes(CDC*);//draw shapes
 
-
+	
 	void DeleteScreen();//delete shape list and buttons
 
 };

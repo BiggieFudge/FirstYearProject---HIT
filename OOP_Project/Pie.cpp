@@ -40,25 +40,29 @@ pie::~pie()
 
 double pie::create_angle()
 {
-      b = sqrt(abs(pow((get_center().x - end_angle.x / 10), 2) + pow((get_center().y - end_angle.y / 10), 2)));
-      c = sqrt(abs(pow((start_angle.x / 10 - get_center().x), 2) + pow((start_angle.y / 10 - get_center().y), 2)));
-      if(b==0||c==0)
-      {
-         return(0);
-      }
+    
+    b = vector_len(this->get_center(), end_angle)/10;
+    c = vector_len(this->get_center(), start_angle)/10;
+    if (b == 0 || c == 0)
+    {
+        return(0);
+    }
 
-      else {
-          angle = acos((((start_angle.x / 10 * end_angle.x / 10) + (start_angle.y / 10 * end_angle.y / 10)) / (b * c))) * 180 / PI;
-
-          if ((start_angle.x < end_angle.x) || (start_angle.y > end_angle.y)) {
-              angle = 360 - angle;
-          }
-          return(angle);
-      }
+    else {
+       // angle = acos((((((get_center().x / 10-start_angle.x / 10 ) * (get_center().x/10 - end_angle.x / 10))) + ((get_center().y / 10-start_angle.y / 10 ) * (get_center().y/10 - end_angle.y / 10))) / (b * c))) * 180 / PI;
+        angle = atan2(get_center().y -start_angle.y, get_center().x -start_angle.x) - atan2(get_center().y-end_angle.y, get_center().x- end_angle.x);
+        if (angle < 0) {
+            angle += 2 * PI;
+       }
+        angle = 360-(angle * 180 / PI);
       
+
+        return(angle);
+    }
+
 }
 
- double pie::get_angle()
+ double pie::get_angle() const
  {
      return(angle);
  }
@@ -91,17 +95,17 @@ string pie::type()
      return("CircleP");
 }
     
-POINT* pie::get_angle_point()
+POINT* pie::get_angle_point() const
 {
     return(Angle_point);
 }
 
-POINT pie::get_start_angle()
+POINT pie::get_start_angle() const
 {
     return start_angle;
 }
 
-POINT pie::get_end_angle()
+POINT pie::get_end_angle() const
 {
     return end_angle;
 }

@@ -19,14 +19,16 @@ public:
     string type();
 
     //Getters / Setters
-    POINT* get_angle_point();
-    POINT get_start_angle();
-    POINT get_end_angle();
-    POINT get_lp();
-    POINT get_rp();
+    POINT* get_angle_point() const;
+    POINT get_start_angle() const;
+    POINT get_end_angle() const;
+    POINT get_lp() const;
+    POINT get_rp() const ;
+    double get_angle() const;
+
 
     double create_angle();
-    double get_angle();
+   
 
 private:
 
